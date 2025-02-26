@@ -9,5 +9,5 @@ import lombok.Getter;
 public abstract class AbstractNode {
     
     @Id @GeneratedValue
-    private Long id;
+    protected Long id;
 }
