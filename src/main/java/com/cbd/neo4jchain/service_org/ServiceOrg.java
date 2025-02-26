@@ -1,4 +1,4 @@
-package com.cbd.neo4jchain.service;
+package com.cbd.neo4jchain.service_org;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Node
-public class Service extends NamedNode {
+public class ServiceOrg extends NamedNode {
 
     @Relationship("SLAS")
-    private List<Sla<Service>> slas;
+    private List<Sla<ServiceOrg>> slas;
 
     @Relationship("TEAMS")
-    private List<Sla<Service>> teams;
+    private List<Sla<ServiceOrg>> teams;
 }
