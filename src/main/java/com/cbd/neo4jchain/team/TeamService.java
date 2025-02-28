@@ -4,16 +4,36 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.cbd.neo4jchain.person.Person;
+import com.cbd.neo4jchain.person.PersonRepository;
+
 @Service
 public class TeamService {
     
-    private final TeamRepository TeamRepository;
+    private final TeamRepository teamRepository;
+    private final PersonRepository userRepository;
 
-    public TeamService(TeamRepository TeamRepository) {
-        this.TeamRepository = TeamRepository;
+    public TeamService(TeamRepository teamRepository, PersonRepository userRepository) {
+        this.teamRepository = teamRepository;
+        this.userRepository = userRepository;
     }
 
     public List<Team> getAllServices(){
-        return this.TeamRepository.findAll();
+        return this.teamRepository.findAll();
     }
+
+    public Team addUserToTeam(Long teamId, Long userId){
+        Team team = this.teamRepository.findById(teamId).orElseThrow();
+        Person user = this.userRepository.findById(userId).orElseThrow();
+        if(team.contains(user))
+            throw new IllegalArgumentException("Team have user yet");
+        
+        team.add(user);
+        return teamRepository.save(team);
+    }
+
+    public Team createTeam(Team team){
+        return teamRepository.save(team);
+    }
+
 }

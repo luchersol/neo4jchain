@@ -6,8 +6,8 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.model.NamedNode;
-import com.cbd.neo4jchain.sla.Sla;
-import com.cbd.neo4jchain.team.Team;
+import com.cbd.neo4jchain.sla.SlaToServiceOrg;
+import com.cbd.neo4jchain.sla.SlaToTeam;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +18,13 @@ import lombok.Setter;
 @Node
 public class ServiceOrg extends NamedNode {
 
-    @Relationship("SERVICES")
-    private List<Sla<ServiceOrg>> services;
+    private String type;
 
-    @Relationship("TEAMS")
-    private List<Sla<Team>> teams;
+    private String contactInfo;
+
+    @Relationship(type = "SERVICE")
+    private List<SlaToServiceOrg> services;
+
+    @Relationship(type = "TEAM")
+    private List<SlaToTeam> teams;
 }

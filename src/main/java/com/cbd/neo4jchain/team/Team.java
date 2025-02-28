@@ -6,7 +6,7 @@ import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.model.NamedNode;
-import com.cbd.neo4jchain.user.User;
+import com.cbd.neo4jchain.person.Person;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +17,15 @@ import lombok.Setter;
 @Node
 public class Team extends NamedNode {
 
-    @Relationship("MEMBERS")
-    private List<User> users;
+    private String specialization;
+
+    @Relationship(type = "MEMBER")
+    private List<Person> Person;
+
+    public void add(Person user){
+        this.Person.add(user);
+    }
+    public boolean contains(Person user){
+        return Person.contains(user);
+    }
 }

@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServiceOrgService {
     
-    private final ServiceOrgRepository ServiceOrgRepository;
+    private final ServiceOrgRepository serviceOrgRepository;
 
-    public ServiceOrgService(ServiceOrgRepository ServiceOrgRepository) {
-        this.ServiceOrgRepository = ServiceOrgRepository;
+    public ServiceOrgService(ServiceOrgRepository serviceOrgRepository) {
+        this.serviceOrgRepository = serviceOrgRepository;
     }
 
     public List<ServiceOrg> getAllServices(){
-        return this.ServiceOrgRepository.findAll();
+        return this.serviceOrgRepository.findAll();
+    }
+
+    public ServiceOrg createServiceOrg(ServiceOrg serviceOrg){
+        return this.serviceOrgRepository.save(serviceOrg);
     }
 }

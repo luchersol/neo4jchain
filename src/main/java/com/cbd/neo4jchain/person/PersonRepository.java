@@ -1,10 +1,10 @@
-package com.cbd.neo4jchain.team;
+package com.cbd.neo4jchain.person;
 
 import org.springframework.stereotype.Repository;
 
 import com.cbd.neo4jchain.model.AbstractRepository;
 
 @Repository
-public interface TeamRepository extends AbstractRepository<Team> {
+public interface PersonRepository extends AbstractRepository<Person> {
     
 }
