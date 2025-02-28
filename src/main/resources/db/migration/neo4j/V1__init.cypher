@@ -17,6 +17,8 @@ CREATE (person1:Person {firstName: "Alice", lastName: "Smith", status: "ACTIVE",
        (person3:Person {firstName: "Charlie", lastName: "Brown", status: "INACTIVE", function: "Marketer", email: "charlie.brown@org.com", phone: "345-678-9012"}), 
        (person4:Person {firstName: "David", lastName: "Williams", status: "ACTIVE", function: "Accountant", email: "david.williams@org.com", phone: "456-789-0123"})
 
+CREATE (person1)-[:MANAGER]->(person2)
+
 CREATE (org2)-[:PARENT]->(org1),
        (org3)-[:PARENT]->(org1)
 
@@ -27,7 +29,7 @@ CREATE (team1)-[:MEMBER]->(person1),
        (team1)-[:MEMBER]->(person2),
        (team2)-[:MEMBER]->(person3)
 
-CREATE (serviceOrg1)-[:SERVICE]->(serviceOrg2)
+CREATE (serviceOrg1)-[:SLA_SERVICE]->(serviceOrg2)
 
-CREATE (serviceOrg1)-[:TEAM]->(team1),
-       (serviceOrg2)-[:TEAM]->(team2)
+CREATE (serviceOrg1)-[:SLA_TEAM]->(team1),
+       (serviceOrg2)-[:SLA_TEAM]->(team2)

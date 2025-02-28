@@ -2,6 +2,7 @@ package com.cbd.neo4jchain.person;
 
 
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.enums.Status;
 import com.cbd.neo4jchain.model.AbstractNode;
@@ -30,6 +31,7 @@ public class Person extends AbstractNode {
 
     private String function;
 
+    @Relationship(type = "MANAGER")
     private Person manager;
 
     @Pattern(regexp = RegexConstants.EMAIL)

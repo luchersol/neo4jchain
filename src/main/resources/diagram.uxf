@@ -1,0 +1,41 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>40</x><y>80</y><w>100</w><h>50</h></coordinates><panel_attributes>AbstractNode
+-
+id: Long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>170</y><w>100</w><h>50</h></coordinates><panel_attributes>NamedNode
+-
+name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>80</x><y>120</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>60</y><w>130</w><h>70</h></coordinates><panel_attributes>Organization
+-
+code: String
+status: Status</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>40</x><y>0</y><w>100</w><h>60</h></coordinates><panel_attributes>Status
+-
+INACTIVE
+ACTIVE</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>280</x><y>240</y><w>150</w><h>60</h></coordinates><panel_attributes>Team
+-
+specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>20</x><y>370</y><w>120</w><h>130</h></coordinates><panel_attributes>Person
+-
+lastName: String 
+firstName: String 
+status: Status
+function: String 
+email: String 
+phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>430</y><w>150</w><h>60</h></coordinates><panel_attributes>ServiceOrg
+-
+type: String
+contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>120</y><w>60</w><h>140</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..n
+m2=0..n
+TEAM</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>350</x><y>290</y><w>90</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+m1=0..n
+m2=0..1
+SLA_TEAM</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element><element><id>Relation</id><coordinates><x>430</x><y>430</y><w>210</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..n
+m2=0..1
+SLA_SERVICE</panel_attributes><additional_attributes>10;10;120;10;120;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>400</y><w>150</w><h>100</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..n
+m2=0..1
+MANAGER v</panel_attributes><additional_attributes>10;10;60;10;60;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>70</x><y>260</y><w>230</w><h>130</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..n
+m2=0..n
+MEMBER</panel_attributes><additional_attributes>210;20;10;20;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>60</y><w>190</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
+m1=0..n
+m2=0..1
+PARENT v</panel_attributes><additional_attributes>10;10;110;10;110;60;10;60</additional_attributes></element></diagram>

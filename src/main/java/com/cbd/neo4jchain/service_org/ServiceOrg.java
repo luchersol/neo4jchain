@@ -22,9 +22,9 @@ public class ServiceOrg extends NamedNode {
 
     private String contactInfo;
 
-    @Relationship(type = "SERVICE")
+    @Relationship(type = "SLA_SERVICE")
     private List<SlaToServiceOrg> services;
 
-    @Relationship(type = "TEAM")
+    @Relationship(type = "SLA_TEAM")
     private List<SlaToTeam> teams;
 }
