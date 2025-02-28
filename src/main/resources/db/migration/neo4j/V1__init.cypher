@@ -31,5 +31,5 @@ CREATE (team1)-[:MEMBER]->(person1),
 
 CREATE (serviceOrg1)-[:SLA_SERVICE]->(serviceOrg2)
 
-CREATE (serviceOrg1)-[:SLA_TEAM]->(team1),
-       (serviceOrg2)-[:SLA_TEAM]->(team2)
+CREATE (serviceOrg1)-[:SLA_ORGANIZATION]->(org1),
+       (serviceOrg2)-[:SLA_ORGANIZATION]->(org2)
