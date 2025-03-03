@@ -1,67 +1,117 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>530</x><y>0</y><w>100</w><h>50</h></coordinates><panel_attributes>AbstractNode
+<diagram program="umletino" version="15.1"><zoom_level>11</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>583</x><y>27</y><w>110</w><h>55</h></coordinates><panel_attributes>AbstractNode
 -
-id: Long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>90</y><w>100</w><h>50</h></coordinates><panel_attributes>NamedNode
+id: Long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>583</x><y>126</y><w>110</w><h>55</h></coordinates><panel_attributes>NamedNode
 -
-name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>570</x><y>40</y><w>30</w><h>70</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>360</y><w>130</w><h>70</h></coordinates><panel_attributes>Organization
+name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>627</x><y>71</y><w>33</w><h>77</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>423</y><w>143</w><h>77</h></coordinates><panel_attributes>Organization
 -
 code: String
-status: Status</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>330</x><y>190</y><w>100</w><h>60</h></coordinates><panel_attributes>Status
+status: Status</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>88</x><y>610</y><w>110</w><h>66</h></coordinates><panel_attributes>Status
 -
 INACTIVE
-ACTIVE</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>480</x><y>540</y><w>150</w><h>60</h></coordinates><panel_attributes>Team
+ACTIVE</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>528</x><y>621</y><w>165</w><h>66</h></coordinates><panel_attributes>Team
 -
-specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>500</x><y>680</y><w>120</w><h>130</h></coordinates><panel_attributes>Person
+specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>550</x><y>797</y><w>132</w><h>143</h></coordinates><panel_attributes>Person
 -
 lastName: String 
 firstName: String 
 status: Status
 function: String 
 email: String 
-phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>190</y><w>150</w><h>60</h></coordinates><panel_attributes>ServiceOrg
+phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>539</x><y>236</y><w>165</w><h>66</h></coordinates><panel_attributes>ServiceOrg
 -
 type: String
-contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>420</y><w>60</w><h>140</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
-m2=0..n
-TEAM</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>240</y><w>90</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
-m1=0..n
+contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>605</x><y>489</y><w>66</w><h>154</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=*
+TEAM</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>616</x><y>291</y><w>77</w><h>154</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
 m2=0..1
-SLA_TEAM</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>190</y><w>210</w><h>80</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
+SERVICE</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>605</x><y>676</y><w>88</w><h>143</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=*
+MEMBER</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>682</x><y>423</y><w>165</w><h>99</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
 m2=0..1
-SLA_SERVICE v</panel_attributes><additional_attributes>10;10;100;10;100;50;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>710</y><w>180</w><h>100</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
-m2=0..1
-MANAGER v</panel_attributes><additional_attributes>10;10;90;10;90;70;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>590</y><w>80</w><h>110</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
-m2=0..n
-MEMBER</panel_attributes><additional_attributes>10;10;10;50;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>360</y><w>190</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
-m2=0..1
-PARENT v</panel_attributes><additional_attributes>10;10;110;10;110;60;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>550</y><w>170</w><h>130</h></coordinates><panel_attributes>SLT
+PARENT v</panel_attributes><additional_attributes>10;10;70;10;70;60;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>946</x><y>577</y><w>187</w><h>88</h></coordinates><panel_attributes>Objetive
 -
-name: String
-priority: Priority
-requestType: RequestType
 metric: Metric
 value: Double
-unit: UnitSLT</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>230</x><y>350</y><w>130</w><h>70</h></coordinates><panel_attributes>SLA
+unit: UnitTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>165</x><y>236</y><w>143</w><h>77</h></coordinates><panel_attributes>SLA
 -
-description</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>340</y><w>130</w><h>90</h></coordinates><panel_attributes>Priority
+description</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>489</y><w>143</w><h>99</h></coordinates><panel_attributes>Priority
 -
 CRITICAL
 HARD
 MEDIUM
-LOW</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>600</y><w>130</w><h>70</h></coordinates><panel_attributes>UnitSLT
+LOW</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>687</y><w>143</w><h>77</h></coordinates><panel_attributes>UnitTime
 -
 HOUR
-MINUTES</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>520</y><w>70</w><h>70</h></coordinates><panel_attributes>Metric
+MINUTES</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>599</y><w>77</w><h>77</h></coordinates><panel_attributes>Metric
 -
 TTR
-TTO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>440</y><w>130</w><h>70</h></coordinates><panel_attributes>RequestType
+TTO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>154</x><y>434</y><w>143</w><h>44</h></coordinates><panel_attributes>Customer
 -
-INCIDENT
-SERVICE_REQUEST</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>410</y><w>50</w><h>160</h></coordinates><panel_attributes>lt=-&gt;
-m1=0..n
-m2=0..n
-XXX</panel_attributes><additional_attributes>10;10;10;140</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>187</x><y>302</y><w>55</w><h>154</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+SLA</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>286</x><y>445</y><w>286</w><h>55</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+ORGANIZATION</panel_attributes><additional_attributes>240;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>286</x><y>841</y><w>154</w><h>33</h></coordinates><panel_attributes>Role 
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>429</x><y>841</y><w>143</w><h>55</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=*
+ROLE</panel_attributes><additional_attributes>110;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>319</x><y>346</y><w>143</w><h>44</h></coordinates><panel_attributes>Provider
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>242</x><y>302</y><w>99</w><h>99</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+SLA</panel_attributes><additional_attributes>10;10;10;60;70;60</additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>379</y><w>176</w><h>88</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+ORGANIZATION</panel_attributes><additional_attributes>140;50;10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>374</x><y>236</y><w>187</w><h>132</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=0..1
+SERVICE</panel_attributes><additional_attributes>150;20;10;20;10;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>946</x><y>258</y><w>132</w><h>33</h></coordinates><panel_attributes>RequestType 
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>308</x><y>962</y><w>121</w><h>33</h></coordinates><panel_attributes>Privilege
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>352</x><y>863</y><w>99</w><h>121</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=*
+PRIVILEGE</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>935</x><y>401</y><w>187</w><h>55</h></coordinates><panel_attributes>Scope
+-
+priority: Priority</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1012</x><y>280</y><w>121</w><h>143</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+REQUEST_TYPE</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1012</x><y>445</y><w>99</w><h>154</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=*
+OBJECTIVE</panel_attributes><additional_attributes>10;120;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>759</x><y>324</y><w>110</w><h>33</h></coordinates><panel_attributes>Status
+-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>726</x><y>324</y><w>187</w><h>77</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=*
+NEXT_STATUS</panel_attributes><additional_attributes>130;10;150;10;150;50;10;50;10;10;30;10</additional_attributes></element><element><id>Relation</id><coordinates><x>352</x><y>654</y><w>198</w><h>209</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=*
+ROLE</panel_attributes><additional_attributes>160;10;10;10;10;170</additional_attributes></element><element><id>Relation</id><coordinates><x>187</x><y>192</y><w>1023</w><h>275</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+GUARANTEE</panel_attributes><additional_attributes>850;220;910;220;910;20;10;20;10;40</additional_attributes></element><element><id>Relation</id><coordinates><x>693</x><y>269</y><w>154</w><h>77</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+STATUS</panel_attributes><additional_attributes>110;50;110;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>693</x><y>247</y><w>275</w><h>55</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=*
+REQUEST_TYPE</panel_attributes><additional_attributes>230;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>291</y><w>264</w><h>385</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=*
+TEAM</panel_attributes><additional_attributes>20;320;190;320;190;110;10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>407</x><y>258</y><w>154</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=0..1
+PROVIDER</panel_attributes><additional_attributes>10;80;10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>110</x><y>170</y><w>517</w><h>319</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=0..1
+CUSTOMER</panel_attributes><additional_attributes>40;260;10;260;10;20;430;20;430;60</additional_attributes></element></diagram>

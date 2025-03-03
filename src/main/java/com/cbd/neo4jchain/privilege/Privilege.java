@@ -1,4 +1,4 @@
-package com.cbd.neo4jchain.role;
+package com.cbd.neo4jchain.privilege;
 
 import org.springframework.data.neo4j.core.schema.Node;
 
@@ -11,5 +11,5 @@ import lombok.Setter;
 @Setter
 @Node
 public class Privilege extends NamedNode {
-    
+
 }

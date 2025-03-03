@@ -1,10 +1,11 @@
 package com.cbd.neo4jchain.status;
 
-import com.cbd.neo4jchain.model.NamedNode;
-
 import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.Node;
+import org.springframework.data.neo4j.core.schema.Relationship;
+
+import com.cbd.neo4jchain.model.NamedNode;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +14,8 @@ import lombok.Setter;
 @Setter
 @Node
 public class Status extends NamedNode {
-    
+
+    @Relationship(type = "NEXT_STATUS")
     List<Status> possibleNextStatuses;
 
 }

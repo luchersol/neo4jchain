@@ -13,7 +13,6 @@ import com.cbd.neo4jchain.team.Team;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Node
@@ -29,6 +28,7 @@ public class Organization extends NamedNode {
     @Relationship(type = "TEAM")
     private List<Team> teams;
 
+    @Relationship(type = "SERVICE")
     private List<ServiceOrg> services;
 
 }
