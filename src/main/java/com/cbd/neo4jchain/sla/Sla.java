@@ -7,7 +7,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.schema.RelationshipId;
 
 import com.cbd.neo4jchain.model.NamedNode;
-import com.cbd.neo4jchain.slt.Slt;
+import com.cbd.neo4jchain.scope.Scope;
 
 import lombok.Getter;
 
@@ -15,11 +15,6 @@ import lombok.Getter;
 @Node
 public class Sla extends NamedNode {
 
-    @RelationshipId
-    Long id;
-
-    String description;
-
-    @Relationship(type = "SLT")
-    List<Slt> slts;
+    @Relationship(type = "GUARANTEES")
+    List<Scope> guarantees;
 }

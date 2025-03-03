@@ -25,10 +25,10 @@ public class TeamService {
     public Team addUserToTeam(Long teamId, Long userId){
         Team team = this.teamRepository.findById(teamId).orElseThrow();
         Person user = this.userRepository.findById(userId).orElseThrow();
-        if(team.contains(user))
+        if(team.containsMember(user))
             throw new IllegalArgumentException("Team have user yet");
         
-        team.add(user);
+        team.addMember(user);
         return teamRepository.save(team);
     }
 
