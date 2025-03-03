@@ -1,14 +1,19 @@
 MATCH (n)
 DETACH DELETE n;
 
-CREATE (org1:Organization { name: "Org A", code: "A001", status: "ACTIVE" }),
+CREATE
+(chain1:ChainState { version: 1.0, description: "Descripcion chain 1", ownershipType:"STATE" }),
+(chain2:ChainFaceted { version: 2.0, description: "Descripcion chain 2", ownershipType:"STATE_TEAM" }),
+
+(customer1:Customer),
+(customer2:Customer),
+
+(org1:Organization { name: "Org A", code: "A001", status: "ACTIVE" }),
 (org2:Organization { name: "Org B", code: "B002", status: "INACTIVE" }),
 (org3:Organization { name: "Org C", code: "C003", status: "ACTIVE" }),
 
 (team1:Team { name: "Team Alpha", specialization: "Software Development" }),
 (team2:Team { name: "Team Beta", specialization: "Marketing" }),
-(team3:Team { name: "Team Gamma", specialization: "Finance" }),
-(team4:Team { name: "Team Delta", specialization: "HR" }),
 
 (serviceOrg1:ServiceOrg { type: 'IT', contact_info: 'contact@madridit.com', name: 'ServiceOrg1' }),
 (serviceOrg2:ServiceOrg { type: 'HR', contact_info: 'contact@barcelonahr.com', name: 'ServiceOrg2' }),
@@ -24,10 +29,9 @@ CREATE (org1:Organization { name: "Org A", code: "A001", status: "ACTIVE" }),
 (slt1:SLT { name: "Tiempo de Respuesta", priority: "HIGH", requestType: "INCIDENT", metric: "TTO", value: 4.5, unit: "HOURS" }),
 (slt2:SLT { name: "Disponibilidad", priority: "MEDIUM", requestType: "SERVICE_REQUEST", metric: "TTR", value: 30.0, unit: "MINUTES" }),
 
-(person1)-[:MANAGER]->(person2),
-
-(org2)-[:PARENT]->(org1),
-(org3)-[:PARENT]->(org1),
+(chain)-[:INITIAL]->(status1),
+(chain)-[:TERMINAL]->(status2),
+(chain)-[:INITIAL_STATE]->(sla1),
 
 (org1)-[:TEAM]->(team1),
 (org1)-[:TEAM]->(team2),
