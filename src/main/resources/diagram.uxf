@@ -103,10 +103,10 @@ m2=*
 REQUEST_TYPE</panel_attributes><additional_attributes>230;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>264</y><w>264</w><h>385</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=*
-TEAM</panel_attributes><additional_attributes>20;320;190;320;190;110;10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>407</x><y>231</y><w>154</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
+TEAM</panel_attributes><additional_attributes>20;320;190;320;190;110;10;110;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>385</x><y>231</y><w>176</w><h>110</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
-PROVIDER</panel_attributes><additional_attributes>10;80;10;20;120;20</additional_attributes></element><element><id>Relation</id><coordinates><x>110</x><y>143</y><w>517</w><h>319</h></coordinates><panel_attributes>lt=&lt;-
+IS_PROVIDER_OF</panel_attributes><additional_attributes>140;20;30;20;30;80</additional_attributes></element><element><id>Relation</id><coordinates><x>110</x><y>143</y><w>517</w><h>319</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
 CUSTOMER</panel_attributes><additional_attributes>40;260;10;260;10;20;430;20;430;60</additional_attributes></element></diagram>

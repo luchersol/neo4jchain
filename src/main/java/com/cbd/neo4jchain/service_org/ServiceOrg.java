@@ -7,7 +7,6 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.customer.Customer;
 import com.cbd.neo4jchain.model.NamedNode;
-import com.cbd.neo4jchain.provider.Provider;
 import com.cbd.neo4jchain.requestType.RequestType;
 import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
@@ -30,9 +29,6 @@ public class ServiceOrg extends NamedNode {
 
     @Relationship(type = "TEAM")
     private List<Team> teams;
-
-    @Relationship(type = "PROVIDER")
-    private List<Provider> providers;
 
     @Relationship(type = "CUSTOMER")
     private List<Customer> customers;

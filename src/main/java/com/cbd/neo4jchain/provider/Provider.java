@@ -1,5 +1,7 @@
 package com.cbd.neo4jchain.provider;
 
+import java.util.List;
+
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
@@ -19,6 +21,9 @@ public class Provider extends AbstractNode {
 
     @Relationship(type = "SERVICE")
     ServiceOrg serviceOrg;
+
+    @Relationship(type = "IS_PROVIDER_OF")
+    private List<ServiceOrg> servicesProviders;
 
     @Relationship(type = "SLA")
     Sla sla;
