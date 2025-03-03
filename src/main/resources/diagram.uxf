@@ -116,7 +116,7 @@ title: String
 description: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>990</y><w>176</w><h>55</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-CRETED_BY</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>1023</y><w>176</w><h>55</h></coordinates><panel_attributes>lt=-&gt;
+CREATED_BY</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>671</x><y>1023</y><w>176</w><h>55</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
 ASIGNED_TO</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>649</x><y>814</y><w>209</w><h>198</h></coordinates><panel_attributes>lt=-&gt;
