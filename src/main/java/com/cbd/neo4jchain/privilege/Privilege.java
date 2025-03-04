@@ -11,5 +11,7 @@ import lombok.Setter;
 @Setter
 @Node
 public class Privilege extends NamedNode {
-
+    public Privilege(String name) {
+        this.name = name;
+    }
 }

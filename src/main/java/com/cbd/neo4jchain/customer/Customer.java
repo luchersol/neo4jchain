@@ -6,6 +6,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import com.cbd.neo4jchain.model.AbstractNode;
 import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.sla.Sla;
+import com.cbd.neo4jchain.util.RelationName.CustomerRelation;
 
 import lombok.Getter;
 
@@ -13,10 +14,10 @@ import lombok.Getter;
 @Getter
 public class Customer extends AbstractNode {
 
-    @Relationship(type = "ORGANIZATION")
+    @Relationship(type = CustomerRelation.ORGANIZATION)
     Organization organization;
 
-    @Relationship(type = "SLA")
+    @Relationship(type = CustomerRelation.SLA)
     Sla sla;
 
 }

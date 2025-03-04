@@ -9,6 +9,7 @@ import com.cbd.neo4jchain.enums.Priority;
 import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.objective.Objective;
 import com.cbd.neo4jchain.requestType.RequestType;
+import com.cbd.neo4jchain.util.RelationName.ScopeRelation;
 
 import lombok.Getter;
 
@@ -18,9 +19,14 @@ public class Scope extends NamedNode {
 
     Priority priority;
 
-    @Relationship(type = "REQUEST_TYPE")
+    public Scope(String name, Priority priority) {
+        this.name = name;
+        this.priority = priority;
+    }
+
+    @Relationship(type = ScopeRelation.REQUEST_TYPE)
     RequestType requestType;
 
-    @Relationship(type = "OBJECTIVE")
+    @Relationship(type = ScopeRelation.OBJECTIVES)
     List<Objective> objectives;
 }

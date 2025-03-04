@@ -10,6 +10,7 @@ import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.requestType.RequestType;
 import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
+import com.cbd.neo4jchain.util.RelationName.ServiceOrgRelation;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,16 +22,21 @@ public class ServiceOrg extends NamedNode {
 
     private String description;
 
-    @Relationship(type = "STATUS")
+    public ServiceOrg(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    @Relationship(type = ServiceOrgRelation.STATUS)
     private Status status;
 
-    @Relationship(type = "REQUEST_TYPE")
+    @Relationship(type = ServiceOrgRelation.REQUEST_TYPES)
     private List<RequestType> requestTypes;
 
-    @Relationship(type = "TEAM")
+    @Relationship(type = ServiceOrgRelation.TEAMS)
     private List<Team> teams;
 
-    @Relationship(type = "CUSTOMER")
+    @Relationship(type = ServiceOrgRelation.CUSTOMERS)
     private List<Customer> customers;
 
 }

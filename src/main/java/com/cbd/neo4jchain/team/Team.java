@@ -8,6 +8,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.role.Role;
+import com.cbd.neo4jchain.util.RelationName.TeamRelation;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,10 +20,14 @@ public class Team extends NamedNode {
 
     private String specialization;
 
-    @Relationship(type = "MEMBER")
+    public Team(String name, String specialization) {
+        this.specialization = specialization;
+    }
+
+    @Relationship(type = TeamRelation.PERSONS)
     private List<Person> members;
 
-    @Relationship(type = "ROLE")
+    @Relationship(type = TeamRelation.ROLES)
     private List<Role> roles;
 
     public void addMember(Person user) {

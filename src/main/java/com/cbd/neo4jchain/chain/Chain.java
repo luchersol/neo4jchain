@@ -10,10 +10,15 @@ import lombok.Setter;
 @Setter
 public class Chain extends NamedNode {
 
-    private Double version;
-
+    private String version;
     private String description;
-
     private OwnershipType ownershipType;
+
+    public Chain(String name, String version, String description, OwnershipType ownershipType) {
+        this.name = name;
+        this.version = version;
+        this.description = description;
+        this.ownershipType = ownershipType;
+    }
 
 }

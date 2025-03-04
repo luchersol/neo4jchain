@@ -9,6 +9,7 @@ import com.cbd.neo4jchain.model.AbstractNode;
 import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.service_org.ServiceOrg;
 import com.cbd.neo4jchain.sla.Sla;
+import com.cbd.neo4jchain.util.RelationName.ProviderRelation;
 
 import lombok.Getter;
 
@@ -16,16 +17,16 @@ import lombok.Getter;
 @Getter
 public class Provider extends AbstractNode {
 
-    @Relationship(type = "ORGANIZATION")
+    @Relationship(type = ProviderRelation.ORGANIZATION)
     Organization organization;
 
-    @Relationship(type = "SERVICE")
+    @Relationship(type = ProviderRelation.SERVICE_ORG)
     ServiceOrg serviceOrg;
 
-    @Relationship(type = "IS_PROVIDER_OF")
+    @Relationship(type = ProviderRelation.SERVICE_ORGS)
     private List<ServiceOrg> servicesProviders;
 
-    @Relationship(type = "SLA")
+    @Relationship(type = ProviderRelation.SLA)
     Sla sla;
 
 }

@@ -7,6 +7,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.privilege.Privilege;
+import com.cbd.neo4jchain.util.RelationName.RoleRelation;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,7 +17,11 @@ import lombok.Setter;
 @Node
 public class Role extends NamedNode {
 
-    @Relationship(type = "PRIVILEGE")
+    public Role(String name) {
+        this.name = name;
+    }
+
+    @Relationship(type = RoleRelation.PRIVILEGE)
     private List<Privilege> privileges;
 
     public void add(Privilege privilege) {
