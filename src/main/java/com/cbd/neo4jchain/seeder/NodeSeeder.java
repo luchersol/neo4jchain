@@ -71,25 +71,23 @@ public class NodeSeeder {
     Faker faker;
     FileWriter file;
 
-    static final String PATH_CYPHER = "src/main/resources/db/migration/neo4j/V1_create_node.cypher";
-    static final boolean DO_DELETE = true;
+    boolean deleteData;
+    String pathCypher;
+    String relationPath;
 
-    private NodeSeeder() throws IOException {
+    public NodeSeeder(Boolean deleteData, String pathCypher, String relationPath) throws IOException {
+        this.deleteData = deleteData;
+        this.pathCypher = pathCypher;
+        this.relationPath = relationPath;
         this.faker = new Faker(new Random(1L));
-        this.file = new FileWriter(PATH_CYPHER, false);
-    }
-
-    public static void main(String[] args) throws Exception {
-        NodeSeeder nodeSeeder = new NodeSeeder();
-        nodeSeeder.loadTestData();
-        nodeSeeder.generateCypher();
+        this.file = new FileWriter(pathCypher, false);
     }
 
     public void generateCypher() throws Exception {
-        if (DO_DELETE)
+        if (this.deleteData)
             file.write("MATCH (n) DETACH DELETE n; \n\n");
         createNodes();
-        createRelationship(file);
+        createRelationship(file, this.relationPath);
     }
 
     public void createNodes() throws Exception {

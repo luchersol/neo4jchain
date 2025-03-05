@@ -1,0 +1,29 @@
+{
+  "properties": [
+    {
+      "name": "neo4jchain.populate-database",
+      "type": "java.lang.Boolean",
+      "description": "Indica si la base de datos Neo4j debe ser poblada automáticamente con datos iniciales al iniciar la aplicación. Establecer en 'true' para habilitar la carga de datos predeterminados."
+    },
+    {
+      "name": "neo4jchain.generate-cypher",
+      "type": "java.lang.Boolean",
+      "description": "Controla si la aplicación debe generar y ejecutar consultas Cypher automáticamente al iniciar. Establecer en 'true' para habilitar la generación de Cypher."
+    },
+    {
+      "name": "neo4jchain.delete-data",
+      "type": "java.lang.Boolean",
+      "description": "Determina si los datos existentes en la base de datos Neo4j deben eliminarse antes de insertar nuevos datos. Establecer en 'true' para habilitar la eliminación de datos."
+    },
+    {
+      "name": "neo4jchain.cypher-path",
+      "type": "java.lang.String",
+      "description": "Ruta del archivo que contiene las consultas Cypher que deben ser ejecutadas al inicializar la base de datos. Especifica el directorio o archivo Cypher en el que se encuentran las consultas."
+    },
+    {
+      "name": "neo4jchain.relation-path",
+      "type": "java.lang.String",
+      "description": "Ruta del archivo que contiene las relaciones a ser creadas o manipuladas en la base de datos Neo4j. Especifica la ubicación del archivo que define las relaciones entre los nodos."
+    }
+  ]
+}

@@ -42,17 +42,14 @@ public class RelationshipBuilder {
     String targetClass;
     String relationship;
 
-    static final boolean READ_FILE = false;
-    static final String PATH_RELATION_FILE = "src/main/resources/relationship.csv";
-
     private RelationshipBuilder(FileWriter file) {
         this.file = file;
     }
 
-    public static void createRelationship(FileWriter fileWriter) throws Exception {
-        if (READ_FILE) {
+    public static void createRelationship(FileWriter fileWriter, String relationPath) throws Exception {
+        if (relationPath != null) {
             String linea;
-            try (BufferedReader br = new BufferedReader(new FileReader(PATH_RELATION_FILE))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(relationPath))) {
                 br.readLine(); // Saltamos la primera línea
                 while ((linea = br.readLine()) != null) {
                     String[] args = linea.split("\t");

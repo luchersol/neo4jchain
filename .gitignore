@@ -32,3 +32,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Neo4jChain ###
+src/main/resources/relationship.csv
+src/main/resources/db/migration/neo4j
