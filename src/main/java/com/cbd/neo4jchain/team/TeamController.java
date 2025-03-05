@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
-
 @RestController
-@RequestMapping("/api/v1/teams")
+@RequestMapping("/team")
 public class TeamController {
-    
+
     private final TeamService teamService;
 
     public TeamController(TeamService teamService) {
@@ -30,8 +29,7 @@ public class TeamController {
     public ResponseEntity<?> createTeam(@Valid @RequestBody Team team) {
         return ResponseEntity.ok(teamService.createTeam(team));
     }
-    
-    
+
     @PostMapping("/{teamId}/{userId}")
     public ResponseEntity<?> addUserToTeam(@PathVariable Long teamId, @PathVariable Long userId) {
         try {
@@ -41,5 +39,5 @@ public class TeamController {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
 }

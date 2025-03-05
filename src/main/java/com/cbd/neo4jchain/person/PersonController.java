@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@RequestMapping("/api/v1/persons")
+@RequestMapping("/person")
 public class PersonController {
-    
+
     private final PersonService personService;
 
     public PersonController(PersonService personService) {
@@ -20,5 +19,5 @@ public class PersonController {
     public ResponseEntity<?> getAllpersonS() {
         return ResponseEntity.ok(personService.getAllServices());
     }
-    
+
 }

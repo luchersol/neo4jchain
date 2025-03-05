@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 
-
-
 @RestController
-@RequestMapping("/api/v1/services")
+@RequestMapping("/serviceOrg")
 public class ServiceOrgController {
-    
+
     private final ServiceOrgService serviceOrgService;
 
     public ServiceOrgController(ServiceOrgService serviceOrgService) {
@@ -30,6 +28,5 @@ public class ServiceOrgController {
     public ResponseEntity<?> createServiceOrg(@Valid @RequestBody ServiceOrg serviceOrg) {
         return ResponseEntity.ok(serviceOrgService.createServiceOrg(serviceOrg));
     }
-    
-    
+
 }

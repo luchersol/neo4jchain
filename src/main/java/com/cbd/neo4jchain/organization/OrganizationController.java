@@ -5,11 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
-@RequestMapping("/api/v1/organizations")
+@RequestMapping("/organization")
 public class OrganizationController {
-    
+
     private final OrganizationService organizationService;
 
     public OrganizationController(OrganizationService organizationService) {
@@ -20,5 +19,5 @@ public class OrganizationController {
     public ResponseEntity<?> getAllOrganizations() {
         return ResponseEntity.ok(organizationService.getAllServices());
     }
-    
+
 }
