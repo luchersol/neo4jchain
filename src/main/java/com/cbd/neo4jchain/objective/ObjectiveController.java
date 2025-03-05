@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/objective")
 public class ObjectiveController {
 
+    ObjectiveService objectiveService;
+
+    public ObjectiveController(ObjectiveService objectiveService) {
+        this.objectiveService = objectiveService;
+    }
 }

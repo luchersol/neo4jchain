@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/issue")
 public class IssueController {
 
+    IssueService issueService;
+
+    public IssueController(IssueService issueService) {
+        this.issueService = issueService;
+    }
 }

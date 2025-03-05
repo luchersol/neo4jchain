@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/privilege")
 public class PrivilegeController {
 
+    PrivilegeService privilegeService;
+
+    public PrivilegeController(PrivilegeService privilegeService) {
+        this.privilegeService = privilegeService;
+    }
 }

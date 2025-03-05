@@ -5,4 +5,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class PrivilegeService {
 
+    PrivilegeRepository privilegeRepository;
+
+    public PrivilegeService(PrivilegeRepository privilegeRepository) {
+        this.privilegeRepository = privilegeRepository;
+    }
 }

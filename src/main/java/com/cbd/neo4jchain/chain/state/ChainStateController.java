@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chain/state")
 public class ChainStateController {
 
+    ChainStateService chainStateService;
+
+    public ChainStateController(ChainStateService chainStateService) {
+        this.chainStateService = chainStateService;
+    }
 }

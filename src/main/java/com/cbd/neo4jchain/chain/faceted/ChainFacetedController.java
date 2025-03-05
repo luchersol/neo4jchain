@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/chain/faceted")
 public class ChainFacetedController {
 
+    ChainFacetedService chainFacetedService;
+
+    public ChainFacetedController(ChainFacetedService chainFacetedService) {
+        this.chainFacetedService = chainFacetedService;
+    }
 }

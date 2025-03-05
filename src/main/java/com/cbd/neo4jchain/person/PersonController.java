@@ -16,8 +16,12 @@ public class PersonController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllpersonS() {
-        return ResponseEntity.ok(personService.getAllServices());
+    public ResponseEntity<?> getAllPerson() {
+        try {
+            return ResponseEntity.ok(personService.getAllPerson());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

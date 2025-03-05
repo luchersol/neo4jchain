@@ -17,7 +17,11 @@ public class OrganizationController {
 
     @GetMapping
     public ResponseEntity<?> getAllOrganizations() {
-        return ResponseEntity.ok(organizationService.getAllServices());
+        try {
+            return ResponseEntity.ok(organizationService.getAllOrganization());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

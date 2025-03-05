@@ -6,14 +6,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PersonService {
-    
+
     private final PersonRepository userRepository;
 
     public PersonService(PersonRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public List<Person> getAllServices(){
+    public List<Person> getAllPerson() {
         return this.userRepository.findAll();
     }
 }
