@@ -14,8 +14,8 @@ import lombok.Getter;
 @Getter
 public class ChainState extends Chain {
 
-    public ChainState(String name, String version, String description, OwnershipType ownershipType) {
-        super(name, version, description, ownershipType);
+    public ChainState(Long id, String name, String version, String description, OwnershipType ownershipType) {
+        super(id, name, version, description, ownershipType);
     }
 
     @Relationship(type = ChainStateRelation.INITIAL_STATUS)

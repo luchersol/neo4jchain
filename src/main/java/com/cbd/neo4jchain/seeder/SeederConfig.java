@@ -2,7 +2,8 @@ package com.cbd.neo4jchain.seeder;
 
 public class SeederConfig {
 
-    static int NUM_CHAIN = 10;
+    static int NUM_CHAIN_STATE = 10;
+    static int NUM_CHAIN_FACETED = 10;
     static int NUM_CUSTOMER = 10;
     static int NUM_ISSUE = 10;
     static int NUM_OBJECTIVE = 10;

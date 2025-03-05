@@ -19,7 +19,8 @@ public class Issue extends AbstractNode {
     private String title;
     private String description;
 
-    public Issue(String title, String description) {
+    public Issue(Long id, String title, String description) {
+        super(id);
         this.title = title;
         this.description = description;
     }

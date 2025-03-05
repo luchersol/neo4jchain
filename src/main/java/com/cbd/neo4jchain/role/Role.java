@@ -17,8 +17,8 @@ import lombok.Setter;
 @Node
 public class Role extends NamedNode {
 
-    public Role(String name) {
-        this.name = name;
+    public Role(Long id, String name) {
+        super(id, name);
     }
 
     @Relationship(type = RoleRelation.PRIVILEGE)

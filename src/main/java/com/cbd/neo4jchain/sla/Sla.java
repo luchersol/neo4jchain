@@ -15,8 +15,8 @@ import lombok.Getter;
 @Node
 public class Sla extends NamedNode {
 
-    public Sla(String name) {
-        this.name = name;
+    public Sla(Long id, String name) {
+        super(id, name);
     }
 
     @Relationship(type = SlaRelation.SCOPES)

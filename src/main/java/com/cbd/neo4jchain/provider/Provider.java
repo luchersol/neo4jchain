@@ -17,6 +17,10 @@ import lombok.Getter;
 @Getter
 public class Provider extends AbstractNode {
 
+    public Provider(Long id) {
+        super(id);
+    }
+
     @Relationship(type = ProviderRelation.ORGANIZATION)
     Organization organization;
 

@@ -1,5 +1,8 @@
 package com.cbd.neo4jchain.seeder;
 
+import static com.cbd.neo4jchain.seeder.RelationshipBuilder.createRelationship;
+import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_FACETED;
+import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_STATE;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CUSTOMER;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_ISSUE;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_OBJECTIVE;
@@ -15,16 +18,13 @@ import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_SLA;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_STATUS;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_TEAM;
 
-import java.lang.reflect.Constructor;
-import java.util.Arrays;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.LongStream;
-
-import org.springframework.data.neo4j.core.Neo4jTemplate;
-import org.springframework.stereotype.Component;
 
 import com.cbd.neo4jchain.chain.ChainFaceted;
 import com.cbd.neo4jchain.chain.ChainState;
@@ -49,11 +49,7 @@ import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
 import com.github.javafaker.Faker;
 
-@Component
 public class NodeSeeder {
-
-    Neo4jTemplate neo4jTemplate;
-    Faker faker;
 
     List<ChainFaceted> chainFaceteds;
     List<ChainState> chainStates;
@@ -72,12 +68,99 @@ public class NodeSeeder {
     List<Status> status;
     List<Team> teams;
 
-    private NodeSeeder(Neo4jTemplate neo4jTemplate) {
-        this.neo4jTemplate = neo4jTemplate;
+    Faker faker;
+    FileWriter file;
+
+    static final String PATH_CYPHER = "src/main/resources/db/migration/neo4j/V1_create_node.cypher";
+
+    private NodeSeeder() throws IOException {
         this.faker = new Faker(new Random(1L));
+        this.file = new FileWriter(PATH_CYPHER, false);
     }
 
-    public NodeSeeder loadNode() {
+    public static void main(String[] args) throws Exception {
+        NodeSeeder nodeSeeder = new NodeSeeder();
+        nodeSeeder.loadTestData();
+        nodeSeeder.generateCypher();
+    }
+
+    public void generateCypher() throws Exception {
+        file.write("MATCH (n) DETACH DELETE n; \n\n");
+        createNodes();
+        createRelationship(file);
+    }
+
+    public void createNodes() throws Exception {
+        doQuery(chainFaceteds, "id", "name", "version", "description", "ownershipType");
+        doQuery(chainStates, "id", "name", "version", "description", "ownershipType");
+        doQuery(customers, "id");
+        doQuery(issues, "id", "title", "description");
+        doQuery(objectives, "id", "metric", "value", "unit");
+        doQuery(organizations, "id", "name", "code");
+        doQuery(persons, "id", "lastName", "firstName", "email", "phone");
+        doQuery(privileges, "id", "name");
+        doQuery(providers, "id");
+        doQuery(requestTypes, "id", "name");
+        doQuery(roles, "id", "name");
+        doQuery(scopes, "id", "name", "priority");
+        doQuery(serviceOrgs, "id", "name", "description");
+        doQuery(slas, "id", "name");
+        doQuery(status, "id", "name");
+        doQuery(teams, "id", "name", "specialization");
+    }
+
+    public <T extends AbstractNode> void doQuery(List<T> list, String... properties) throws Exception {
+
+        if (list == null || list.isEmpty()) {
+            throw new IllegalArgumentException("La lista no puede estar vacía.");
+        }
+
+        Class<?> clazz = list.get(0).getClass();
+        file.write("// " + clazz.getSimpleName() + "\n");
+        try {
+            for (T t : list) {
+                String clazzName = t.getClass().getSimpleName();
+                StringBuilder query = new StringBuilder("MERGE (")
+                        .append(clazzName.toLowerCase())
+                        .append(t.getId())
+                        .append(":")
+                        .append(clazzName)
+                        .append(" {");
+
+                for (int i = 0; i < properties.length; i++) {
+                    Field field = getField(clazz, properties[i]);
+                    Object value = field.get(t);
+                    if (value != null) {
+                        query.append(field.getName()).append(": \"").append(value).append("\"");
+                        if (i < properties.length - 1)
+                            query.append(", ");
+                    }
+                }
+
+                query.append("})\n");
+                this.file.write(query.toString());
+                this.file.flush();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Error al escribir en el archivo.", e);
+        }
+        file.write("\n");
+    }
+
+    public static Field getField(Class<?> clazz, String fieldName) {
+        while (clazz != null && clazz != Object.class) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true); // Hacer accesible si es privado
+                return field;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass(); // Subir en la jerarquía de clases
+            }
+        }
+        return null;
+    }
+
+    public NodeSeeder loadTestData() {
         this.chainFaceteds = seedChainFaceted();
         this.chainStates = seedChainState();
         this.customers = seedCustomer();
@@ -97,172 +180,160 @@ public class NodeSeeder {
         return this;
     }
 
-    public NodeSeeder saveNode() {
-        this.chainFaceteds = neo4jTemplate.saveAll(this.chainFaceteds);
-        this.chainStates = neo4jTemplate.saveAll(this.chainStates);
-        this.customers = neo4jTemplate.saveAll(this.customers);
-        this.issues = neo4jTemplate.saveAll(this.issues);
-        this.objectives = neo4jTemplate.saveAll(this.objectives);
-        this.organizations = neo4jTemplate.saveAll(this.organizations);
-        this.persons = neo4jTemplate.saveAll(this.persons);
-        this.privileges = neo4jTemplate.saveAll(this.privileges);
-        this.providers = neo4jTemplate.saveAll(this.providers);
-        this.requestTypes = neo4jTemplate.saveAll(this.requestTypes);
-        this.roles = neo4jTemplate.saveAll(this.roles);
-        this.scopes = neo4jTemplate.saveAll(this.scopes);
-        this.serviceOrgs = neo4jTemplate.saveAll(this.serviceOrgs);
-        this.slas = neo4jTemplate.saveAll(this.slas);
-        this.status = neo4jTemplate.saveAll(this.status);
-        this.teams = neo4jTemplate.saveAll(this.teams);
-        return this;
-    }
-
     public List<ChainState> seedChainState() {
         // String name, String version, String description, OwnershipType ownershipType
-        return rangeCreate(10, ChainState.class,
-                faker.company().name(),
-                faker.app().version(),
-                faker.lorem().sentence(),
-                faker.options().option(OwnershipType.class));
+        return LongStream.range(0, NUM_CHAIN_STATE)
+                .boxed()
+                .map(id -> new ChainState(id,
+                        faker.company().name(),
+                        faker.app().version(),
+                        faker.lorem().sentence(),
+                        faker.options().option(OwnershipType.class)))
+                .collect(Collectors.toList());
     }
 
     public List<ChainFaceted> seedChainFaceted() {
         // String name, String version, String description, OwnershipType ownershipType
-        return rangeCreate(10, ChainFaceted.class,
-                faker.company().name(),
-                faker.app().version(),
-                faker.lorem().sentence(),
-                faker.options().option(OwnershipType.class));
+        return LongStream.range(0, NUM_CHAIN_FACETED)
+                .boxed()
+                .map(id -> new ChainFaceted(id,
+                        faker.company().name(),
+                        faker.app().version(),
+                        faker.lorem().sentence(),
+                        faker.options().option(OwnershipType.class)))
+                .collect(Collectors.toList());
     }
 
     public List<Customer> seedCustomer() {
-        return rangeCreate(NUM_CUSTOMER, Customer.class);
+        return LongStream.range(0, NUM_CUSTOMER)
+                .boxed()
+                .map(id -> new Customer(id))
+                .collect(Collectors.toList());
     }
 
     public List<Issue> seedIssue() {
         // String title, String description
-        return rangeCreate(NUM_ISSUE, Issue.class,
-                faker.lorem().sentence(),
-                faker.lorem().paragraph());
+        return LongStream.range(0, NUM_ISSUE)
+                .boxed()
+                .map(id -> new Issue(id,
+                        faker.lorem().sentence(),
+                        faker.lorem().paragraph()))
+                .collect(Collectors.toList());
     }
 
     public List<Objective> seedObjective() {
         // Metric metric, Double value, UnitTime unit
-        return rangeCreate(NUM_OBJECTIVE, Objective.class,
-                faker.options().option(Metric.class),
-                faker.number().randomDouble(2, 1, 100),
-                faker.options().option(UnitTime.class));
+        return LongStream.range(0, NUM_OBJECTIVE)
+                .boxed()
+                .map(id -> new Objective(id,
+                        faker.options().option(Metric.class),
+                        faker.number().randomDouble(2, 1, 100),
+                        faker.options().option(UnitTime.class)))
+                .collect(Collectors.toList());
     }
 
     public List<Organization> seedOrganization() {
         // String name, String code
-        return rangeCreate(NUM_ORGANIZATION, Organization.class,
-                faker.company().name(),
-                faker.code().isbn10());
+        return LongStream.range(0, NUM_ORGANIZATION)
+                .boxed()
+                .map(id -> new Organization(id,
+                        faker.company().name(),
+                        faker.code().isbn10()))
+                .collect(Collectors.toList());
     }
 
     public List<Person> seedPerson() {
         // String lastName, String firstName, String email, String phone
-        return rangeCreate(NUM_PERSON, Person.class,
-                faker.name().lastName(),
-                faker.name().firstName(),
-                faker.internet().emailAddress(),
-                faker.phoneNumber().phoneNumber());
+        return LongStream.range(0, NUM_PERSON)
+                .boxed()
+                .map(id -> new Person(id,
+                        faker.name().lastName(),
+                        faker.name().firstName(),
+                        faker.internet().emailAddress(),
+                        faker.phoneNumber().phoneNumber()))
+                .collect(Collectors.toList());
     }
 
     public List<Privilege> seedPrivilege() {
         // String name
-        return rangeCreate(NUM_PRIVILEGE, Privilege.class,
-                faker.lorem().word());
+        return LongStream.range(0, NUM_PRIVILEGE)
+                .boxed()
+                .map(id -> new Privilege(id,
+                        faker.lorem().word()))
+                .collect(Collectors.toList());
     }
 
     public List<Provider> seedProvider() {
-        return rangeCreate(NUM_PROVIDER, Provider.class);
+        return LongStream.range(0, NUM_PROVIDER)
+                .boxed()
+                .map(id -> new Provider(id))
+                .collect(Collectors.toList());
     }
 
     public List<RequestType> seedRequestType() {
         // String name
-        return rangeCreate(NUM_REQUEST_TYPE, RequestType.class,
-                faker.lorem().word());
+        return LongStream.range(0, NUM_REQUEST_TYPE)
+                .boxed()
+                .map(id -> new RequestType(id,
+                        faker.lorem().word()))
+                .collect(Collectors.toList());
     }
 
     public List<Role> seedRole() {
         // String name
-        return rangeCreate(NUM_ROLE, Role.class,
-                faker.job().title());
+        return LongStream.range(0, NUM_ROLE)
+                .boxed()
+                .map(id -> new Role(id,
+                        faker.job().title()))
+                .collect(Collectors.toList());
     }
 
     public List<Scope> seedScope() {
         // String name, Priority priority
-        return rangeCreate(NUM_SCOPE, Scope.class,
-                faker.lorem().word(),
-                faker.options().option(Priority.class));
+        return LongStream.range(0, NUM_SCOPE)
+                .boxed()
+                .map(id -> new Scope(id,
+                        faker.lorem().word(),
+                        faker.options().option(Priority.class)))
+                .collect(Collectors.toList());
     }
 
     public List<ServiceOrg> seedServiceOrg() {
         // String name, String description
-        return rangeCreate(NUM_SERVICE_ORG, ServiceOrg.class,
-                faker.company().name(),
-                faker.lorem().sentence());
+        return LongStream.range(0, NUM_SERVICE_ORG)
+                .boxed()
+                .map(id -> new ServiceOrg(id,
+                        faker.company().name(),
+                        faker.lorem().sentence()))
+                .collect(Collectors.toList());
     }
 
     public List<Sla> seedSla() {
         // String name
-        return rangeCreate(NUM_SLA, Sla.class,
-                faker.lorem().word());
+        return LongStream.range(0, NUM_SLA)
+                .boxed()
+                .map(id -> new Sla(id,
+                        faker.lorem().word()))
+                .collect(Collectors.toList());
     }
 
     public List<Status> seedStatus() {
         // String name
-        return rangeCreate(NUM_STATUS, Status.class,
-                faker.lorem().word());
+        return LongStream.range(0, NUM_STATUS)
+                .boxed()
+                .map(id -> new Status(id,
+                        faker.lorem().word()))
+                .collect(Collectors.toList());
     }
 
     public List<Team> seedTeam() {
         // String name, String specialization
-        return rangeCreate(NUM_TEAM, Team.class,
-                faker.company().name(),
-                faker.lorem().word());
-    }
-
-    private static <T> List<T> rangeCreate(int num, Class<T> clazz, Object... params) {
-        Class<?>[] typeParams = Arrays.stream(params)
-                .map(Object::getClass)
-                .toArray(Class[]::new);
-
-        return IntStream.range(0, num)
+        return LongStream.range(0, NUM_TEAM)
                 .boxed()
-                .map(_ -> {
-                    try {
-                        var constructor = clazz.getConstructor(typeParams);
-                        return (T) constructor.newInstance(params);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        return null;
-                    }
-                })
+                .map(id -> new Team(id,
+                        faker.company().name(),
+                        faker.lorem().word()))
                 .collect(Collectors.toList());
     }
 
-    private static <T> List<T> rangeCreate(int num, Class<T> clazz) {
-        return LongStream.range(0, num)
-                .boxed()
-                .map(i -> extracted(clazz, i))
-                .collect(Collectors.toList());
-    }
-
-    private static <T> T extracted(Class<T> clazz, Long id) {
-        try {
-            Constructor<T> constructor = clazz.getDeclaredConstructor();
-            constructor.setAccessible(true);
-            T node = constructor.newInstance();
-            if (node instanceof AbstractNode) {
-                ((AbstractNode) node).setId(id);
-            }
-            return node;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }

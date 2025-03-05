@@ -20,7 +20,8 @@ public class Team extends NamedNode {
 
     private String specialization;
 
-    public Team(String name, String specialization) {
+    public Team(Long id, String name, String specialization) {
+        super(id, name);
         this.specialization = specialization;
     }
 

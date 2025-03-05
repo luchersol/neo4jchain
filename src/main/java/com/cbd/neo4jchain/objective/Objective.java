@@ -16,7 +16,8 @@ public class Objective extends AbstractNode {
     Double value;
     UnitTime unit;
 
-    public Objective(Metric metric, Double value, UnitTime unit) {
+    public Objective(Long id, Metric metric, Double value, UnitTime unit) {
+        super(id);
         this.metric = metric;
         this.value = value;
         this.unit = unit;

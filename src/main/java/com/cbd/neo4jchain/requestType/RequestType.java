@@ -12,8 +12,8 @@ import lombok.Setter;
 @Node
 public class RequestType extends NamedNode {
 
-    public RequestType(String name) {
-        this.name = name;
+    public RequestType(Long id, String name) {
+        super(id, name);
     }
 
 }

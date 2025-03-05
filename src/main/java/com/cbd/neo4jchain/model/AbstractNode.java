@@ -13,4 +13,12 @@ public abstract class AbstractNode {
     @Id
     @GeneratedValue
     protected Long id;
+
+    public AbstractNode() {
+        super();
+    }
+
+    public AbstractNode(Long id) {
+        this.id = id;
+    }
 }

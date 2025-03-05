@@ -10,8 +10,8 @@ import lombok.Getter;
 @Getter
 public class ChainFaceted extends Chain {
 
-    public ChainFaceted(String name, String version, String description, OwnershipType ownershipType) {
-        super(name, version, description, ownershipType);
+    public ChainFaceted(Long id, String name, String version, String description, OwnershipType ownershipType) {
+        super(id, name, version, description, ownershipType);
     }
 
 }

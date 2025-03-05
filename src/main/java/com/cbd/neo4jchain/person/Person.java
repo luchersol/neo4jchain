@@ -31,7 +31,8 @@ public class Person extends AbstractNode {
 
     private String phone;
 
-    public Person(String lastName, String firstName, String email, String phone) {
+    public Person(Long id, String lastName, String firstName, String email, String phone) {
+        super(id);
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;

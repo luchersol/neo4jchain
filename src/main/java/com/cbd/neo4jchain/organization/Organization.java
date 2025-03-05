@@ -21,8 +21,8 @@ public class Organization extends NamedNode {
 
     private String code;
 
-    public Organization(String name, String code) {
-        this.name = name;
+    public Organization(Long id, String name, String code) {
+        super(id, name);
         this.code = code;
     }
 

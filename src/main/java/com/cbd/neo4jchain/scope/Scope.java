@@ -19,8 +19,8 @@ public class Scope extends NamedNode {
 
     Priority priority;
 
-    public Scope(String name, Priority priority) {
-        this.name = name;
+    public Scope(Long id, String name, Priority priority) {
+        super(id, name);
         this.priority = priority;
     }
 

@@ -22,8 +22,8 @@ public class ServiceOrg extends NamedNode {
 
     private String description;
 
-    public ServiceOrg(String name, String description) {
-        this.name = name;
+    public ServiceOrg(Long id, String name, String description) {
+        super(id, name);
         this.description = description;
     }
 

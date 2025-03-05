@@ -14,4 +14,14 @@ public abstract class NamedNode extends AbstractNode {
     @NotBlank
     @Pattern(regexp = RegexConstants.ALPHANUMERIC)
     protected String name;
+
+    public NamedNode(String name) {
+        this.name = name;
+    }
+
+    public NamedNode(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
 }

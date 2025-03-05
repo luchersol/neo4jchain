@@ -14,8 +14,8 @@ public class Chain extends NamedNode {
     private String description;
     private OwnershipType ownershipType;
 
-    public Chain(String name, String version, String description, OwnershipType ownershipType) {
-        this.name = name;
+    public Chain(Long id, String name, String version, String description, OwnershipType ownershipType) {
+        super(id, name);
         this.version = version;
         this.description = description;
         this.ownershipType = ownershipType;
