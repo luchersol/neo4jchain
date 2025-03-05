@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/scope")
 public class ScopeController {
 
+    ScopeService scopeService;
+
+    public ScopeController(ScopeService scopeService) {
+        this.scopeService = scopeService;
+    }
 }

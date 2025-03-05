@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/provider")
 public class ProviderController {
 
+    ProviderService providerService;
+
+    public ProviderController(ProviderService providerService) {
+        this.providerService = providerService;
+    }
 }

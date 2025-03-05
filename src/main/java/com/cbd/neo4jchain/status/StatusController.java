@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/status")
 public class StatusController {
 
+    StatusService statusService;
+
+    public StatusController(StatusService statusService) {
+        this.statusService = statusService;
+    }
 }

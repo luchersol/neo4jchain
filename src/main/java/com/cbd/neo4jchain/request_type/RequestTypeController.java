@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/requestType")
 public class RequestTypeController {
 
+    RequestTypeService requestTypeService;
+
+    public RequestTypeController(RequestTypeService requestTypeService) {
+        this.requestTypeService = requestTypeService;
+    }
 }

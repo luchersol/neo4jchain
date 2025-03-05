@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/sla")
 public class SlaController {
 
+    SlaService slaService;
+
+    public SlaController(SlaService slaService) {
+        this.slaService = slaService;
+    }
 }

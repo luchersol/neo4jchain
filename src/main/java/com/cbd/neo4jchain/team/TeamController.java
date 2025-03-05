@@ -22,7 +22,7 @@ public class TeamController {
 
     @GetMapping
     public ResponseEntity<?> getAllTeams() {
-        return ResponseEntity.ok(teamService.getAllServices());
+        return ResponseEntity.ok(teamService.getAllTeams());
     }
 
     @PostMapping

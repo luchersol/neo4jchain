@@ -21,7 +21,7 @@ public class ServiceOrgController {
 
     @GetMapping
     public ResponseEntity<?> getAllServiceOrgs() {
-        return ResponseEntity.ok(serviceOrgService.getAllServices());
+        return ResponseEntity.ok(serviceOrgService.getAllServiceOrg());
     }
 
     @PostMapping

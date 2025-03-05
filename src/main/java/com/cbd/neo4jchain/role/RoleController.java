@@ -7,4 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/role")
 public class RoleController {
 
+    RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 }
