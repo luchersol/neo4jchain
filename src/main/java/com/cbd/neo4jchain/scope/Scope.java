@@ -8,7 +8,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import com.cbd.neo4jchain.enums.Priority;
 import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.objective.Objective;
-import com.cbd.neo4jchain.requestType.RequestType;
+import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.util.RelationName.ScopeRelation;
 
 import lombok.Getter;

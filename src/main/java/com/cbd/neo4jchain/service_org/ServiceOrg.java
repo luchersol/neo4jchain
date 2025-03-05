@@ -7,7 +7,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.customer.Customer;
 import com.cbd.neo4jchain.model.NamedNode;
-import com.cbd.neo4jchain.requestType.RequestType;
+import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
 import com.cbd.neo4jchain.util.RelationName.ServiceOrgRelation;

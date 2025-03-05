@@ -40,7 +40,7 @@ import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.privilege.Privilege;
 import com.cbd.neo4jchain.provider.Provider;
-import com.cbd.neo4jchain.requestType.RequestType;
+import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.role.Role;
 import com.cbd.neo4jchain.scope.Scope;
 import com.cbd.neo4jchain.service_org.ServiceOrg;

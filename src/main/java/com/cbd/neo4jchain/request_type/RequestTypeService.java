@@ -1,4 +1,4 @@
-package com.cbd.neo4jchain.requestType;
+package com.cbd.neo4jchain.request_type;
 
 import org.springframework.stereotype.Service;
 
