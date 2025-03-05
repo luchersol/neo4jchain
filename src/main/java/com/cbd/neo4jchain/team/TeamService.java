@@ -24,7 +24,7 @@ public class TeamService {
         return this.teamRepository.findById(id).orElseThrow();
     }
 
-    public List<Team> getAllTeams() {
+    public List<Team> getAllTeam() {
         return this.teamRepository.findAll();
     }
 
