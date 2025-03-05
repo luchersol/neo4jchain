@@ -10,8 +10,14 @@ import com.cbd.neo4jchain.chain.ChainFaceted;
 import com.cbd.neo4jchain.chain.ChainState;
 import com.cbd.neo4jchain.customer.Customer;
 import com.cbd.neo4jchain.issue.Issue;
+import com.cbd.neo4jchain.objective.Objective;
 import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.person.Person;
+import com.cbd.neo4jchain.privilege.Privilege;
+import com.cbd.neo4jchain.provider.Provider;
+import com.cbd.neo4jchain.requestType.RequestType;
+import com.cbd.neo4jchain.role.Role;
+import com.cbd.neo4jchain.scope.Scope;
 import com.cbd.neo4jchain.service_org.ServiceOrg;
 import com.cbd.neo4jchain.sla.Sla;
 import com.cbd.neo4jchain.team.Team;
@@ -19,6 +25,14 @@ import com.cbd.neo4jchain.util.RelationName.ChainStateRelation;
 import com.cbd.neo4jchain.util.RelationName.CustomerRelation;
 import com.cbd.neo4jchain.util.RelationName.IssueRelation;
 import com.cbd.neo4jchain.util.RelationName.OrganizationRelation;
+import com.cbd.neo4jchain.util.RelationName.PersonRelation;
+import com.cbd.neo4jchain.util.RelationName.ProviderRelation;
+import com.cbd.neo4jchain.util.RelationName.RoleRelation;
+import com.cbd.neo4jchain.util.RelationName.ScopeRelation;
+import com.cbd.neo4jchain.util.RelationName.ServiceOrgRelation;
+import com.cbd.neo4jchain.util.RelationName.SlaRelation;
+import com.cbd.neo4jchain.util.RelationName.StatusRelation;
+import com.cbd.neo4jchain.util.RelationName.TeamRelation;
 
 public class RelationshipBuilder {
 
@@ -46,10 +60,10 @@ public class RelationshipBuilder {
                 while ((linea = br.readLine()) != null) {
                     String[] args = linea.split(",");
                     edge(fileWriter,
-                            args[0],
+                            args[0].toLowerCase(),
                             Integer.valueOf(args[1]),
-                            args[2],
-                            args[3],
+                            args[2].toUpperCase(),
+                            args[3].toLowerCase(),
                             Integer.valueOf(args[2]));
                 }
             } catch (Exception e) {
@@ -61,6 +75,14 @@ public class RelationshipBuilder {
             relationshipBuilder.edgesCustomer();
             relationshipBuilder.edgesIssue();
             relationshipBuilder.edgesOrganization();
+            relationshipBuilder.edgesPerson();
+            relationshipBuilder.edgesProvider();
+            relationshipBuilder.edgesRole();
+            relationshipBuilder.edgesScope();
+            relationshipBuilder.edgesServiceOrg();
+            relationshipBuilder.edgesSla();
+            relationshipBuilder.edgesStatus();
+            relationshipBuilder.edgesTeam();
         }
 
     }
@@ -119,6 +141,93 @@ public class RelationshipBuilder {
         ;
     }
 
+    public void edgesPerson() throws Exception {
+        this.configSource(Person.class)
+                .configTarget(Role.class)
+                .configRelationship(PersonRelation.ROLES)
+
+        ;
+    }
+
+    public void edgesProvider() throws Exception {
+        this.configSource(Provider.class)
+                .configTarget(Organization.class)
+                .configRelationship(ProviderRelation.ORGANIZATION)
+
+                .configTarget(ServiceOrg.class)
+                .configRelationship(ProviderRelation.SERVICE_ORG)
+                .configRelationship(ProviderRelation.SERVICE_ORGS)
+
+                .configTarget(Sla.class)
+                .configRelationship(ProviderRelation.SLA)
+
+        ;
+
+    }
+
+    public void edgesRole() throws Exception {
+        this.configSource(Role.class)
+                .configTarget(Privilege.class)
+                .configRelationship(RoleRelation.PRIVILEGE)
+
+        ;
+    }
+
+    public void edgesScope() throws Exception {
+        this.configSource(Scope.class)
+                .configTarget(RequestType.class)
+                .configRelationship(ScopeRelation.REQUEST_TYPE)
+
+                .configTarget(Objective.class)
+                .configRelationship(ScopeRelation.OBJECTIVES)
+
+        ;
+    }
+
+    public void edgesServiceOrg() throws Exception {
+        this.configSource(ServiceOrg.class)
+                .configTarget(Status.class)
+                .configRelationship(ServiceOrgRelation.STATUS)
+
+                .configTarget(RequestType.class)
+                .configRelationship(ServiceOrgRelation.REQUEST_TYPES)
+
+                .configTarget(Team.class)
+                .configRelationship(ServiceOrgRelation.TEAMS)
+
+                .configTarget(Customer.class)
+                .configRelationship(ServiceOrgRelation.CUSTOMERS)
+
+        ;
+    }
+
+    public void edgesSla() throws Exception {
+        this.configSource(Sla.class)
+                .configTarget(Scope.class)
+                .configRelationship(SlaRelation.SCOPES)
+
+        ;
+    }
+
+    public void edgesStatus() throws Exception {
+        this.configSource(Status.class)
+                .configTarget(Status.class)
+                .configRelationship(StatusRelation.STATUSES)
+
+        ;
+    }
+
+    public void edgesTeam() throws Exception {
+        this.configSource(Team.class)
+                .configTarget(Person.class)
+                .configRelationship(TeamRelation.PERSONS)
+
+                .configTarget(Role.class)
+                .configRelationship(TeamRelation.ROLES)
+
+        ;
+    }
+
     public RelationshipBuilder configNodes(Class<?> sourceClass, Class<?> targetClass) {
         this.sourceClass = sourceClass.getSimpleName().toLowerCase();
         this.targetClass = targetClass.getSimpleName().toLowerCase();
@@ -152,6 +261,12 @@ public class RelationshipBuilder {
                 .append(") \n").toString();
         file.write(query);
         file.flush();
+        return this;
+    }
+
+    public RelationshipBuilder edge(int sourceId, int... targetIds) throws Exception {
+        for (int targetId : targetIds)
+            edge(sourceId, targetId);
         return this;
     }
 
