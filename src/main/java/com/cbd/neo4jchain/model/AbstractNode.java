@@ -12,13 +12,13 @@ public abstract class AbstractNode {
 
     @Id
     @GeneratedValue
-    protected Long id;
+    protected Long oid;
 
     public AbstractNode() {
         super();
     }
 
-    public AbstractNode(Long id) {
-        this.id = id;
+    public AbstractNode(Long oid) {
+        this.oid = oid;
     }
 }

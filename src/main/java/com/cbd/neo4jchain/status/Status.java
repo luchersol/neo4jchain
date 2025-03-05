@@ -17,8 +17,7 @@ import lombok.Setter;
 public class Status extends NamedNode {
 
     public Status(Long id, String name) {
-        super(name);
-        this.id = id;
+        super(id, name);
     }
 
     @Relationship(type = StatusRelation.STATUSES)

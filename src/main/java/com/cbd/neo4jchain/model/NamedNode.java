@@ -20,7 +20,7 @@ public abstract class NamedNode extends AbstractNode {
     }
 
     public NamedNode(Long id, String name) {
-        this.id = id;
+        this.oid = id;
         this.name = name;
     }
 
