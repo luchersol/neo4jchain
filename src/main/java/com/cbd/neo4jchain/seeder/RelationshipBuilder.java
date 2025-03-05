@@ -3,6 +3,7 @@ package com.cbd.neo4jchain.seeder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.ObjectInputFilter.Status;
 import java.lang.Thread.State;
 
@@ -48,17 +49,13 @@ public class RelationshipBuilder {
         this.file = file;
     }
 
-    public static RelationshipBuilder builder(FileWriter file) {
-        return new RelationshipBuilder(file);
-    }
-
-    public static void createRelationship(FileWriter file) throws Exception {
+    public static void createRelationship(FileWriter fileWriter) throws Exception {
         if (READ_FILE) {
             String linea;
-            FileWriter fileWriter = new FileWriter(NodeSeeder.PATH_CYPHER);
             try (BufferedReader br = new BufferedReader(new FileReader(PATH_RELATION_FILE))) {
+                br.readLine(); // Saltamos la primera línea
                 while ((linea = br.readLine()) != null) {
-                    String[] args = linea.split(",");
+                    String[] args = linea.split("\t");
                     edge(fileWriter,
                             args[0].toLowerCase(),
                             Integer.valueOf(args[1]),
@@ -66,11 +63,14 @@ public class RelationshipBuilder {
                             args[3].toLowerCase(),
                             Integer.valueOf(args[2]));
                 }
-            } catch (Exception e) {
+            } catch (IOException e) {
                 throw new IllegalAccessException("No se ha podido acceder al archivo de relaciones.");
+            } catch (Exception e) {
+                throw new IllegalArgumentException("Ha ocurrido algún error en la creación de relaciones");
             }
+
         } else {
-            RelationshipBuilder relationshipBuilder = builder(file);
+            RelationshipBuilder relationshipBuilder = new RelationshipBuilder(fileWriter);
             relationshipBuilder.edgesChainState();
             relationshipBuilder.edgesCustomer();
             relationshipBuilder.edgesIssue();
@@ -90,12 +90,12 @@ public class RelationshipBuilder {
     public void edgesChainState() throws Exception {
         this.configNodes(ChainState.class, State.class)
                 .configRelationship(ChainStateRelation.INITIAL_STATUS)
-                .edge(0, 1)
+
                 .configRelationship(ChainStateRelation.TERMINAL_STATUS)
-                .edge(2, 3)
+
                 .configTarget(Sla.class)
                 .configRelationship(ChainStateRelation.SLA)
-                .edge(4, 5)
+
                 .end();
     }
 
@@ -103,10 +103,10 @@ public class RelationshipBuilder {
         this.configSource(Customer.class)
                 .configTarget(Organization.class)
                 .configRelationship(CustomerRelation.ORGANIZATION)
-                .edge(0, 1)
+
                 .configTarget(Sla.class)
                 .configRelationship(CustomerRelation.SLA)
-                .edge(2, 3)
+
                 .end();
     }
 

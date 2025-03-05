@@ -72,6 +72,7 @@ public class NodeSeeder {
     FileWriter file;
 
     static final String PATH_CYPHER = "src/main/resources/db/migration/neo4j/V1_create_node.cypher";
+    static final boolean DO_DELETE = true;
 
     private NodeSeeder() throws IOException {
         this.faker = new Faker(new Random(1L));
@@ -85,7 +86,8 @@ public class NodeSeeder {
     }
 
     public void generateCypher() throws Exception {
-        file.write("MATCH (n) DETACH DELETE n; \n\n");
+        if (DO_DELETE)
+            file.write("MATCH (n) DETACH DELETE n; \n\n");
         createNodes();
         createRelationship(file);
     }
