@@ -45,14 +45,12 @@ public class DataSeeder {
         if (populateDatabase) {
             try {
                 List<String> cypherFile = Files.readAllLines(Path.of(this.cypherPath));
-                for (String line : cypherFile) {
-                    if (line.isBlank() || line.startsWith("//"))
-                        continue;
-                    neo4jClient.query(line).run();
-                }
+                cypherFile.stream()
+                        .filter(line -> !line.isBlank() && !line.startsWith("//"))
+                        .forEach(line -> neo4jClient.query(line).run());
 
             } catch (Exception e) {
-                throw new IllegalAccessError("No se ha podido acceder al cypher");
+                throw new IllegalAccessError(e.getMessage());
             }
         }
     }
