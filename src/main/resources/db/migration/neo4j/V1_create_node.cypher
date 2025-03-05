@@ -121,77 +121,114 @@ MERGE (requesttype8:RequestType {id: "8", name: "aut"})
 MERGE (requesttype9:RequestType {id: "9", name: "voluptas"})
 
 // Role
-MERGE (role0:Role {id: "0", name: "Marketing Specialist"})
-MERGE (role1:Role {id: "1", name: "Education Agent"})
-MERGE (role2:Role {id: "2", name: "Real-Estate Specialist"})
-MERGE (role3:Role {id: "3", name: "Advertising Assistant"})
-MERGE (role4:Role {id: "4", name: "Lead Technology Supervisor"})
-MERGE (role5:Role {id: "5", name: "Retail Engineer"})
-MERGE (role6:Role {id: "6", name: "Investor Community-Services Director"})
-MERGE (role7:Role {id: "7", name: "Legacy Analyst"})
-MERGE (role8:Role {id: "8", name: "Dynamic Mining Specialist"})
-MERGE (role9:Role {id: "9", name: "Consulting Consultant"})
+MERGE (role0:Role {id: "0", name: "web developer"})
+MERGE (role1:Role {id: "1", name: "factory worker"})
+MERGE (role2:Role {id: "2", name: "electrician"})
+MERGE (role3:Role {id: "3", name: "optician"})
+MERGE (role4:Role {id: "4", name: "economist"})
+MERGE (role5:Role {id: "5", name: "web developer"})
+MERGE (role6:Role {id: "6", name: "air traffic controller"})
+MERGE (role7:Role {id: "7", name: "agriculturist"})
+MERGE (role8:Role {id: "8", name: "writer"})
+MERGE (role9:Role {id: "9", name: "shop assistant"})
 
 // Scope
-MERGE (scope0:Scope {id: "0", name: "et", priority: "MEDIUM"})
-MERGE (scope1:Scope {id: "1", name: "incidunt", priority: "MEDIUM"})
-MERGE (scope2:Scope {id: "2", name: "placeat", priority: "LOW"})
-MERGE (scope3:Scope {id: "3", name: "blanditiis", priority: "HARD"})
-MERGE (scope4:Scope {id: "4", name: "provident", priority: "LOW"})
-MERGE (scope5:Scope {id: "5", name: "debitis", priority: "LOW"})
-MERGE (scope6:Scope {id: "6", name: "delectus", priority: "ALL"})
-MERGE (scope7:Scope {id: "7", name: "neque", priority: "ALL"})
-MERGE (scope8:Scope {id: "8", name: "non", priority: "ALL"})
-MERGE (scope9:Scope {id: "9", name: "eligendi", priority: "MEDIUM"})
+MERGE (scope0:Scope {id: "0", name: "facilis", priority: "CRITICAL"})
+MERGE (scope1:Scope {id: "1", name: "est", priority: "LOW"})
+MERGE (scope2:Scope {id: "2", name: "et", priority: "CRITICAL"})
+MERGE (scope3:Scope {id: "3", name: "rem", priority: "LOW"})
+MERGE (scope4:Scope {id: "4", name: "et", priority: "CRITICAL"})
+MERGE (scope5:Scope {id: "5", name: "et", priority: "MEDIUM"})
+MERGE (scope6:Scope {id: "6", name: "dicta", priority: "ALL"})
+MERGE (scope7:Scope {id: "7", name: "nam", priority: "MEDIUM"})
+MERGE (scope8:Scope {id: "8", name: "mollitia", priority: "ALL"})
+MERGE (scope9:Scope {id: "9", name: "repellendus", priority: "MEDIUM"})
 
 // ServiceOrg
-MERGE (serviceorg0:ServiceOrg {id: "0", name: "Reinger Group", description: "Sed aut totam dolores."})
-MERGE (serviceorg1:ServiceOrg {id: "1", name: "Hyatt and Sons", description: "Nam aut sunt dolore id placeat sed a."})
-MERGE (serviceorg2:ServiceOrg {id: "2", name: "Halvorson Inc", description: "Ipsa ipsum adipisci qui."})
-MERGE (serviceorg3:ServiceOrg {id: "3", name: "Smith-Wehner", description: "Praesentium et qui voluptate."})
-MERGE (serviceorg4:ServiceOrg {id: "4", name: "Treutel-Sauer", description: "Quaerat omnis similique asperiores veritatis consectetur natus."})
-MERGE (serviceorg5:ServiceOrg {id: "5", name: "Ward Group", description: "Eum temporibus libero distinctio dolores iure error."})
-MERGE (serviceorg6:ServiceOrg {id: "6", name: "Rutherford, Hermann and Stamm", description: "Vel consectetur dolorum possimus et."})
-MERGE (serviceorg7:ServiceOrg {id: "7", name: "Monahan and Sons", description: "Commodi ullam eum quia a laudantium voluptate rerum."})
-MERGE (serviceorg8:ServiceOrg {id: "8", name: "Bins Group", description: "Autem atque voluptates ipsa id incidunt."})
-MERGE (serviceorg9:ServiceOrg {id: "9", name: "Crona-Boyer", description: "Qui officiis sit consequatur et."})
+MERGE (serviceorg0:ServiceOrg {id: "0", name: "Hoppe Group", description: "Voluptatibus incidunt reiciendis."})
+MERGE (serviceorg1:ServiceOrg {id: "1", name: "Padberg LLC", description: "Provident vel debitis."})
+MERGE (serviceorg2:ServiceOrg {id: "2", name: "Ernser-Stiedemann", description: "Adipisci non voluptatibus eligendi est quibusdam rem."})
+MERGE (serviceorg3:ServiceOrg {id: "3", name: "McLaughlin Inc", description: "Totam dolores laboriosam consectetur tempora."})
+MERGE (serviceorg4:ServiceOrg {id: "4", name: "Bradtke, Maggio and Keeling", description: "Id placeat sed a."})
+MERGE (serviceorg5:ServiceOrg {id: "5", name: "Halvorson Inc", description: "Ipsa ipsum adipisci qui."})
+MERGE (serviceorg6:ServiceOrg {id: "6", name: "Smith-Wehner", description: "Praesentium et qui voluptate."})
+MERGE (serviceorg7:ServiceOrg {id: "7", name: "Treutel-Sauer", description: "Quaerat omnis similique asperiores veritatis consectetur natus."})
+MERGE (serviceorg8:ServiceOrg {id: "8", name: "Ward Group", description: "Eum temporibus libero distinctio dolores iure error."})
+MERGE (serviceorg9:ServiceOrg {id: "9", name: "Rutherford, Hermann and Stamm", description: "Vel consectetur dolorum possimus et."})
 
 // Sla
-MERGE (sla0:Sla {id: "0", name: "est"})
-MERGE (sla1:Sla {id: "1", name: "voluptatibus"})
-MERGE (sla2:Sla {id: "2", name: "eos"})
-MERGE (sla3:Sla {id: "3", name: "non"})
-MERGE (sla4:Sla {id: "4", name: "expedita"})
-MERGE (sla5:Sla {id: "5", name: "ipsam"})
-MERGE (sla6:Sla {id: "6", name: "nostrum"})
-MERGE (sla7:Sla {id: "7", name: "quo"})
-MERGE (sla8:Sla {id: "8", name: "natus"})
-MERGE (sla9:Sla {id: "9", name: "sunt"})
+MERGE (sla0:Sla {id: "0", name: "quia"})
+MERGE (sla1:Sla {id: "1", name: "culpa"})
+MERGE (sla2:Sla {id: "2", name: "accusamus"})
+MERGE (sla3:Sla {id: "3", name: "autem"})
+MERGE (sla4:Sla {id: "4", name: "commodi"})
+MERGE (sla5:Sla {id: "5", name: "ullam"})
+MERGE (sla6:Sla {id: "6", name: "eum"})
+MERGE (sla7:Sla {id: "7", name: "quia"})
+MERGE (sla8:Sla {id: "8", name: "a"})
+MERGE (sla9:Sla {id: "9", name: "laudantium"})
 
 // Status
-MERGE (status0:Status {id: "0", name: "rerum"})
-MERGE (status1:Status {id: "1", name: "sint"})
-MERGE (status2:Status {id: "2", name: "nisi"})
-MERGE (status3:Status {id: "3", name: "rerum"})
-MERGE (status4:Status {id: "4", name: "eum"})
-MERGE (status5:Status {id: "5", name: "sint"})
-MERGE (status6:Status {id: "6", name: "reprehenderit"})
-MERGE (status7:Status {id: "7", name: "tenetur"})
-MERGE (status8:Status {id: "8", name: "eum"})
-MERGE (status9:Status {id: "9", name: "repudiandae"})
+MERGE (status0:Status {id: "0", name: "voluptate"})
+MERGE (status1:Status {id: "1", name: "rerum"})
+MERGE (status2:Status {id: "2", name: "dolores"})
+MERGE (status3:Status {id: "3", name: "at"})
+MERGE (status4:Status {id: "4", name: "dolor"})
+MERGE (status5:Status {id: "5", name: "quibusdam"})
+MERGE (status6:Status {id: "6", name: "autem"})
+MERGE (status7:Status {id: "7", name: "atque"})
+MERGE (status8:Status {id: "8", name: "voluptates"})
+MERGE (status9:Status {id: "9", name: "ipsa"})
 
 // Team
-MERGE (team0:Team {id: "0", name: "Rempel-Rowe", specialization: "qui"})
-MERGE (team1:Team {id: "1", name: "Harvey, Witting and Rutherford", specialization: "quas"})
-MERGE (team2:Team {id: "2", name: "Strosin Group", specialization: "facere"})
-MERGE (team3:Team {id: "3", name: "Corkery-Volkman", specialization: "ea"})
-MERGE (team4:Team {id: "4", name: "Prohaska-Heaney", specialization: "dolorum"})
-MERGE (team5:Team {id: "5", name: "Lockman-Satterfield", specialization: "incidunt"})
-MERGE (team6:Team {id: "6", name: "Baumbach-Ullrich", specialization: "sint"})
-MERGE (team7:Team {id: "7", name: "Ortiz Group", specialization: "quasi"})
-MERGE (team8:Team {id: "8", name: "Denesik-Rutherford", specialization: "et"})
-MERGE (team9:Team {id: "9", name: "Denesik Inc", specialization: "laudantium"})
+MERGE (team0:Team {id: "0", name: "Roberts LLC", specialization: "molestiae"})
+MERGE (team1:Team {id: "1", name: "Haag-Grimes", specialization: "officiis"})
+MERGE (team2:Team {id: "2", name: "Hilpert Inc", specialization: "est"})
+MERGE (team3:Team {id: "3", name: "Trantow-Osinski", specialization: "expedita"})
+MERGE (team4:Team {id: "4", name: "Gibson LLC", specialization: "natus"})
+MERGE (team5:Team {id: "5", name: "Spencer-Kuhn", specialization: "nisi"})
+MERGE (team6:Team {id: "6", name: "Heaney Group", specialization: "reprehenderit"})
+MERGE (team7:Team {id: "7", name: "Kovacek Inc", specialization: "sit"})
+MERGE (team8:Team {id: "8", name: "Rowe Inc", specialization: "nobis"})
+MERGE (team9:Team {id: "9", name: "Witting, Rutherford and Hilpert", specialization: "commodi"})
 
 MERGE (chainstate0)-[:INITIAL]->(state1) 
 MERGE (chainstate2)-[:TERMINAL]->(state3) 
 MERGE (chainstate4)-[:INITIAL_SLA]->(sla5) 
+
+
+// Customer Relations:
+MERGE (customer0)-[:ORGANIZATION]->(organization1) 
+MERGE (customer2)-[:SLA]->(sla3) 
+
+
+// Issue Relations:
+
+
+// Organization Relations:
+
+
+// Person Relations:
+
+
+// Provider Relations:
+
+
+// Role Relations:
+
+
+// Scope Relations:
+
+
+// ServiceOrg Relations:
+
+
+// Sla Relations:
+
+
+// Status Relations:
+
+
+// Team Relations:
+
+

@@ -26,8 +26,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
-import com.cbd.neo4jchain.chain.ChainFaceted;
-import com.cbd.neo4jchain.chain.ChainState;
+import com.cbd.neo4jchain.chain.faceted.ChainFaceted;
+import com.cbd.neo4jchain.chain.state.ChainState;
 import com.cbd.neo4jchain.customer.Customer;
 import com.cbd.neo4jchain.enums.Metric;
 import com.cbd.neo4jchain.enums.OwnershipType;
@@ -284,7 +284,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_ROLE)
                 .boxed()
                 .map(id -> new Role(id,
-                        faker.job().title()))
+                        faker.company().profession()))
                 .collect(Collectors.toList());
     }
 

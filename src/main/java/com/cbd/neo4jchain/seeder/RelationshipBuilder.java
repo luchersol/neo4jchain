@@ -6,8 +6,8 @@ import java.io.FileWriter;
 import java.io.ObjectInputFilter.Status;
 import java.lang.Thread.State;
 
-import com.cbd.neo4jchain.chain.ChainFaceted;
-import com.cbd.neo4jchain.chain.ChainState;
+import com.cbd.neo4jchain.chain.faceted.ChainFaceted;
+import com.cbd.neo4jchain.chain.state.ChainState;
 import com.cbd.neo4jchain.customer.Customer;
 import com.cbd.neo4jchain.issue.Issue;
 import com.cbd.neo4jchain.objective.Objective;
@@ -41,7 +41,7 @@ public class RelationshipBuilder {
     String targetClass;
     String relationship;
 
-    static final boolean READ_FILE = true;
+    static final boolean READ_FILE = false;
     static final String PATH_RELATION_FILE = "src/main/resources/relationship.csv";
 
     private RelationshipBuilder(FileWriter file) {
@@ -95,7 +95,8 @@ public class RelationshipBuilder {
                 .edge(2, 3)
                 .configTarget(Sla.class)
                 .configRelationship(ChainStateRelation.SLA)
-                .edge(4, 5);
+                .edge(4, 5)
+                .end();
     }
 
     public void edgesCustomer() throws Exception {
@@ -105,7 +106,8 @@ public class RelationshipBuilder {
                 .edge(0, 1)
                 .configTarget(Sla.class)
                 .configRelationship(CustomerRelation.SLA)
-                .edge(2, 3);
+                .edge(2, 3)
+                .end();
     }
 
     public void edgesIssue() throws Exception {
@@ -122,7 +124,9 @@ public class RelationshipBuilder {
                 .configTarget(Person.class)
                 .configRelationship(IssueRelation.ASSIGNED_PERSON)
 
-                .configRelationship(IssueRelation.OWNER_PERSON);
+                .configRelationship(IssueRelation.OWNER_PERSON)
+
+                .end();
     }
 
     public void edgesOrganization() throws Exception {
@@ -138,7 +142,7 @@ public class RelationshipBuilder {
 
                 .configTarget(ChainFaceted.class)
 
-        ;
+                .end();
     }
 
     public void edgesPerson() throws Exception {
@@ -146,7 +150,7 @@ public class RelationshipBuilder {
                 .configTarget(Role.class)
                 .configRelationship(PersonRelation.ROLES)
 
-        ;
+                .end();
     }
 
     public void edgesProvider() throws Exception {
@@ -161,7 +165,7 @@ public class RelationshipBuilder {
                 .configTarget(Sla.class)
                 .configRelationship(ProviderRelation.SLA)
 
-        ;
+                .end();
 
     }
 
@@ -170,7 +174,7 @@ public class RelationshipBuilder {
                 .configTarget(Privilege.class)
                 .configRelationship(RoleRelation.PRIVILEGE)
 
-        ;
+                .end();
     }
 
     public void edgesScope() throws Exception {
@@ -181,7 +185,7 @@ public class RelationshipBuilder {
                 .configTarget(Objective.class)
                 .configRelationship(ScopeRelation.OBJECTIVES)
 
-        ;
+                .end();
     }
 
     public void edgesServiceOrg() throws Exception {
@@ -198,7 +202,7 @@ public class RelationshipBuilder {
                 .configTarget(Customer.class)
                 .configRelationship(ServiceOrgRelation.CUSTOMERS)
 
-        ;
+                .end();
     }
 
     public void edgesSla() throws Exception {
@@ -206,7 +210,7 @@ public class RelationshipBuilder {
                 .configTarget(Scope.class)
                 .configRelationship(SlaRelation.SCOPES)
 
-        ;
+                .end();
     }
 
     public void edgesStatus() throws Exception {
@@ -214,7 +218,7 @@ public class RelationshipBuilder {
                 .configTarget(Status.class)
                 .configRelationship(StatusRelation.STATUSES)
 
-        ;
+                .end();
     }
 
     public void edgesTeam() throws Exception {
@@ -225,7 +229,7 @@ public class RelationshipBuilder {
                 .configTarget(Role.class)
                 .configRelationship(TeamRelation.ROLES)
 
-        ;
+                .end();
     }
 
     public RelationshipBuilder configNodes(Class<?> sourceClass, Class<?> targetClass) {
@@ -234,8 +238,9 @@ public class RelationshipBuilder {
         return this;
     }
 
-    public RelationshipBuilder configSource(Class<?> sourceClass) {
+    public RelationshipBuilder configSource(Class<?> sourceClass) throws Exception {
         this.sourceClass = sourceClass.getSimpleName().toLowerCase();
+        this.file.write("// " + sourceClass.getSimpleName() + " Relations:\n");
         return this;
     }
 
@@ -262,6 +267,11 @@ public class RelationshipBuilder {
         file.write(query);
         file.flush();
         return this;
+    }
+
+    public void end() throws Exception {
+        this.file.write("\n\n");
+        this.file.flush();
     }
 
     public RelationshipBuilder edge(int sourceId, int... targetIds) throws Exception {

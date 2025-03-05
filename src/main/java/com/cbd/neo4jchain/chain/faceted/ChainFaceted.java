@@ -1,7 +1,8 @@
-package com.cbd.neo4jchain.chain;
+package com.cbd.neo4jchain.chain.faceted;
 
 import org.springframework.data.neo4j.core.schema.Node;
 
+import com.cbd.neo4jchain.chain.Chain;
 import com.cbd.neo4jchain.enums.OwnershipType;
 
 import lombok.Getter;

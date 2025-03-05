@@ -1,8 +1,9 @@
-package com.cbd.neo4jchain.chain;
+package com.cbd.neo4jchain.chain.state;
 
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
+import com.cbd.neo4jchain.chain.Chain;
 import com.cbd.neo4jchain.enums.OwnershipType;
 import com.cbd.neo4jchain.sla.Sla;
 import com.cbd.neo4jchain.status.Status;
