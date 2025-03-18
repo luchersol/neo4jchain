@@ -5,9 +5,11 @@ import org.springframework.data.neo4j.core.schema.GeneratedValue;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
+@SuperBuilder
 public abstract class AbstractNode {
 
     @Id

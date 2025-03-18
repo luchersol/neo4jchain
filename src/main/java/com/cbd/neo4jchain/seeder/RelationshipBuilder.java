@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputFilter.Status;
 import java.lang.Thread.State;
+import java.util.Random;
 
 import com.cbd.neo4jchain.chain.faceted.ChainFaceted;
 import com.cbd.neo4jchain.chain.state.ChainState;
@@ -41,6 +42,8 @@ public class RelationshipBuilder {
     String sourceClass;
     String targetClass;
     String relationship;
+
+    private static final Integer DEFAULT_NUM_EDGES = 3;
 
     private RelationshipBuilder(FileWriter file) {
         this.file = file;
@@ -85,14 +88,15 @@ public class RelationshipBuilder {
     }
 
     public void edgesChainState() throws Exception {
-        this.configNodes(ChainState.class, State.class)
+        this.configSource(ChainState.class)
+                .configTarget(State.class)
                 .configRelationship(ChainStateRelation.INITIAL_STATUS)
-
+                .edgeRandomGenerator(SeederConfig.NUM_STATUS)
                 .configRelationship(ChainStateRelation.TERMINAL_STATUS)
-
+                .edgeRandomGenerator(SeederConfig.NUM_STATUS)
                 .configTarget(Sla.class)
                 .configRelationship(ChainStateRelation.SLA)
-
+                .edgeRandomGenerator(SeederConfig.NUM_SLA)
                 .end();
     }
 
@@ -100,10 +104,10 @@ public class RelationshipBuilder {
         this.configSource(Customer.class)
                 .configTarget(Organization.class)
                 .configRelationship(CustomerRelation.ORGANIZATION)
-
+                .edgeRandomGenerator(SeederConfig.NUM_ORGANIZATION)
                 .configTarget(Sla.class)
                 .configRelationship(CustomerRelation.SLA)
-
+                .edgeRandomGenerator(SeederConfig.NUM_SLA)
                 .end();
     }
 
@@ -111,18 +115,18 @@ public class RelationshipBuilder {
         this.configSource(Issue.class)
                 .configTarget(ServiceOrg.class)
                 .configRelationship(IssueRelation.SERVICE_ORG)
-
+                .edgeRandomGenerator(SeederConfig.NUM_SERVICE_ORG)
                 .configTarget(Status.class)
                 .configRelationship(IssueRelation.STATUS)
-
+                .edgeRandomGenerator(SeederConfig.NUM_STATUS)
                 .configTarget(Team.class)
                 .configRelationship(IssueRelation.TEAM)
-
+                .edgeRandomGenerator(SeederConfig.NUM_TEAM)
                 .configTarget(Person.class)
                 .configRelationship(IssueRelation.ASSIGNED_PERSON)
-
+                .edgeRandomGenerator(SeederConfig.NUM_PERSON)
                 .configRelationship(IssueRelation.OWNER_PERSON)
-
+                .edgeRandomGenerator(SeederConfig.NUM_PERSON)
                 .end();
     }
 
@@ -130,15 +134,15 @@ public class RelationshipBuilder {
         this.configSource(Organization.class)
                 .configTarget(Team.class)
                 .configRelationship(OrganizationRelation.TEAMS)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_TEAM)
                 .configTarget(ServiceOrg.class)
                 .configRelationship(IssueRelation.STATUS)
-
+                .edgeRandomGenerator(SeederConfig.NUM_SERVICE_ORG)
                 .configRelationship(OrganizationRelation.CHAIN)
                 .configTarget(ChainState.class)
-
+                .edgeRandomGenerator(SeederConfig.NUM_CHAIN_STATE)
                 .configTarget(ChainFaceted.class)
-
+                .edgeRandomGenerator(SeederConfig.NUM_CHAIN_FACETED)
                 .end();
     }
 
@@ -146,7 +150,7 @@ public class RelationshipBuilder {
         this.configSource(Person.class)
                 .configTarget(Role.class)
                 .configRelationship(PersonRelation.ROLES)
-
+                .edgeRandomGenerator(SeederConfig.NUM_ROLE)
                 .end();
     }
 
@@ -154,14 +158,15 @@ public class RelationshipBuilder {
         this.configSource(Provider.class)
                 .configTarget(Organization.class)
                 .configRelationship(ProviderRelation.ORGANIZATION)
-
+                .edgeRandomGenerator(SeederConfig.NUM_ORGANIZATION)
                 .configTarget(ServiceOrg.class)
                 .configRelationship(ProviderRelation.SERVICE_ORG)
+                .edgeRandomGenerator(SeederConfig.NUM_SERVICE_ORG)
                 .configRelationship(ProviderRelation.SERVICE_ORGS)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_SERVICE_ORG)
                 .configTarget(Sla.class)
                 .configRelationship(ProviderRelation.SLA)
-
+                .edgeRandomGenerator(SeederConfig.NUM_SLA)
                 .end();
 
     }
@@ -170,7 +175,7 @@ public class RelationshipBuilder {
         this.configSource(Role.class)
                 .configTarget(Privilege.class)
                 .configRelationship(RoleRelation.PRIVILEGE)
-
+                .edgeRandomGenerator(SeederConfig.NUM_PRIVILEGE)
                 .end();
     }
 
@@ -178,10 +183,10 @@ public class RelationshipBuilder {
         this.configSource(Scope.class)
                 .configTarget(RequestType.class)
                 .configRelationship(ScopeRelation.REQUEST_TYPE)
-
+                .edgeRandomGenerator(SeederConfig.NUM_REQUEST_TYPE)
                 .configTarget(Objective.class)
                 .configRelationship(ScopeRelation.OBJECTIVES)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_OBJECTIVE)
                 .end();
     }
 
@@ -189,16 +194,16 @@ public class RelationshipBuilder {
         this.configSource(ServiceOrg.class)
                 .configTarget(Status.class)
                 .configRelationship(ServiceOrgRelation.STATUS)
-
+                .edgeRandomGenerator(SeederConfig.NUM_STATUS)
                 .configTarget(RequestType.class)
                 .configRelationship(ServiceOrgRelation.REQUEST_TYPES)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_REQUEST_TYPE)
                 .configTarget(Team.class)
                 .configRelationship(ServiceOrgRelation.TEAMS)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_TEAM)
                 .configTarget(Customer.class)
                 .configRelationship(ServiceOrgRelation.CUSTOMERS)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_CUSTOMER)
                 .end();
     }
 
@@ -206,7 +211,7 @@ public class RelationshipBuilder {
         this.configSource(Sla.class)
                 .configTarget(Scope.class)
                 .configRelationship(SlaRelation.SCOPES)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_SCOPE)
                 .end();
     }
 
@@ -214,7 +219,7 @@ public class RelationshipBuilder {
         this.configSource(Status.class)
                 .configTarget(Status.class)
                 .configRelationship(StatusRelation.STATUSES)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_STATUS)
                 .end();
     }
 
@@ -222,10 +227,10 @@ public class RelationshipBuilder {
         this.configSource(Team.class)
                 .configTarget(Person.class)
                 .configRelationship(TeamRelation.PERSONS)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_PERSON)
                 .configTarget(Role.class)
                 .configRelationship(TeamRelation.ROLES)
-
+                .edgeMultiTargetRandomGenerator(SeederConfig.NUM_ROLE)
                 .end();
     }
 
@@ -237,7 +242,15 @@ public class RelationshipBuilder {
 
     public RelationshipBuilder configSource(Class<?> sourceClass) throws Exception {
         this.sourceClass = sourceClass.getSimpleName().toLowerCase();
-        this.file.write("// " + sourceClass.getSimpleName() + " Relations:\n");
+        String title = String.format("// %s Relations:\n", this.sourceClass);
+        this.file.write(title);
+        return this;
+    }
+
+    public RelationshipBuilder configSource(Class<?> sourceClass, Integer numRelations) throws Exception {
+        this.sourceClass = sourceClass.getSimpleName().toLowerCase();
+        String title = String.format("// %s Relations(%d):\n", this.sourceClass, numRelations);
+        this.file.write(title);
         return this;
     }
 
@@ -275,6 +288,45 @@ public class RelationshipBuilder {
         for (int targetId : targetIds)
             edge(sourceId, targetId);
         return this;
+    }
+
+    public RelationshipBuilder edgeRandomGenerator(Integer limitId, Long seed) throws Exception {
+        Random random = new Random(seed);
+        for (int sourcerId = 0; sourcerId < limitId; sourcerId++) {
+            Integer targetId = null;
+            do {
+                targetId = random.nextInt(0, limitId.intValue());
+            } while (targetId == sourcerId);
+            edge(sourcerId, targetId);
+        }
+        return this;
+    }
+
+    public RelationshipBuilder edgeRandomGenerator(Integer limitId) throws Exception {
+        return edgeRandomGenerator(limitId, 1L);
+    }
+
+    public RelationshipBuilder edgeMultiTargetRandomGenerator(Integer numEdges, Integer limitId, Long seed)
+            throws Exception {
+        Random random = new Random(seed);
+        for (int sourcerId = 0; sourcerId < limitId; sourcerId++) {
+            for (int i = 0; i < numEdges; i++) {
+                Integer targetId = null;
+                do {
+                    targetId = random.nextInt(0, limitId.intValue());
+                } while (targetId == sourcerId);
+                edge(sourcerId, targetId);
+            }
+        }
+        return this;
+    }
+
+    public RelationshipBuilder edgeMultiTargetRandomGenerator(Integer limitId, Long seedId) throws Exception {
+        return edgeMultiTargetRandomGenerator(DEFAULT_NUM_EDGES, limitId, seedId);
+    }
+
+    public RelationshipBuilder edgeMultiTargetRandomGenerator(Integer limitId) throws Exception {
+        return edgeMultiTargetRandomGenerator(limitId, 1L);
     }
 
     public static void edge(FileWriter file, String sourceClass, int sourceId, String relationship,
