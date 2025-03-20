@@ -90,6 +90,19 @@ public class NodeSeeder {
         createRelationship(file, this.relationPath);
     }
 
+    private static String[] specializations = {
+            "Desarrollador Backend",
+            "Desarrollador Frontend",
+            "Ingeniero DevOps",
+            "Analista de Datos",
+            "Arquitecto de Software",
+            "Especialista en Ciberseguridad",
+            "Ingeniero QA",
+            "Product Manager",
+            "UX/UI Designer",
+            "Scrum Master"
+    };
+
     public void createNodes() throws Exception {
         doQuery(chainFaceteds, "oid", "name", "version", "description", "ownershipType");
         doQuery(chainStates, "oid", "name", "version", "description", "ownershipType");
@@ -187,7 +200,7 @@ public class NodeSeeder {
                 .map(id -> new ChainState(id,
                         faker.company().name(),
                         faker.app().version(),
-                        faker.lorem().sentence(),
+                        "Descripcion chainstate " + id,
                         faker.options().option(OwnershipType.class)))
                 .collect(Collectors.toList());
     }
@@ -199,7 +212,7 @@ public class NodeSeeder {
                 .map(id -> new ChainFaceted(id,
                         faker.company().name(),
                         faker.app().version(),
-                        faker.lorem().sentence(),
+                        "Descripcion chainfaceted " + id,
                         faker.options().option(OwnershipType.class)))
                 .collect(Collectors.toList());
     }
@@ -216,8 +229,8 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_ISSUE)
                 .boxed()
                 .map(id -> new Issue(id,
-                        faker.lorem().sentence(),
-                        faker.lorem().paragraph()))
+                        faker.company().buzzword() + " " + faker.hacker().noun(),
+                        faker.hacker().verb() + " " + faker.hacker().noun()))
                 .collect(Collectors.toList());
     }
 
@@ -259,7 +272,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_PRIVILEGE)
                 .boxed()
                 .map(id -> new Privilege(id,
-                        faker.lorem().word()))
+                        "Privilegio " + id))
                 .collect(Collectors.toList());
     }
 
@@ -275,7 +288,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_REQUEST_TYPE)
                 .boxed()
                 .map(id -> new RequestType(id,
-                        faker.lorem().word()))
+                        "Request Type " + id))
                 .collect(Collectors.toList());
     }
 
@@ -293,7 +306,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_SCOPE)
                 .boxed()
                 .map(id -> new Scope(id,
-                        faker.lorem().word(),
+                        "Scope name " + id,
                         faker.options().option(Priority.class)))
                 .collect(Collectors.toList());
     }
@@ -304,7 +317,7 @@ public class NodeSeeder {
                 .boxed()
                 .map(id -> new ServiceOrg(id,
                         faker.company().name(),
-                        faker.lorem().sentence()))
+                        faker.company().buzzword()))
                 .collect(Collectors.toList());
     }
 
@@ -313,7 +326,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_SLA)
                 .boxed()
                 .map(id -> new Sla(id,
-                        faker.lorem().word()))
+                        "Sla name " + id))
                 .collect(Collectors.toList());
     }
 
@@ -322,7 +335,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_STATUS)
                 .boxed()
                 .map(id -> new Status(id,
-                        faker.lorem().word()))
+                        "Status name " + id))
                 .collect(Collectors.toList());
     }
 
@@ -332,7 +345,7 @@ public class NodeSeeder {
                 .boxed()
                 .map(id -> new Team(id,
                         faker.company().name(),
-                        faker.lorem().word()))
+                        faker.options().option(specializations)))
                 .collect(Collectors.toList());
     }
 
