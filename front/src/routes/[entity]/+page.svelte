@@ -2,21 +2,46 @@
     import { BackendAPI } from '../../stores/stores';
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
-    import Throbber from '../../components/throbber.svelte'
+    import Throbber from '../../components/throbber.svelte';
+    import { writable } from 'svelte/store';
+
     let entity = $page.params.entity;
-    let data = []
+    let data = [];
+    let showModal = writable(false);
+    let selectedEntity = writable(null);
+
     async function fetchInfo() {
         try {
-            console.log(`${BackendAPI}/api/${entity.toLocaleLowerCase()}`)
-            const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}`)
-            data = await response.json()
+            const response = await fetch(`${BackendAPI}/api/${entity.toLowerCase()}`);
+            data = await response.json();
         } catch (error) {
-            data = 'There was an error retrieving the info: '+ error
+            data = 'There was an error retrieving the info: ' + error;
         }
     }
 
-    onMount( async () => {
-        await fetchInfo()
+    async function deleteEntity(id) {
+        try {
+            const response = await fetch(`${BackendAPI}/api/${entity.toLowerCase()}/${id}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                data = data.filter(item => item.id !== id);
+                showModal.set(false);
+            } else {
+                console.error('Failed to delete entity');
+            }
+        } catch (error) {
+            console.error('Error deleting entity:', error);
+        }
+    }
+
+    function confirmDelete(entity) {
+        selectedEntity.set(entity);
+        showModal.set(true);
+    }
+
+    onMount(async () => {
+        await fetchInfo();
     });
 </script>
 
@@ -53,12 +78,22 @@
                     <button on:click={() => window.location.href = `/${entity}/${element.id}/edit`} class="button edit-button">
                         Edit
                     </button>
-                    <button on:click={() => console.log('delete element')} class="button delete-button">
+                    <button on:click={() => confirmDelete(element)} class="button delete-button">
                         Delete
                     </button>
                 </div>
             </div>
         {/each}
+    </div>
+{/if}
+
+{#if $showModal}
+    <div class="modal">
+        <div class="modal-content">
+            <p>Are you sure that you want to delete this entity?</p>
+            <button on:click={() => deleteEntity($selectedEntity.id)} class="button delete-button">Delete Forever</button>
+            <button on:click={() => showModal.set(false)} class="button cancel-button">Cancel</button>
+        </div>
     </div>
 {/if}
 
@@ -68,6 +103,9 @@
         flex-wrap: wrap;
         gap: 1rem;
         justify-content: center;
+    }
+    .modal-content {
+        background: white;
         padding: 2rem;
     }
 
@@ -137,5 +175,28 @@
     }
     .delete-button:hover {
         background-color: #a71d2a;
+    }
+    .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .modal-content {
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        text-align: center;
+    }
+    .cancel-button {
+        background-color: #6c757d;
+    }
+    .cancel-button:hover {
+        background-color: #5a6268;
     }
 </style>
