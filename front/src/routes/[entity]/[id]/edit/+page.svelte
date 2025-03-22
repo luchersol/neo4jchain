@@ -35,8 +35,8 @@
 
 	async function fetchItemsForSelect(type) {
 		const regex = /List<([A-Za-z]+)>/;
-		const match = str.match(regex);
-		const endpoint = (match ? match[1] : str).toLocaleLowerCase();
+		const match = type.match(regex);
+		const endpoint = (match ? match[1] : type).toLocaleLowerCase();
 
 		try {
 			const response = await fetch(`${BackendAPI}${endpoint}`);
