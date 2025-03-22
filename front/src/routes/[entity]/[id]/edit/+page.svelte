@@ -82,7 +82,7 @@
 
     async function handleSubmit() {
         try {
-            const response = await fetch(`${BackendAPI}/api/${entity}`, {
+            const response = await fetch(`${BackendAPI}/api/${entity}/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -91,9 +91,9 @@
             });
 
             if (response.ok) {
-                alert(`${entity} created successfully!`);
+                alert(`${entity} edited successfully!`);
             } else {
-                alert('There was an error creating the entity.');
+                alert('There was an error editing the entity.');
             }
         } catch (error) {
             console.error('Error submitting form:', error);
@@ -156,7 +156,7 @@
                 </div>
             {/each}
 
-            <button type="submit">Create {entity}</button>
+            <button type="submit">Edit {entity}</button>
         </form>
     {:else}
         <p>Loading fields...</p>
