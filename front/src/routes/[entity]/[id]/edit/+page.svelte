@@ -13,7 +13,14 @@
         'List<ServiceOrg>': [],
         'List<Customer>': [],
         'List<Privilege>': [],
-        'List<Role>': []
+        'List<Role>': [],
+        'Status': [],
+        'Sla': [],
+        'Organization': [],
+        'Team': [],
+        'Person': [],
+        'Role': [],
+        'RequestType': [],
     };
 
     async function fetchInfo() {
@@ -42,6 +49,9 @@
                 break;
             case 'List<Role>':
                 endpoint = '/api/role';
+                break;
+            case 'List<Scope>':
+                endpoint = '/api/scope';
                 break;
             default:
                 endpoint = `/api/${type.toLocaleLowerCase()}`;
