@@ -2,6 +2,7 @@
     import { BackendAPI } from '../../stores/stores';
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
+    import Throbber from '../../components/throbber.svelte'
 	let entity = $page.params.entity;
     let data = []
     async function fetchInfo() {
@@ -21,7 +22,7 @@
 </script>
 
 {#if data.length === 0}
-<p>Loading...</p>
+<Throbber message={'Loading...'}/>
 {:else}
 {#each data as element}
 <div class="section">

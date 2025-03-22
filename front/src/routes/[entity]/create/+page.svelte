@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import { BackendAPI, entityDict } from '../../stores/stores';
+    import Throbber from '../../../components/throbber.svelte';
 
     let entity = $page.params.entity;
     let fields = {};
@@ -148,7 +149,7 @@
             <button type="submit">Create {entity}</button>
         </form>
     {:else}
-        <p>Loading fields...</p>
+        <Throbber message={'Loading...'}/>
     {/if}
 </div>
 

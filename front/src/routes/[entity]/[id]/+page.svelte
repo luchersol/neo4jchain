@@ -2,6 +2,7 @@
     import { onMount } from 'svelte';
     import { BackendAPI } from '../../stores/stores';
 	import { page } from '$app/stores';
+    import Throbber from '../../../components/throbber.svelte';
 	let entity = $page.params.entity;
     let id = $page.params.id;
     let data = {}
@@ -21,7 +22,7 @@
 
 <div class="container">
     {#if !Object.keys(data).length}
-        <p>Loading...</p>
+    <Throbber message={'Loading...'}/>
     {:else}
         {#each Object.entries(data) as [key, value]}
             <div class="section">
