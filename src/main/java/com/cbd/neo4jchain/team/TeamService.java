@@ -25,7 +25,8 @@ public class TeamService {
     }
 
     public List<Team> getAllTeam() {
-        return this.teamRepository.findAll();
+        List<Team> teams = this.teamRepository.findAll();
+        return teams;
     }
 
     public Team createTeam(Team team) {

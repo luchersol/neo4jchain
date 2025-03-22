@@ -1,7 +1,5 @@
 package com.cbd.neo4jchain.model;
 
-import org.springframework.data.neo4j.core.schema.Node;
-
 import com.cbd.neo4jchain.util.RegexConstants;
 
 import jakarta.validation.constraints.NotBlank;
@@ -11,7 +9,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Node
 public abstract class NamedNode extends AbstractNode {
 
     @NotBlank
@@ -23,7 +20,7 @@ public abstract class NamedNode extends AbstractNode {
     }
 
     public NamedNode(Long id, String name) {
-        this.oid = id;
+        this.id = id;
         this.name = name;
     }
 
