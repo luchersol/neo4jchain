@@ -2,27 +2,14 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../../components/throbber.svelte';
-	import { BackendAPI, entityDict } from '../../../../stores/stores';
+	import { BackendAPI, entityDict, transformObject } from '../../../../stores/stores';
 
 	let entity = $page.params.entity;
 	let fields = {};
 	let data = {};
 	let formData = {};
 	let entityToEdit = {};
-	let existingItems = {
-		'List<Team>': [],
-		'List<ServiceOrg>': [],
-		'List<Customer>': [],
-		'List<Privilege>': [],
-		'List<Role>': [],
-		Status: [],
-		Sla: [],
-		Organization: [],
-		Team: [],
-		Person: [],
-		Role: [],
-		RequestType: []
-	};
+	let existingItems = transformObject(entityDict);
 
 	async function fetchInfo() {
 		try {
@@ -36,7 +23,7 @@
 	async function fetchItemsForSelect(type) {
 		const regex = /List<([A-Za-z]+)>/;
 		const match = type.match(regex);
-		const endpoint =  "/api/" + (match ? match[1] : type).toLocaleLowerCase();
+		const endpoint = '/api/' + (match ? match[1] : type).toLocaleLowerCase();
 
 		try {
 			const response = await fetch(`${BackendAPI}${endpoint}`);

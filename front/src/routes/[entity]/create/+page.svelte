@@ -2,30 +2,22 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../components/throbber.svelte';
-	import { BackendAPI, entityDict } from '../../../stores/stores';
+	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
+
+	$: {
+		console.log(formData);
+	}
 
 	let entity = $page.params.entity;
 	let fields = {};
 	let formData = {};
-	let existingItems = {
-		'List<Team>': [],
-		'List<ServiceOrg>': [],
-		'List<Customer>': [],
-		'List<Privilege>': [],
-		'List<Role>': [],
-		Status: [],
-		Sla: [],
-		Organization: [],
-		Team: [],
-		Person: [],
-		Role: [],
-		RequestType: []
-	};
+
+	let existingItems = transformObject(entityDict);
 
 	async function fetchItemsForSelect(type) {
 		const regex = /List<([A-Za-z]+)>/;
 		const match = type.match(regex);
-		const endpoint = "/api/" + (match ? match[1] : type).toLocaleLowerCase();
+		const endpoint = '/api/' + (match ? match[1] : type).toLocaleLowerCase();
 
 		try {
 			const response = await fetch(`${BackendAPI}${endpoint}`);
@@ -47,6 +39,7 @@
 			Object.keys(fields).forEach((key) => {
 				formData[key] = '';
 			});
+			console.log(fields);
 
 			Object.entries(fields).forEach(([key, type]) => {
 				if (
@@ -96,7 +89,7 @@
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>
-			{#each Object.entries(fields) as [key, type]}
+			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, type]}
 				<div class="field">
 					<label for={key}>{key}</label>
 
@@ -120,23 +113,14 @@
 							<option value="MINUTES">Minutes</option>
 							<option value="HOURS">Hours</option>
 						</select>
-					{:else if type === 'List<Team>' || type === 'List<ServiceOrg>' || type === 'List<Customer>'}
+					{:else if ['List<Team>', 'List<ServiceOrg>', 'List<Customer>', 'List<Privilege>', 'List<Role>', 'List<Person>'].includes(type)}
 						<select id={key} bind:value={formData[key]} required multiple>
-							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
-					{:else if type === 'List<Privilege>' || type === 'List<Role>'}
-						<select id={key} bind:value={formData[key]} required multiple>
-							<option value="">Select an existing {key}</option>
-							{#each existingItems[type] as item}
-								<option value={item.id}>{item.name}</option>
-							{/each}
-						</select>
-					{:else if type === 'Status' || type === 'Sla' || type === 'Organization' || type === 'Team' || type === 'Person' || type === 'Role' || type === 'RequestType'}
+					{:else if ['Status', 'Sla', 'Organization', 'Team', 'Person', 'Role', 'RequestType'].includes(type)}
 						<select id={key} bind:value={formData[key]} required>
-							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
