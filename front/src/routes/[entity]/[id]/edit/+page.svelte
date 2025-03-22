@@ -5,6 +5,7 @@
 	import { BackendAPI, entityDict, transformObject } from '../../../../stores/stores';
 
 	let entity = $page.params.entity;
+	let id = $page.params.id;
 	let fields = {};
 	let data = {};
 	let formData = {};
@@ -13,8 +14,10 @@
 
 	async function fetchInfo() {
 		try {
+			// console.log(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`)
 			const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`);
 			data = await response.json();
+			entityToEdit = data
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
@@ -41,7 +44,7 @@
 	}
 
 	onMount(async () => {
-		entityToEdit = await fetchInfo();
+		await fetchInfo()
 		if (entityDict[entity]) {
 			fields = entityDict[entity];
 			Object.keys(fields).forEach((key) => {
