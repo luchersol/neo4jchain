@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/chain/state")
+@RequestMapping("/chainstate")
 public class ChainStateController {
 
     ChainStateService chainStateService;

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/chain/faceted")
+@RequestMapping("/chainfaceted")
 public class ChainFacetedController {
 
     ChainFacetedService chainFacetedService;
