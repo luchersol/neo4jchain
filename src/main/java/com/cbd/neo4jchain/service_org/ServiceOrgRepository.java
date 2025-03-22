@@ -6,5 +6,5 @@ import com.cbd.neo4jchain.model.AbstractRepository;
 
 @Repository
 public interface ServiceOrgRepository extends AbstractRepository<ServiceOrg> {
-    
+
 }

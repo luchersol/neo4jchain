@@ -21,7 +21,8 @@ public class ServiceOrgService {
     }
 
     public List<ServiceOrg> getAllServiceOrg() {
-        return this.serviceOrgRepository.findAll();
+        List<ServiceOrg> serviceOrgs = this.serviceOrgRepository.findAll();
+        return serviceOrgs;
     }
 
     public ServiceOrg createServiceOrg(ServiceOrg serviceOrg) {

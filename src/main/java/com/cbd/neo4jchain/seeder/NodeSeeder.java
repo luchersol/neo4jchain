@@ -110,22 +110,22 @@ public class NodeSeeder {
     };
 
     public void createNodes() throws Exception {
-        doQuery(chainFaceteds, "oid", "name", "version", "description", "ownershipType");
-        doQuery(chainStates, "oid", "name", "version", "description", "ownershipType");
-        doQuery(customers, "oid");
-        doQuery(issues, "oid", "title", "description");
-        doQuery(objectives, "oid", "metric", "value", "unit");
-        doQuery(organizations, "oid", "name", "code");
-        doQuery(persons, "oid", "lastName", "firstName", "email", "phone");
-        doQuery(privileges, "oid", "name");
-        doQuery(providers, "oid");
-        doQuery(requestTypes, "oid", "name");
-        doQuery(roles, "oid", "name");
-        doQuery(scopes, "oid", "name", "priority");
-        doQuery(serviceOrgs, "oid", "name", "description");
-        doQuery(slas, "oid", "name");
-        doQuery(status, "oid", "name");
-        doQuery(teams, "oid", "name", "specialization");
+        doQuery(chainFaceteds, "id", "name", "version", "description", "ownershipType");
+        doQuery(chainStates, "id", "name", "version", "description", "ownershipType");
+        doQuery(customers, "id");
+        doQuery(issues, "id", "title", "description");
+        doQuery(objectives, "id", "metric", "value", "unit");
+        doQuery(organizations, "id", "name", "code");
+        doQuery(persons, "id", "lastName", "firstName", "email", "phone");
+        doQuery(privileges, "id", "name");
+        doQuery(providers, "id");
+        doQuery(requestTypes, "id", "name");
+        doQuery(roles, "id", "name");
+        doQuery(scopes, "id", "name", "priority");
+        doQuery(serviceOrgs, "id", "name", "description");
+        doQuery(slas, "id", "name");
+        doQuery(status, "id", "name");
+        doQuery(teams, "id", "name", "specialization");
     }
 
     public <T extends AbstractNode> void doQuery(List<T> list, String... properties) throws Exception {
@@ -141,7 +141,7 @@ public class NodeSeeder {
                 String clazzName = t.getClass().getSimpleName();
                 StringBuilder query = new StringBuilder("MERGE (")
                         .append(clazzName.toLowerCase())
-                        .append(t.getOid())
+                        .append(t.getId())
                         .append(":")
                         .append(clazzName)
                         .append(" {");
