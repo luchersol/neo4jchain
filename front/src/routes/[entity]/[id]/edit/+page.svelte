@@ -2,6 +2,7 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../../components/throbber.svelte';
+	import Title from '../../../../components/title.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../../stores/stores';
 
 	let entity = $page.params.entity;
@@ -95,7 +96,7 @@
 </script>
 
 <div class="container">
-	<h2>Edit {entity}</h2>
+	<Title subtitle={`Edit ${entity}`}></Title>
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>

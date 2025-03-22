@@ -3,6 +3,7 @@
     import { onMount } from 'svelte';
     import { page } from '$app/stores';
     import Throbber from '../../components/throbber.svelte';
+    import Title from '../../components/title.svelte';
     import { writable } from 'svelte/store';
 
     let entity = $page.params.entity;
@@ -44,6 +45,8 @@
         await fetchInfo();
     });
 </script>
+
+<Title subtitle={`${entity} list`}></Title>
 
 {#if data.length === 0}
     <Throbber message={'Loading...'}/>

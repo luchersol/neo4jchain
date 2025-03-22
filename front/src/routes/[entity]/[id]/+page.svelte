@@ -3,6 +3,7 @@
     import { BackendAPI } from '../../../stores/stores';
 	import { page } from '$app/stores';
     import Throbber from '../../../components/throbber.svelte';
+    import Title from '../../../components/title.svelte';
 	let entity = $page.params.entity;
     let id = $page.params.id;
     let data = {}
@@ -21,6 +22,7 @@
 </script>
 
 <div class="container">
+	<Title subtitle={`${entity} details`}></Title>
     {#if !Object.keys(data).length}
     <Throbber message={'Loading...'}/>
     {:else}

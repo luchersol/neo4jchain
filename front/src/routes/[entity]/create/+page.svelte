@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import Throbber from '../../../components/throbber.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
+	import Title from '../../../components/title.svelte'
 
 	$: {
 		console.log(formData);
@@ -86,7 +87,8 @@
 </script>
 
 <div class="container">
-	<h2>Create a new {entity}</h2>
+	
+	<Title subtitle={`Create a new ${entity}`}></Title>
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>

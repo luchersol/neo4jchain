@@ -3,7 +3,7 @@
     export let target = '';
   </script>
   
-  <div class="row w-100">
+  <div class="row w-100" style="margin-top: 16px;">
     <div class="col col-2 text-center align-items-center mt-2">
       <a type="button" href="javascript:window.history.back();">
         <i class="fa fa-arrow-left fa-lg" style="color: #c2c2c2; font-size: 250%;"></i>
