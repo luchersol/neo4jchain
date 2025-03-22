@@ -14,9 +14,10 @@
 
 	let existingItems = transformObject(entityDict);
 
+	const regexList = /List<([A-Za-z]+)>/;
+
 	async function fetchItemsForSelect(type) {
-		const regex = /List<([A-Za-z]+)>/;
-		const match = type.match(regex);
+		const match = type.match(regexList);
 		const endpoint = '/api/' + (match ? match[1] : type).toLocaleLowerCase();
 
 		try {
@@ -113,13 +114,13 @@
 							<option value="MINUTES">Minutes</option>
 							<option value="HOURS">Hours</option>
 						</select>
-					{:else if ['List<Team>', 'List<ServiceOrg>', 'List<Customer>', 'List<Privilege>', 'List<Role>', 'List<Person>'].includes(type)}
+					{:else if type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required multiple>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
-					{:else if ['Status', 'Sla', 'Organization', 'Team', 'Person', 'Role', 'RequestType'].includes(type)}
+					{:else if !type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>

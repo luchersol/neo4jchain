@@ -20,9 +20,10 @@
 		}
 	}
 
+	const regexList = /List<([A-Za-z]+)>/;
+
 	async function fetchItemsForSelect(type) {
-		const regex = /List<([A-Za-z]+)>/;
-		const match = type.match(regex);
+		const match = type.match(regexList);
 		const endpoint = '/api/' + (match ? match[1] : type).toLocaleLowerCase();
 
 		try {
@@ -119,21 +120,14 @@
 							<option value="MINUTES">Minutes</option>
 							<option value="HOURS">Hours</option>
 						</select>
-					{:else if type === 'List<Team>' || type === 'List<ServiceOrg>' || type === 'List<Customer>'}
+					{:else if type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required multiple>
 							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
-					{:else if type === 'List<Privilege>' || type === 'List<Role>'}
-						<select id={key} bind:value={formData[key]} required multiple>
-							<option value="">Select an existing {key}</option>
-							{#each existingItems[type] as item}
-								<option value={item.id}>{item.name}</option>
-							{/each}
-						</select>
-					{:else if type === 'Status' || type === 'Sla' || type === 'Organization' || type === 'Team' || type === 'Person' || type === 'Role' || type === 'RequestType'}
+					{:else if !type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required>
 							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
