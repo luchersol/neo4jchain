@@ -44,7 +44,8 @@
                 endpoint = '/api/role';
                 break;
             default:
-                return `/api/${type.toLocaleLowerCase()}`;
+                endpoint = `/api/${type.toLocaleLowerCase()}`;
+                break
         }
 
         try {
