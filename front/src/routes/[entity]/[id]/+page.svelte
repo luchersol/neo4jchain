@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { BackendAPI } from '../../stores/stores';
+    import { BackendAPI } from '../../../stores/stores';
 	import { page } from '$app/stores';
     import Throbber from '../../../components/throbber.svelte';
 	let entity = $page.params.entity;
