@@ -23,6 +23,9 @@
 {#if data.length === 0}
     <Throbber message={'Loading...'}/>
 {:else}
+    <button on:click={() => window.location.href = `/${entity}/create`} class="button create-button">
+        Create {entity}
+    </button>
     <div class="container">
         {#each data as element}
             <div class="card">
@@ -46,6 +49,14 @@
                 <p><strong>Service:</strong> {element.serviceOrg?.name ?? "No service assigned" }</p>
                 <p><strong>Sla:</strong> {element.sla?.name ?? "No Sla assigned" }</p>
                 {/if}
+                <div>
+                    <button on:click={() => window.location.href = `/${entity}/${element.id}/edit`} class="button edit-button">
+                        Edit
+                    </button>
+                    <button on:click={() => console.log('delete element')} class="button delete-button">
+                        Delete
+                    </button>
+                </div>
             </div>
         {/each}
     </div>
@@ -84,5 +95,47 @@
         color: #555;
         font-size: 1rem;
         margin: 0.25rem 0;
+    }
+    .button {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease-in-out;
+        text-align: center;
+        align-self: center;
+    }
+
+    .create-button {
+        display: block;
+        margin: 1rem auto;
+        padding: 0.75rem 1.5rem;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s ease-in-out;
+    }
+    .create-button:hover {
+        background-color: #0056b3;
+    }
+
+    .edit-button {
+        background-color: #28a745;
+    }
+    .edit-button:hover {
+        background-color: #1e7e34;
+    }
+
+    .delete-button {
+        background-color: #dc3545;
+    }
+    .delete-button:hover {
+        background-color: #a71d2a;
     }
 </style>
