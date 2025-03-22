@@ -1,6 +1,5 @@
 package com.cbd.neo4jchain.seeder;
 
-import static com.cbd.neo4jchain.seeder.RelationshipBuilder.createRelationship;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_FACETED;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_STATE;
 import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CUSTOMER;
@@ -26,6 +25,10 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.cbd.neo4jchain.Neo4jChainApplication;
 import com.cbd.neo4jchain.chain.faceted.ChainFaceted;
 import com.cbd.neo4jchain.chain.state.ChainState;
 import com.cbd.neo4jchain.customer.Customer;
@@ -50,6 +53,8 @@ import com.cbd.neo4jchain.team.Team;
 import com.github.javafaker.Faker;
 
 public class NodeSeeder {
+
+    private static final Logger logger = LoggerFactory.getLogger(Neo4jChainApplication.class);
 
     List<ChainFaceted> chainFaceteds;
     List<ChainState> chainStates;
@@ -87,7 +92,8 @@ public class NodeSeeder {
         if (this.deleteData)
             file.write("MATCH (n) DETACH DELETE n; \n\n");
         createNodes();
-        createRelationship(file, this.relationPath);
+        // TODO: Se produce una excepción en medio de la creación de relaciones
+        // createRelationship(file, this.relationPath);
     }
 
     private static String[] specializations = {
@@ -123,11 +129,11 @@ public class NodeSeeder {
     }
 
     public <T extends AbstractNode> void doQuery(List<T> list, String... properties) throws Exception {
-
         if (list == null || list.isEmpty()) {
             throw new IllegalArgumentException("La lista no puede estar vacía.");
         }
-
+        String message = String.format("Create nodes %s (%d)", list.getFirst().getClass().getSimpleName(), list.size());
+        logger.info(message);
         Class<?> clazz = list.get(0).getClass();
         file.write("// " + clazz.getSimpleName() + "\n");
         try {
