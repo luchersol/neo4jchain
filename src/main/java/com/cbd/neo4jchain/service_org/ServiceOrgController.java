@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/serviceOrg")
+@RequestMapping("/serviceorg")
 public class ServiceOrgController {
 
     private final ServiceOrgService serviceOrgService;

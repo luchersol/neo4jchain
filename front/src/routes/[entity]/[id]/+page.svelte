@@ -7,7 +7,7 @@
     let data = {}
     async function fetchInfo() {
         try {
-            const response = await fetch(`${BackendAPI}/api/${entity}/${id}`)
+            const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`)
             data = await response.json()
         } catch (error) {
             data = 'There was an error retrieving the info: '+ error

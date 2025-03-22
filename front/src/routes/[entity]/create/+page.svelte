@@ -71,7 +71,7 @@
 
     async function handleSubmit() {
         try {
-            const response = await fetch(`${BackendAPI}/api/${entity}`, {
+            const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
