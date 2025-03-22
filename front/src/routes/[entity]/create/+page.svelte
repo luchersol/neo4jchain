@@ -19,22 +19,22 @@
         let endpoint;
         switch (type) {
             case 'List<Team>':
-                endpoint = '/api/Team';
+                endpoint = '/api/team';
                 break;
             case 'List<ServiceOrg>':
-                endpoint = '/api/ServiceOrg';
+                endpoint = '/api/serviceOrg';
                 break;
             case 'List<Customer>':
-                endpoint = '/api/Customer';
+                endpoint = '/api/customer';
                 break;
             case 'List<Privilege>':
-                endpoint = '/api/Privilege';
+                endpoint = '/api/privilege';
                 break;
             case 'List<Role>':
-                endpoint = '/api/Role';
+                endpoint = '/api/role';
                 break;
             default:
-                return `/api/${type}`;
+                return `/api/${type.toLocaleLowerCase()}`;
         }
 
         try {
