@@ -10,34 +10,41 @@ import com.cbd.neo4jchain.exception.NotFoundResource;
 @Service
 public class PersonService {
 
-    private final PersonRepository userRepository;
+    private final PersonRepository personRepository;
 
-    public PersonService(PersonRepository userRepository) {
-        this.userRepository = userRepository;
+    public PersonService(PersonRepository personRepository) {
+        this.personRepository = personRepository;
     }
 
     public List<Person> getAllPerson() {
-        return this.userRepository.findAll();
+        return this.personRepository.findAll();
     }
 
-    
     public Person getPersonById(Long id) {
-        return this.userRepository.findById(id).orElseThrow();
+        return this.personRepository.findById(id).orElseThrow();
+    }
+
+    public Person getPersonByUsername(String username) {
+        return this.personRepository.findByUsername(username).orElseThrow();
+    }
+
+    public boolean existsPersonByUsername(String username) {
+        return this.personRepository.existsByUsername(username);
     }
 
     public Person createPerson(Person person) {
-        return this.userRepository.save(person);
+        return this.personRepository.save(person);
     }
 
     public Person updatePerson(Long personId, Person person) {
         Person personToUpdate = getPersonById(personId);
         BeanUtils.copyProperties(person, personToUpdate, "id");
-        return this.userRepository.save(person);
+        return this.personRepository.save(person);
     }
 
     public void deletePerson(Long personId) {
-        if (!this.userRepository.existsById(personId))
+        if (!this.personRepository.existsById(personId))
             throw new NotFoundResource(Person.class, "ID", personId);
-        this.userRepository.deleteById(personId);
+        this.personRepository.deleteById(personId);
     }
 }

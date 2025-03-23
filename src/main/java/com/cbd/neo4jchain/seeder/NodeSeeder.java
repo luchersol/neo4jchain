@@ -116,7 +116,7 @@ public class NodeSeeder {
         doQuery(issues, "id", "title", "description");
         doQuery(objectives, "id", "metric", "value", "unit");
         doQuery(organizations, "id", "name", "code");
-        doQuery(persons, "id", "lastName", "firstName", "email", "phone");
+        doQuery(persons, "id", "username", "lastName", "firstName", "email", "phone", "password");
         doQuery(privileges, "id", "name");
         doQuery(providers, "id");
         doQuery(requestTypes, "id", "name");
@@ -266,10 +266,12 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_PERSON)
                 .boxed()
                 .map(id -> new Person(id,
+                        faker.name().username(),
                         faker.name().lastName(),
                         faker.name().firstName(),
                         faker.internet().emailAddress(),
-                        faker.phoneNumber().phoneNumber()))
+                        faker.phoneNumber().phoneNumber(),
+                        faker.internet().password()))
                 .collect(Collectors.toList());
     }
 
