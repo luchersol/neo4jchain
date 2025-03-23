@@ -63,8 +63,8 @@
                 <p><strong>Full name:</strong> {element.firstName} {element.lastName}</p>
                 {/if}
                 {#if entity === 'Customer'}
-                <p><strong>Organization:</strong> {element.organization.name}</p>
-                <p><strong>Sla:</strong> {element.sla.name}</p>
+                <p><strong>Organization:</strong> {element.organization?.name ?? "No organization assigned" }</p>
+                <p><strong>Sla:</strong> {element.sla?.name ?? "No Sla assigned" }</p>
                 {/if}
                 {#if entity === 'Issue'}
                 <p><strong>Status:</strong> {element.status.name}</p>
