@@ -64,36 +64,39 @@
 {:else}
     <div class="container">
         {#each data as element}
-            <div class="card">
-                <h3>{element.name || element.firstName || element.title || element.metric || "" }</h3>
-                <p><strong>ID:</strong> {element.id}</p>
-                {#if element.lastName}
+        <!-- svelte-ignore a11y-click-events-have-key-events -->
+        <!-- svelte-ignore a11y-no-static-element-interactions -->
+        <div class="card" on:click={() => window.location.href = `/${entity}/${element.id}`} style="cursor: pointer;">
+            <h3>{element.name || element.firstName || element.title || element.metric || "" }</h3>
+            <p><strong>ID:</strong> {element.id}</p>
+            {#if element.lastName}
                 <p><strong>Full name:</strong> {element.firstName} {element.lastName}</p>
-                {/if}
-                {#if entity === 'Customer'}
+            {/if}
+            {#if entity === 'Customer'}
                 <p><strong>Organization:</strong> {element.organization?.name ?? "No organization assigned" }</p>
                 <p><strong>Sla:</strong> {element.sla?.name ?? "No Sla assigned" }</p>
-                {/if}
-                {#if entity === 'Issue'}
+            {/if}
+            {#if entity === 'Issue'}
                 <p><strong>Status:</strong> {element.status.name}</p>
                 <p><strong>Owner:</strong> {element.owner.firstName} {element.owner.lastName}</p>
                 <p><strong>Assigned to:</strong> { element.assignedPerson ? element.assignedPerson.firstName : 'No person assigned'} {element.assignedPerson.lastName ?? "" }</p>
                 <p><strong>Assigned team:</strong> {element.assignedTeam ? element.assignedTeam.name : 'No team assigned'}</p>
-                {/if}
-                {#if entity === 'Provider'}
+            {/if}
+            {#if entity === 'Provider'}
                 <p><strong>Organization:</strong> {element.organization?.name ?? "No organization assigned" }</p>
                 <p><strong>Service:</strong> {element.serviceOrg?.name ?? "No service assigned" }</p>
                 <p><strong>Sla:</strong> {element.sla?.name ?? "No Sla assigned" }</p>
-                {/if}
-                <div>
-                    <button on:click={() => window.location.href = `/${entity}/${element.id}/edit`} class="button edit-button">
-                        Edit
-                    </button>
-                    <button on:click={() => confirmDelete(element)} class="button delete-button">
-                        Delete
-                    </button>
-                </div>
+            {/if}
+            <div>
+                <button on:click={(event) => { event.stopPropagation(); window.location.href = `/${entity}/${element.id}/edit`; }} class="button edit-button">
+                    Edit
+                </button>
+                <button on:click={(event) => { event.stopPropagation(); confirmDelete(element); }} class="button delete-button">
+                    Delete
+                </button>
             </div>
+        </div>
+        
         {/each}
     </div>
 {/if}
