@@ -48,10 +48,10 @@ CREATE (scope:Sla {name: "Alcance General"})
 CREATE (slaAlumnos)-[:GUARANTEE]->(scope)
 
 // Crear Objetivos dentro del Scope
-CREATE (ttr:Objective {metric: "TTR", value: 48, unit: "HOUR"})
-CREATE (tto:Objective {metric: "TTO", value: 48, unit: "HOUR"})
-CREATE (scope)-[:OBJETIVE]->(ttr)
-CREATE (scope)-[:OBJETIVE]->(tto)
+CREATE (ttr:Objective {metric: "TTR", value: 48.0, unit: "HOUR"})
+CREATE (tto:Objective {metric: "TTO", value: 48.0, unit: "HOUR"})
+CREATE (scope)-[:OBJECTIVE]->(ttr)
+CREATE (scope)-[:OBJECTIVE]->(tto)
 
 // Asociar SLA a Clientes
 CREATE (customerProfesores:Customer {id: 1})
