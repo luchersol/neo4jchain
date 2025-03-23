@@ -18,10 +18,10 @@ CREATE (profesores)-[:BELONGS_TO]->(chainFaceted)
 CREATE (alumnos)-[:BELONGS_TO]->(chainFaceted)
 
 // Crear Personas y Asignarlas a Equipos
-CREATE (julio:Person {firstName: "Julio", lastName: "", email: "julio@us.es", phone: ""})
-CREATE (pedro:Person {firstName: "Pedro", lastName: "", email: "pedro@alum.us.es", phone: ""})
-CREATE (juan:Person {firstName: "Juan", lastName: "", email: "juan@alum.us.es", phone: ""})
-CREATE (paula:Person {firstName: "Paula", lastName: "", email: "paula@alum.us.es", phone: ""})
+CREATE (julio:Person {firstName: "Julio", lastName: "", email: "julio@us.es", phone: "", username: "julio", password: "1234"})
+CREATE (pedro:Person {firstName: "Pedro", lastName: "", email: "pedro@alum.us.es", phone: "", username: "pedro", password: "1234"})
+CREATE (juan:Person {firstName: "Juan", lastName: "", email: "juan@alum.us.es", phone: "", username: "juan", password: "1234"})
+CREATE (paula:Person {firstName: "Paula", lastName: "", email: "paula@alum.us.es", phone: "", , username: "paula", password: "1234"})
 
 // Relacionar Personas con Equipos
 CREATE (julio)-[:MEMBER]->(grupoProfesores)
