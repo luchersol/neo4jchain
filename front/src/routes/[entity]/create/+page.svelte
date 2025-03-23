@@ -111,6 +111,16 @@
 							<option value="CRITICAL">Critial</option>
 							<option value="ALL">All</option>
 						</select>
+					{:else if type === 'OwnershipType'}
+					<select id={key} bind:value={formData[key]} required>
+						<option value="STATE">State</option>
+						<option value="STATE_TEAM">State+team</option>
+					</select>
+					{:else if type === 'Metric'}
+					<select id={key} bind:value={formData[key]} required>
+						<option value="TTO">TTO</option>
+						<option value="TTR">TTR</option>
+					</select>
 					{:else if type === 'UnitTime'}
 						<select id={key} bind:value={formData[key]} required>
 							<option value="MINUTES">Minutes</option>
