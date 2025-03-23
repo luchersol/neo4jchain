@@ -1,3 +1,4 @@
+MATCH(n) DETACH DELETE n
 // Crear Organizaciones
 CREATE (profesores:Organization { name: "Profesores", code: "PROF" })
 CREATE (alumnos:Organization { name: "Alumnos", code: "ALUM" })
