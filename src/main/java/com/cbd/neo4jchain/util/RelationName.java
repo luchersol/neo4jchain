@@ -44,7 +44,7 @@ public class RelationName {
 
     public static class ScopeRelation {
         public static final String REQUEST_TYPE = "REQUEST_TYPE",
-                OBJECTIVES = "OBJETIVE";
+                OBJECTIVES = "OBJECTIVE";
     }
 
     public static class ServiceOrgRelation {
