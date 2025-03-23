@@ -65,7 +65,9 @@ export const entityDict = {
 		firstName: 'String',
 		email: 'String',
 		phone: 'String',
-		roles: 'List<Role>'
+		roles: 'List<Role>',
+		username: 'String',
+		password: 'String',
 	},
 	Privilege: {
 		id: 'Long',
