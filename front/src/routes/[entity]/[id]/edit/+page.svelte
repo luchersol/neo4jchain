@@ -100,7 +100,7 @@
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>
-			{#each Object.entries(fields) as [key, type]}
+			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, type]}
 				<div class="field">
 					<label for={key}>{key}</label>
 
