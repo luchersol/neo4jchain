@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -25,7 +25,7 @@ public class ServiceOrgController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getServiceOrgById(@RequestParam Long id) {
+    public ResponseEntity<?> getServiceOrgById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.serviceOrgService.getServiceOrgById(id));
         } catch (Exception e) {

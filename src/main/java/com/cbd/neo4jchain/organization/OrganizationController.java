@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import jakarta.validation.Valid;
 
@@ -35,7 +33,7 @@ public class OrganizationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getOrganizationById(@RequestParam Long id) {
+    public ResponseEntity<?> getOrganizationById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.organizationService.getOrganizationById(id));
         } catch (Exception e) {
@@ -46,7 +44,8 @@ public class OrganizationController {
     @PostMapping
     public ResponseEntity<?> createOrganization(@RequestBody @Valid Organization organization) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.organizationService.createOrganization(organization));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(this.organizationService.createOrganization(organization));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

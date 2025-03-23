@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -25,7 +24,7 @@ public class RequestTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getRequestTypeById(@RequestParam Long id) {
+    public ResponseEntity<?> getRequestTypeById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.requestTypeService.getRequestTypeById(id));
         } catch (Exception e) {

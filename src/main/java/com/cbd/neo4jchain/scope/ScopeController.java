@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -25,7 +24,7 @@ public class ScopeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getScopeById(@RequestParam Long id) {
+    public ResponseEntity<?> getScopeById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.scopeService.getScopeById(id));
         } catch (Exception e) {

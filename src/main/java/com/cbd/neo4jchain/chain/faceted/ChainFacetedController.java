@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -34,7 +33,7 @@ public class ChainFacetedController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getChainFacetedById(@RequestParam Long id) {
+    public ResponseEntity<?> getChainFacetedById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.chainFacetedService.getChainFacetedById(id));
         } catch (Exception e) {
@@ -45,7 +44,8 @@ public class ChainFacetedController {
     @PostMapping
     public ResponseEntity<?> createChainFaceted(@RequestBody @Valid ChainFaceted chainFaceted) {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.chainFacetedService.createChainFaceted(chainFaceted));
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(this.chainFacetedService.createChainFaceted(chainFaceted));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

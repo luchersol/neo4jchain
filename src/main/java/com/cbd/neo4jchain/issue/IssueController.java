@@ -9,9 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import jakarta.validation.Valid;
 
@@ -25,7 +23,6 @@ public class IssueController {
         this.issueService = issueService;
     }
 
-
     @GetMapping
     public ResponseEntity<?> getAllIssues() {
         try {
@@ -36,7 +33,7 @@ public class IssueController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getIssueById(@RequestParam Long id) {
+    public ResponseEntity<?> getIssueById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(this.issueService.getIssueById(id));
         } catch (Exception e) {
@@ -72,6 +69,5 @@ public class IssueController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
 
 }
