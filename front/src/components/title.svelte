@@ -1,6 +1,5 @@
 <script>
     export let subtitle = '';
-    export let target = '';
   </script>
   
   <div class="row w-100" style="margin-top: 16px;">
@@ -19,7 +18,7 @@
         <hr style="border: 1px solid #333; width: 100%;">
         <p style="font-family: Arial, sans-serif; font-size: 1.2rem; color: #555;">
           {#if subtitle}
-            {subtitle} {target}.
+            {subtitle}
           {/if}
         </p>
       </div>
