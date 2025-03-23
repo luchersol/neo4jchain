@@ -10,11 +10,13 @@
     let data = [];
     let showModal = writable(false);
     let selectedEntity = writable(null);
+    let isLoading = true
 
     async function fetchInfo() {
         try {
             const response = await fetch(`${BackendAPI}/api/${entity.toLowerCase()}`);
             data = await response.json();
+            isLoading = false
         } catch (error) {
             data = 'There was an error retrieving the info: ' + error;
         }
@@ -48,12 +50,18 @@
 
 <Title subtitle={`${entity} list`}></Title>
 
-{#if data.length === 0}
+<button on:click={() => window.location.href = `/${entity}/create`} class="button create-button">
+    Create {entity}
+</button>
+
+{#if isLoading}
     <Throbber message={'Loading...'}/>
 {:else}
-    <button on:click={() => window.location.href = `/${entity}/create`} class="button create-button">
-        Create {entity}
-    </button>
+{#if data.length === 0}
+<div class="container">
+    <p>No data retrieved</p>
+</div>
+{:else}
     <div class="container">
         {#each data as element}
             <div class="card">
@@ -88,6 +96,7 @@
             </div>
         {/each}
     </div>
+{/if}
 {/if}
 
 {#if $showModal}
