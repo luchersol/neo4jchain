@@ -76,6 +76,7 @@
 
 			if (response.ok) {
 				alert(`${entity} created successfully!`);
+				window.location.href = `/${entity}`
 			} else {
 				alert('There was an error creating the entity.');
 			}

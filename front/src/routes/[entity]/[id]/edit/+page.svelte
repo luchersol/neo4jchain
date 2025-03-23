@@ -85,6 +85,7 @@
 
 			if (response.ok) {
 				alert(`${entity} edited successfully!`);
+				window.location.href = `/${entity}`
 			} else {
 				alert('There was an error editing the entity.');
 			}
