@@ -23,6 +23,8 @@
       Manage your service chains easily.
   </p>
 
+  <button on:click={() => navigateTo("login")}> Log in</button>
+
   <div class="button-container mt-4">
       {#each Object.keys(entityDict) as key}
           <button class="btn-square" on:click={() => navigateTo(key)}>
