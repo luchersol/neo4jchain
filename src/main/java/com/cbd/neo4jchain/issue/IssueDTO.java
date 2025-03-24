@@ -5,7 +5,10 @@ import lombok.Getter;
 @Getter
 public class IssueDTO {
 
+    private String name;
+
     private String title;
+
     private String description;
 
     private Long serviceOrg;
@@ -20,7 +23,7 @@ public class IssueDTO {
 
     private Long requestType;
 
-    public Issue parse(){
-        return new Issue(null, title, description);
+    public Issue parse() {
+        return new Issue(null, name, title, description);
     }
 }

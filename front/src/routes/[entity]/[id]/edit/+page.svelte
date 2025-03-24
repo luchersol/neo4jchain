@@ -18,7 +18,7 @@
 			// console.log(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`)
 			const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`);
 			data = await response.json();
-			entityToEdit = data
+			entityToEdit = data;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
@@ -45,12 +45,14 @@
 	}
 
 	onMount(async () => {
-		await fetchInfo()
+		await fetchInfo();
 		if (entityDict[entity]) {
 			fields = entityDict[entity];
-			Object.keys(fields).filter(([key, _]) => key !== 'id').forEach((key) => {
-				formData[key] = entityToEdit[key];
-			});
+			Object.keys(fields)
+				.filter(([key, _]) => key !== 'id')
+				.forEach((key) => {
+					formData[key] = entityToEdit[key];
+				});
 
 			Object.entries(fields).forEach(([key, type]) => {
 				if (
@@ -85,7 +87,7 @@
 
 			if (response.ok) {
 				alert(`${entity} edited successfully!`);
-				window.location.href = `/${entity}`
+				window.location.href = `/${entity}`;
 			} else {
 				alert('There was an error editing the entity.');
 			}
@@ -137,14 +139,14 @@
 						</select>
 					{:else if type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required multiple>
-							<option value="">Select an existing {key}</option>
+							<option value={formData[key].id}>{formData[key]}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
 					{:else if !type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required>
-							<option value="">Select an existing {key}</option>
+							<option value={formData[key].id}>{formData[key]}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}

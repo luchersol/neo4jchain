@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class PersonDTO {
 
-    private String username;
+    private String name;
 
     @NotBlank
     private String lastName;
@@ -30,8 +30,8 @@ public class PersonDTO {
 
     private List<Long> roles;
 
-    public Person parse(){
-        return new Person(null, username, lastName, firstName, email, phone, password);
+    public Person parse() {
+        return new Person(null, name, lastName, firstName, email, phone, password);
     }
 
 }

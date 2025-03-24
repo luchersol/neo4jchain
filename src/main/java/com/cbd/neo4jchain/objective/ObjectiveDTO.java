@@ -8,12 +8,13 @@ import lombok.Getter;
 @Getter
 public class ObjectiveDTO {
 
+    String name;
     Metric metric;
     Double value;
     UnitTime unit;
 
-    public Objective parse(){
-        return new Objective(null, metric, value, unit);
+    public Objective parse() {
+        return new Objective(null, name, metric, value, unit);
     }
 
 }

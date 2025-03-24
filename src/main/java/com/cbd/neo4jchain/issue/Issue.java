@@ -3,7 +3,7 @@ package com.cbd.neo4jchain.issue;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import com.cbd.neo4jchain.model.AbstractNode;
+import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.service_org.ServiceOrg;
@@ -17,13 +17,13 @@ import lombok.Setter;
 @Node
 @Getter
 @Setter
-public class Issue extends AbstractNode {
+public class Issue extends NamedNode {
 
     private String title;
     private String description;
 
-    public Issue(Long id, String title, String description) {
-        super(id);
+    public Issue(Long id, String name, String title, String description) {
+        super(id, name);
         this.title = title;
         this.description = description;
     }
@@ -43,6 +43,6 @@ public class Issue extends AbstractNode {
     @Relationship(type = IssueRelation.OWNER_PERSON)
     private Person owner;
 
-    @Relationship(type = IssueRelation.REQUEST_TYPE )
+    @Relationship(type = IssueRelation.REQUEST_TYPE)
     private RequestType requestType;
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
-import com.cbd.neo4jchain.model.AbstractNode;
+import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.service_org.ServiceOrg;
 import com.cbd.neo4jchain.sla.Sla;
@@ -17,10 +17,10 @@ import lombok.Setter;
 @Node
 @Getter
 @Setter
-public class Provider extends AbstractNode {
+public class Provider extends NamedNode {
 
-    public Provider(Long id) {
-        super(id);
+    public Provider(Long id, String name) {
+        super(id, name);
     }
 
     @Relationship(type = ProviderRelation.ORGANIZATION)

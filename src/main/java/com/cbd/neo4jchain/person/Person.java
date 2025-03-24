@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.data.neo4j.core.schema.Node;
 
-import com.cbd.neo4jchain.model.AbstractNode;
+import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.role.Role;
 import com.cbd.neo4jchain.util.RegexConstants;
 
@@ -18,9 +18,7 @@ import lombok.Setter;
 @Setter
 @Node
 @NoArgsConstructor
-public class Person extends AbstractNode {
-
-    private String username;
+public class Person extends NamedNode {
 
     @NotBlank
     private String lastName;
@@ -35,10 +33,10 @@ public class Person extends AbstractNode {
 
     private String password;
 
-    public Person(Long id, String username, String lastName, String firstName, String email, String phone,
+    public Person(Long id, String name, String lastName, String firstName, String email, String phone,
             String password) {
-        super(id);
-        this.username = username;
+        super(id, name);
+        this.name = name;
         this.lastName = lastName;
         this.firstName = firstName;
         this.email = email;

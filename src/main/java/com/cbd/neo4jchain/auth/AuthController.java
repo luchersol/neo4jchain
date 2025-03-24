@@ -25,7 +25,7 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-        Person person = personService.getPersonByUsername(loginRequest.getUsername());
+        Person person = personService.getPersonByName(loginRequest.getName());
         if (loginRequest.getPassword() == null || Objects.equals(loginRequest.getPassword(), person.getPassword())) {
             return ResponseEntity.badRequest().body("Credenciales incorrectos");
         }
@@ -35,13 +35,13 @@ public class AuthController {
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest registerRequest) {
-        String username = registerRequest.getUsername();
-        if (personService.existsPersonByUsername(username)) {
+        String name = registerRequest.getName();
+        if (personService.existsPersonByName(name)) {
             return ResponseEntity.badRequest().body("Ya existe cuenta con este nombre de usuario.");
         }
 
         Person person = new Person();
-        person.setUsername(username);
+        person.setName(name);
         person.setEmail(registerRequest.getEmail());
         person.setFirstName(registerRequest.getFirstName());
         person.setLastName(registerRequest.getLastName());

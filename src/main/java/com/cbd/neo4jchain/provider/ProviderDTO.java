@@ -7,6 +7,8 @@ import lombok.Getter;
 @Getter
 public class ProviderDTO {
 
+    String name;
+
     Long organization;
 
     Long serviceOrg;
@@ -15,8 +17,8 @@ public class ProviderDTO {
 
     Long sla;
 
-    public Provider parse(){
-        return new Provider(null);
+    public Provider parse() {
+        return new Provider(null, name);
     }
 
 }

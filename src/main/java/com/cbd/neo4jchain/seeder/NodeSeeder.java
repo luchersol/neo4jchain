@@ -112,13 +112,13 @@ public class NodeSeeder {
     public void createNodes() throws Exception {
         doQuery(chainFaceteds, "id", "name", "version", "description", "ownershipType");
         doQuery(chainStates, "id", "name", "version", "description", "ownershipType");
-        doQuery(customers, "id");
-        doQuery(issues, "id", "title", "description");
-        doQuery(objectives, "id", "metric", "value", "unit");
+        doQuery(customers, "id", "name");
+        doQuery(issues, "id", "name", "title", "description");
+        doQuery(objectives, "id", "name", "metric", "value", "unit");
         doQuery(organizations, "id", "name", "code");
-        doQuery(persons, "id", "username", "lastName", "firstName", "email", "phone", "password");
+        doQuery(persons, "id", "name", "lastName", "firstName", "email", "phone", "password");
         doQuery(privileges, "id", "name");
-        doQuery(providers, "id");
+        doQuery(providers, "id", "name");
         doQuery(requestTypes, "id", "name");
         doQuery(roles, "id", "name");
         doQuery(scopes, "id", "name", "priority");
@@ -226,7 +226,8 @@ public class NodeSeeder {
     public List<Customer> seedCustomer() {
         return LongStream.range(0, NUM_CUSTOMER)
                 .boxed()
-                .map(id -> new Customer(id))
+                .map(id -> new Customer(id,
+                        faker.name().name()))
                 .collect(Collectors.toList());
     }
 
@@ -235,6 +236,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_ISSUE)
                 .boxed()
                 .map(id -> new Issue(id,
+                        faker.name().name(),
                         faker.company().buzzword() + " " + faker.hacker().noun(),
                         faker.hacker().verb() + " " + faker.hacker().noun()))
                 .collect(Collectors.toList());
@@ -245,6 +247,7 @@ public class NodeSeeder {
         return LongStream.range(0, NUM_OBJECTIVE)
                 .boxed()
                 .map(id -> new Objective(id,
+                        faker.name().name(),
                         faker.options().option(Metric.class),
                         faker.number().randomDouble(2, 1, 100),
                         faker.options().option(UnitTime.class)))
@@ -287,7 +290,8 @@ public class NodeSeeder {
     public List<Provider> seedProvider() {
         return LongStream.range(0, NUM_PROVIDER)
                 .boxed()
-                .map(id -> new Provider(id))
+                .map(id -> new Provider(id,
+                        "Provider " + id))
                 .collect(Collectors.toList());
     }
 

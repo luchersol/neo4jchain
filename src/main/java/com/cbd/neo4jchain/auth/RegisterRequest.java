@@ -12,7 +12,7 @@ import lombok.Setter;
 public class RegisterRequest {
 
     @NotBlank
-    private String username;
+    private String name;
 
     @NotBlank
     private String lastName;

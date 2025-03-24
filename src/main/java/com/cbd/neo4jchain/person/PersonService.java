@@ -29,23 +29,23 @@ public class PersonService {
         return this.personRepository.findById(id).orElseThrow();
     }
 
-    public Person getPersonByUsername(String username) {
-        return this.personRepository.findByUsername(username).orElseThrow();
+    public Person getPersonByName(String name) {
+        return this.personRepository.findByName(name).orElseThrow();
     }
 
-    public boolean existsPersonByUsername(String username) {
-        return this.personRepository.existsByUsername(username);
+    public boolean existsPersonByName(String name) {
+        return this.personRepository.existsByName(name);
     }
 
     public Person createPerson(PersonDTO person) {
         Person newPerson = person.parse();
         List<Role> roles = roleRepository.findAllById(person.getRoles());
         newPerson.setRoles(roles);
-        
+
         return this.personRepository.save(newPerson);
     }
 
-    public Person createUser(Person person){
+    public Person createUser(Person person) {
         return this.personRepository.save(person);
     }
 

@@ -9,7 +9,7 @@ import com.cbd.neo4jchain.model.AbstractRepository;
 @Repository
 public interface PersonRepository extends AbstractRepository<Person> {
 
-    boolean existsByUsername(String username);
+    boolean existsByName(String name);
 
-    Optional<Person> findByUsername(String username);
+    Optional<Person> findByName(String name);
 }

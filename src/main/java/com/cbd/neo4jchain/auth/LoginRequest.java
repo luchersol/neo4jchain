@@ -11,14 +11,14 @@ import lombok.ToString;
 public class LoginRequest {
 
 	@NotBlank
-	private String username;
+	private String name;
 
 	@NotBlank
 	private String password;
 
-	public static LoginRequest of(String username, String password) {
+	public static LoginRequest of(String name, String password) {
 		LoginRequest loginRequest = new LoginRequest();
-		loginRequest.username = username;
+		loginRequest.name = name;
 		loginRequest.password = password;
 		return loginRequest;
 	}
