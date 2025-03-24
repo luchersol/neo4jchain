@@ -26,9 +26,6 @@ public class Organization extends NamedNode {
         this.code = code;
     }
 
-    @Relationship(type = OrganizationRelation.ORGANIZATION)
-    private Organization parent;
-
     @Relationship(type = OrganizationRelation.TEAMS)
     private List<Team> teams;
 

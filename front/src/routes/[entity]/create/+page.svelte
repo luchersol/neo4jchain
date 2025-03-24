@@ -2,8 +2,8 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../components/throbber.svelte';
+	import Title from '../../../components/title.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
-	import Title from '../../../components/title.svelte'
 
 	$: {
 		console.log(formData);
@@ -38,9 +38,11 @@
 	onMount(() => {
 		if (entityDict[entity]) {
 			fields = entityDict[entity];
-			Object.keys(fields).filter(([key, _]) => key !== 'id').forEach((key) => {
-				formData[key] = '';
-			});
+			Object.keys(fields)
+				.filter(([key, _]) => key !== 'id')
+				.forEach((key) => {
+					formData[key] = '';
+				});
 			console.log(fields);
 
 			Object.entries(fields).forEach(([key, type]) => {
@@ -76,7 +78,7 @@
 
 			if (response.ok) {
 				alert(`${entity} created successfully!`);
-				window.location.href = `/${entity}`
+				window.location.href = `/${entity}`;
 			} else {
 				alert('There was an error creating the entity.');
 			}
@@ -88,7 +90,6 @@
 </script>
 
 <div class="container">
-	
 	<Title subtitle={`Create a new ${entity}`}></Title>
 
 	{#if Object.keys(fields).length > 0}
@@ -113,15 +114,15 @@
 							<option value="ALL">All</option>
 						</select>
 					{:else if type === 'OwnershipType'}
-					<select id={key} bind:value={formData[key]} required>
-						<option value="STATE">State</option>
-						<option value="STATE_TEAM">State+team</option>
-					</select>
+						<select id={key} bind:value={formData[key]} required>
+							<option value="STATE">State</option>
+							<option value="STATE_TEAM">State+team</option>
+						</select>
 					{:else if type === 'Metric'}
-					<select id={key} bind:value={formData[key]} required>
-						<option value="TTO">TTO</option>
-						<option value="TTR">TTR</option>
-					</select>
+						<select id={key} bind:value={formData[key]} required>
+							<option value="TTO">TTO</option>
+							<option value="TTR">TTR</option>
+						</select>
 					{:else if type === 'UnitTime'}
 						<select id={key} bind:value={formData[key]} required>
 							<option value="MINUTES">Minutes</option>

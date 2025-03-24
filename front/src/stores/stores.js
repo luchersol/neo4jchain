@@ -58,7 +58,6 @@ export const entityDict = {
 		id: 'Long',
 		name: 'String',
 		code: 'String',
-		parent: 'Organization',
 		teams: 'List<Team>',
 		services: 'List<ServiceOrg>',
 		chain: 'Chain'

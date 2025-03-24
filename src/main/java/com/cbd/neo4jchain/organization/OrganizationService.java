@@ -24,7 +24,8 @@ public class OrganizationService {
 
     ChainRepository chainRepository;
 
-    public OrganizationService(OrganizationRepository organizationRepository, ServiceOrgRepository serviceOrgRepository, TeamRepository teamRepository, ChainRepository chainRepository) {
+    public OrganizationService(OrganizationRepository organizationRepository, ServiceOrgRepository serviceOrgRepository,
+            TeamRepository teamRepository, ChainRepository chainRepository) {
         this.organizationRepository = organizationRepository;
         this.serviceOrgRepository = serviceOrgRepository;
         this.teamRepository = teamRepository;
@@ -40,15 +41,13 @@ public class OrganizationService {
     }
 
     public Organization createOrganization(OrganizationDTO organization) {
-        
+
         Organization newOrganization = organization.parse();
 
-        Organization parent = organizationRepository.findById(organization.getParent()).orElse(null);
         List<ServiceOrg> services = serviceOrgRepository.findAllById(organization.getServices());
         List<Team> teams = teamRepository.findAllById(organization.getTeams());
         Chain chain = chainRepository.findById(organization.getChain()).orElseThrow();
 
-        newOrganization.setParent(parent);
         newOrganization.setChain(chain);
         newOrganization.setServices(services);
         newOrganization.setTeams(teams);
@@ -65,7 +64,6 @@ public class OrganizationService {
         List<ServiceOrg> services = serviceOrgRepository.findAllById(organizationDTO.getServices());
         List<Team> teams = teamRepository.findAllById(organizationDTO.getTeams());
 
-        organization.setParent(parent);
         organization.setServices(services);
         organization.setTeams(teams);
 

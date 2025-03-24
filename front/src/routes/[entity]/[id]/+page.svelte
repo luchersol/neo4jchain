@@ -110,7 +110,7 @@
 							{/each}
 						</p>
 					{:else}
-						<p>{entityToEdit[key].name}</p>
+						<p>{entityToEdit[key]?.name}</p>
 					{/if}
 				</div>
 			{/each}
