@@ -48,7 +48,7 @@
 		await fetchInfo()
 		if (entityDict[entity]) {
 			fields = entityDict[entity];
-			Object.keys(fields).forEach((key) => {
+			Object.keys(fields).filter(([key, _]) => key !== 'id').forEach((key) => {
 				formData[key] = entityToEdit[key];
 			});
 
