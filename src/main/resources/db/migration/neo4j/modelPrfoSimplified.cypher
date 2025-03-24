@@ -6,7 +6,7 @@ CREATE (profesores:Organization { name: "Profesores", code: "PROF" })
 CREATE (alumnos:Organization { name: "Alumnos", code: "ALUM" })
 
 // Crear Cadena Faceted
-CREATE (chainFaceted:ChainFaceted { name: "Faceted Chain", version: "1", description: "Cadena de tipo faceted", ownershipType: "STATE" })
+CREATE (chainFaceted:Chain:ChainFaceted { name: "Faceted Chain", version: "1", description: "Cadena de tipo faceted", ownershipType: "STATE" })
 
 // Crear Equipos
 CREATE (grupoProfesores:Team { name: "Grupo Profesores", specialization: "FunctionalUser" })
