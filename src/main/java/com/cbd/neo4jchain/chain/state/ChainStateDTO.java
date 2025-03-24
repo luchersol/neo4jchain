@@ -22,4 +22,8 @@ public class ChainStateDTO {
     private List<Long> terminal;
 
     private Long initialSla;
+
+    public ChainState parse() {
+        return new ChainState(null, this.name, this.version, this.description, this.ownershipType);
+    }
 }

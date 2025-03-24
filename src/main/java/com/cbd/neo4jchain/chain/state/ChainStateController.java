@@ -42,7 +42,7 @@ public class ChainStateController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createChainState(@RequestBody @Valid ChainState chainState) {
+    public ResponseEntity<?> createChainState(@RequestBody @Valid ChainStateDTO chainState) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.chainStateService.createChainState(chainState));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ChainStateController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateChainState(@RequestBody @Valid ChainState chainState, @PathVariable Long id) {
+    public ResponseEntity<?> updateChainState(@RequestBody @Valid ChainStateDTO chainState, @PathVariable Long id) {
         try {
             this.chainStateService.updateChainState(id, chainState);
             return ResponseEntity.noContent().build();
