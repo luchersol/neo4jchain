@@ -42,7 +42,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createCustomer(@RequestBody @Valid Customer customer) {
+    public ResponseEntity<?> createCustomer(@RequestBody @Valid CustomerDTO customer) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.customerService.createCustomer(customer));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCustomer(@RequestBody @Valid Customer customer, @PathVariable Long id) {
+    public ResponseEntity<?> updateCustomer(@RequestBody @Valid CustomerDTO customer, @PathVariable Long id) {
         try {
             this.customerService.updateCustomer(id, customer);
             return ResponseEntity.noContent().build();

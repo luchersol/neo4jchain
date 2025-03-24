@@ -38,7 +38,7 @@ public class ChainStateService {
         ChainState newChainState = chainState.parse();
         List<Status> initialStatuses = statusRepository.findAllById(chainState.getInitial());
         List<Status> terminalStatuses = statusRepository.findAllById(chainState.getTerminal());
-        Sla initialSla = slaRepository.findById(chainState.getInitialSla()).get();
+        Sla initialSla = slaRepository.findById(chainState.getInitialSla()).orElseThrow();
 
         newChainState.setInitial(initialStatuses);
         newChainState.setTerminal(terminalStatuses);
@@ -52,7 +52,7 @@ public class ChainStateService {
         ChainState chainStateToUpdate = getChainStateById(chainStateId);
         List<Status> initialStatuses = statusRepository.findAllById(chainStateDTO.getInitial());
         List<Status> terminalStatuses = statusRepository.findAllById(chainStateDTO.getTerminal());
-        Sla initialSla = slaRepository.findById(chainStateDTO.getInitialSla()).get();
+        Sla initialSla = slaRepository.findById(chainStateDTO.getInitialSla()).orElseThrow();
 
         chainState.setInitial(initialStatuses);
         chainState.setTerminal(terminalStatuses);

@@ -9,4 +9,8 @@ public class CustomerDTO {
 
     Long sla;
 
+    public Customer parse(){
+        return new Customer(null);
+    }
+
 }
