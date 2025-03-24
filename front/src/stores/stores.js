@@ -31,11 +31,13 @@ export const entityDict = {
 	},
 	Customer: {
 		id: 'Long',
+		name: 'String',
 		organization: 'Organization',
 		sla: 'Sla'
 	},
 	Issue: {
 		id: 'Long',
+		name: 'String',
 		title: 'String',
 		description: 'String',
 		serviceOrg: 'ServiceOrg',
@@ -47,6 +49,7 @@ export const entityDict = {
 	},
 	Objective: {
 		id: 'Long',
+		name: 'String',
 		metric: 'Metric',
 		value: 'Double',
 		unit: 'UnitTime'
@@ -62,13 +65,14 @@ export const entityDict = {
 	},
 	Person: {
 		id: 'Long',
+		name: 'String',
 		lastName: 'String',
 		firstName: 'String',
 		email: 'String',
 		phone: 'String',
 		roles: 'List<Role>',
 		username: 'String',
-		password: 'String',
+		password: 'String'
 	},
 	Privilege: {
 		id: 'Long',
@@ -76,6 +80,7 @@ export const entityDict = {
 	},
 	Provider: {
 		id: 'Long',
+		name: 'String',
 		organization: 'Organization',
 		serviceOrg: 'ServiceOrg',
 		servicesProviders: 'List<ServiceOrg>',

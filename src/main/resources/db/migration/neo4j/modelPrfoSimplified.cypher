@@ -1,10 +1,11 @@
-MATCH(n) DETACH DELETE n
+MATCH (n)
+DETACH DELETE n
 // Crear Organizaciones
 CREATE (profesores:Organization { name: "Profesores", code: "PROF" })
 CREATE (alumnos:Organization { name: "Alumnos", code: "ALUM" })
 
 // Crear Cadena Faceted
-CREATE (chainFaceted:ChainFaceted { id: 1, name: "Faceted Chain", version: "1", description: "Cadena de tipo faceted", ownershipType: "STATE" })
+CREATE (chainFaceted:ChainFaceted { name: "Faceted Chain", version: "1", description: "Cadena de tipo faceted", ownershipType: "STATE" })
 
 // Crear Equipos
 CREATE (grupoProfesores:Team { name: "Grupo Profesores", specialization: "FunctionalUser" })
@@ -19,10 +20,10 @@ CREATE (profesores)-[:BELONGS_TO]->(chainFaceted)
 CREATE (alumnos)-[:BELONGS_TO]->(chainFaceted)
 
 // Crear Personas y Asignarlas a Equipos
-CREATE (julio:Person { firstName: "Julio", lastName: "", email: "julio@us.es", phone: "", username: "julio", password: "1234" })
-CREATE (pedro:Person { firstName: "Pedro", lastName: "", email: "pedro@alum.us.es", phone: "", username: "pedro", password: "1234" })
-CREATE (juan:Person { firstName: "Juan", lastName: "", email: "juan@alum.us.es", phone: "", username: "juan", password: "1234" })
-CREATE (paula:Person { firstName: "Paula", lastName: "", email: "paula@alum.us.es", phone: "", username: "paula", password: "1234" })
+CREATE (julio:Person { name: "julio", firstName: "Julio", lastName: "", email: "julio@us.es", phone: "", password: "1234" })
+CREATE (pedro:Person { name: "pedro", firstName: "Pedro", lastName: "", email: "pedro@alum.us.es", phone: "", password: "1234" })
+CREATE (juan:Person { name: "juan", firstName: "Juan", lastName: "", email: "juan@alum.us.es", phone: "", password: "1234" })
+CREATE (paula:Person { name: "paula", firstName: "Paula", lastName: "", email: "paula@alum.us.es", phone: "", password: "1234" })
 
 // Relacionar Personas con Equipos
 CREATE (julio)-[:MEMBER]->(grupoProfesores)
@@ -49,13 +50,13 @@ CREATE (scope:Sla { name: "Alcance General" })
 CREATE (slaAlumnos)-[:GUARANTEE]->(scope)
 
 // Crear Objetivos dentro del Scope
-CREATE (ttr:Objective { metric: "TTR", value: 48.0, unit: "HOUR" })
-CREATE (tto:Objective { metric: "TTO", value: 48.0, unit: "HOUR" })
+CREATE (ttr:Objective { name: "Alcance General TTR", metric: "TTR", value: 48.0, unit: "HOUR" })
+CREATE (tto:Objective { name: "Alcance General TTO", metric: "TTO", value: 48.0, unit: "HOUR" })
 CREATE (scope)-[:OBJECTIVE]->(ttr)
 CREATE (scope)-[:OBJECTIVE]->(tto)
 
 // Asociar SLA a Clientes
-CREATE (customerProfesores:Customer { id: 1 })
+CREATE (customerProfesores:Customer { name: "AlumnosServiceCustomer_1" })
 CREATE (customerProfesores)-[:ORGANIZATION]->(profesores)
 CREATE (customerProfesores)-[:SLA]->(slaAlumnos)
 CREATE (servicioAlumnos)-[:CUSTOMER]->(customerProfesores)
