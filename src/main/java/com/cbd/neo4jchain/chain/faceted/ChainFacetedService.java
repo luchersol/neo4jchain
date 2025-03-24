@@ -15,6 +15,7 @@ public class ChainFacetedService {
     public ChainFacetedService(ChainFacetedRepository chainFacetedRepository) {
         this.chainFacetedRepository = chainFacetedRepository;
     }
+
     public List<ChainFaceted> getAllChainFaceted() {
         return this.chainFacetedRepository.findAll();
     }

@@ -1,10 +1,10 @@
 <script>
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import { writable } from 'svelte/store';
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
-	import { writable } from 'svelte/store';
 
 	let entity = $page.params.entity;
 	let id = $page.params.id;
@@ -12,7 +12,7 @@
 	let data = {};
 	let entityToEdit = {};
 	let showModal = writable(false);
-    let selectedEntity = writable(null);
+	let selectedEntity = writable(null);
 	let existingItems = transformObject(entityDict);
 
 	async function fetchInfo() {
@@ -54,16 +54,7 @@
 			});
 
 			Object.entries(fields).forEach(([key, type]) => {
-				if (
-					type.startsWith('List<') ||
-					type === 'Status' ||
-					type === 'Sla' ||
-					type === 'Organization' ||
-					type === 'Team' ||
-					type === 'Person' ||
-					type === 'Role' ||
-					type === 'RequestType'
-				) {
+				if (Object.keys(existingItems).includes(type)) {
 					fetchItemsForSelect(type).then((items) => {
 						existingItems[type] = items;
 					});
@@ -75,25 +66,24 @@
 	});
 
 	function confirmDelete() {
-        showModal.set(true);
-    }
+		showModal.set(true);
+	}
 
 	async function deleteEntity() {
-        try {
-            const response = await fetch(`${BackendAPI}/api/${entity.toLowerCase()}/${id}`, {
-                method: 'DELETE'
-            });
-            if (response.ok) {
-                showModal.set(false);
-				window.location.href = `/${entity}`
-            } else {
-                console.error('Failed to delete entity');
-            }
-        } catch (error) {
-            console.error('Error deleting entity:', error);
-        }
-    }
-
+		try {
+			const response = await fetch(`${BackendAPI}/api/${entity.toLowerCase()}/${id}`, {
+				method: 'DELETE'
+			});
+			if (response.ok) {
+				showModal.set(false);
+				window.location.href = `/${entity}`;
+			} else {
+				console.error('Failed to delete entity');
+			}
+		} catch (error) {
+			console.error('Error deleting entity:', error);
+		}
+	}
 </script>
 
 <div class="container">
@@ -120,15 +110,25 @@
 							{/each}
 						</p>
 					{:else}
-						<p>{entityToEdit[key]}</p>
+						<p>{entityToEdit[key].name}</p>
 					{/if}
 				</div>
 			{/each}
 		</div>
-		<button on:click={() => { window.location.href = `/${entity}/${entityToEdit.id}/edit`; }} class="button edit-button">
+		<button
+			on:click={() => {
+				window.location.href = `/${entity}/${entityToEdit.id}/edit`;
+			}}
+			class="button edit-button"
+		>
 			Edit
 		</button>
-		<button on:click={() => { confirmDelete() }} class="button delete-button">
+		<button
+			on:click={() => {
+				confirmDelete();
+			}}
+			class="button delete-button"
+		>
 			Delete
 		</button>
 	{:else}
@@ -137,13 +137,13 @@
 </div>
 
 {#if $showModal}
-    <div class="modal">
-        <div class="modal-content">
-            <p>Are you sure that you want to delete this entity?</p>
-            <button on:click={() => deleteEntity()} class="button delete-button">Delete Forever</button>
-            <button on:click={() => showModal.set(false)} class="button cancel-button">Cancel</button>
-        </div>
-    </div>
+	<div class="modal">
+		<div class="modal-content">
+			<p>Are you sure that you want to delete this entity?</p>
+			<button on:click={() => deleteEntity()} class="button delete-button">Delete Forever</button>
+			<button on:click={() => showModal.set(false)} class="button cancel-button">Cancel</button>
+		</div>
+	</div>
 {/if}
 
 <style>
@@ -171,57 +171,57 @@
 		border-radius: 4px;
 		background-color: #f9f9f9;
 	}
-    .modal-content {
-        background: white;
-        padding: 2rem;
-    }
+	.modal-content {
+		background: white;
+		padding: 2rem;
+	}
 
-    .button {
-        display: inline-block;
-        padding: 0.75rem 1.5rem;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 1rem;
-        transition: background 0.3s ease-in-out;
-        text-align: center;
-        align-self: center;
-    }
-    .edit-button {
-        background-color: #28a745;
-    }
-    .edit-button:hover {
-        background-color: #1e7e34;
-    }
+	.button {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 1rem;
+		transition: background 0.3s ease-in-out;
+		text-align: center;
+		align-self: center;
+	}
+	.edit-button {
+		background-color: #28a745;
+	}
+	.edit-button:hover {
+		background-color: #1e7e34;
+	}
 
-    .delete-button {
-        background-color: #dc3545;
-    }
-    .delete-button:hover {
-        background-color: #a71d2a;
-    }
-    .modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .modal-content {
-        background: white;
-        padding: 2rem;
-        border-radius: 10px;
-        text-align: center;
-    }
-    .cancel-button {
-        background-color: #6c757d;
-    }
-    .cancel-button:hover {
-        background-color: #5a6268;
-    }
+	.delete-button {
+		background-color: #dc3545;
+	}
+	.delete-button:hover {
+		background-color: #a71d2a;
+	}
+	.modal {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0, 0, 0, 0.5);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.modal-content {
+		background: white;
+		padding: 2rem;
+		border-radius: 10px;
+		text-align: center;
+	}
+	.cancel-button {
+		background-color: #6c757d;
+	}
+	.cancel-button:hover {
+		background-color: #5a6268;
+	}
 </style>

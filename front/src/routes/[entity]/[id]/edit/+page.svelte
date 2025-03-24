@@ -139,14 +139,14 @@
 						</select>
 					{:else if type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required multiple>
-							<option value={formData[key].id}>{formData[key]}</option>
+							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
 					{:else if !type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required>
-							<option value={formData[key].id}>{formData[key]}</option>
+							<option value="">Select an existing {key}</option>
 							{#each existingItems[type] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
