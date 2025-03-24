@@ -8,7 +8,7 @@ import com.cbd.neo4jchain.enums.OwnershipType;
 import lombok.Getter;
 import lombok.Setter;
 
-@Node
+@Node("ChainFaceted")
 @Getter
 @Setter
 public class ChainFaceted extends Chain {
