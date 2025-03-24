@@ -8,7 +8,7 @@
     function navigateTo(entity) {
         goto(`/${entity}`);
     }
-  </script>
+</script>
   
   <div class="container d-flex flex-column align-items-center mt-4">
     <div class="text-center">
