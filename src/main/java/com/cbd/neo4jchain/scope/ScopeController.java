@@ -42,7 +42,7 @@ public class ScopeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createScope(@RequestBody @Valid Scope scope) {
+    public ResponseEntity<?> createScope(@RequestBody @Valid ScopeDTO scope) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.scopeService.createScope(scope));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ScopeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateScope(@RequestBody @Valid Scope scope, @PathVariable Long id) {
+    public ResponseEntity<?> updateScope(@RequestBody @Valid ScopeDTO scope, @PathVariable Long id) {
         try {
             this.scopeService.updateScope(id, scope);
             return ResponseEntity.noContent().build();

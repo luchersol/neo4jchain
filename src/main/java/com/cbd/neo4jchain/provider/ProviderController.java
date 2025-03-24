@@ -42,7 +42,7 @@ public class ProviderController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createProvider(@RequestBody @Valid Provider provider) {
+    public ResponseEntity<?> createProvider(@RequestBody @Valid ProviderDTO provider) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.providerService.createProvider(provider));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ProviderController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProvider(@RequestBody @Valid Provider provider, @PathVariable Long id) {
+    public ResponseEntity<?> updateProvider(@RequestBody @Valid ProviderDTO provider, @PathVariable Long id) {
         try {
             this.providerService.updateProvider(id, provider);
             return ResponseEntity.noContent().build();

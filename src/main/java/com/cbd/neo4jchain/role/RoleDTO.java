@@ -13,4 +13,8 @@ public class RoleDTO {
 
     private List<Long> privileges;
 
+    public Role parse(){
+        return new Role(null, name);
+    }
+
 }

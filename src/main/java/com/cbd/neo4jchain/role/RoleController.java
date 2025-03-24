@@ -42,7 +42,7 @@ public class RoleController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createRole(@RequestBody @Valid Role role) {
+    public ResponseEntity<?> createRole(@RequestBody @Valid RoleDTO role) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.createRole(role));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class RoleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRole(@RequestBody @Valid Role role, @PathVariable Long id) {
+    public ResponseEntity<?> updateRole(@RequestBody @Valid RoleDTO role, @PathVariable Long id) {
         try {
             this.roleService.updateRole(id, role);
             return ResponseEntity.noContent().build();

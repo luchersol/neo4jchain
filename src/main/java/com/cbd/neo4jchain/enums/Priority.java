@@ -4,6 +4,5 @@ public enum Priority {
     CRITICAL,
     HARD,
     MEDIUM,
-    LOW,
-    ALL;
+    LOW;
 }

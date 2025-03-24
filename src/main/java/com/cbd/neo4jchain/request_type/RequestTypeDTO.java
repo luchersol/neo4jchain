@@ -9,4 +9,8 @@ public class RequestTypeDTO {
 
     private String name;
 
+    public RequestType parse(){
+        return new RequestType(null, name);
+    }
+
 }

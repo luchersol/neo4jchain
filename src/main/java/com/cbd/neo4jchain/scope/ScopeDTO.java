@@ -15,4 +15,9 @@ public class ScopeDTO {
     Long requestType;
 
     List<Long> objectives;
+
+    public Scope parse(){
+        return new Scope(null, name, priority);
+    }
+
 }

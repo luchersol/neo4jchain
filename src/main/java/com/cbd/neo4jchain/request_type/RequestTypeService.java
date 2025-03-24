@@ -24,14 +24,14 @@ public class RequestTypeService {
         return this.requestTypeRepository.findAll();
     }
 
-    public RequestType createRequestType(RequestType requestType) {
-        return this.requestTypeRepository.save(requestType);
+    public RequestType createRequestType(RequestTypeDTO requestType) {
+        return this.requestTypeRepository.save(requestType.parse());
     }
 
-    public RequestType updateRequestType(Long requestTypeId, RequestType requestType) {
+    public RequestType updateRequestType(Long requestTypeId, RequestTypeDTO requestType) {
         RequestType requestTypeToUpdate = getRequestTypeById(requestTypeId);
-        BeanUtils.copyProperties(requestType, requestTypeToUpdate, "id");
-        return this.requestTypeRepository.save(requestType);
+        BeanUtils.copyProperties(requestType.parse(), requestTypeToUpdate, "id");
+        return this.requestTypeRepository.save(requestTypeToUpdate);
     }
 
     public void deleteRequestType(Long requestTypeId) {

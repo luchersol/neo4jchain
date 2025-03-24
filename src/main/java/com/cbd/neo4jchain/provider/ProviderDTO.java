@@ -15,4 +15,8 @@ public class ProviderDTO {
 
     Long sla;
 
+    public Provider parse(){
+        return new Provider(null);
+    }
+
 }

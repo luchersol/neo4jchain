@@ -42,7 +42,7 @@ public class RequestTypeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createRequestType(@RequestBody @Valid RequestType requestType) {
+    public ResponseEntity<?> createRequestType(@RequestBody @Valid RequestTypeDTO requestType) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(this.requestTypeService.createRequestType(requestType));
@@ -52,7 +52,7 @@ public class RequestTypeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateRequestType(@RequestBody @Valid RequestType requestType, @PathVariable Long id) {
+    public ResponseEntity<?> updateRequestType(@RequestBody @Valid RequestTypeDTO requestType, @PathVariable Long id) {
         try {
             this.requestTypeService.updateRequestType(id, requestType);
             return ResponseEntity.noContent().build();
