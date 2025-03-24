@@ -15,4 +15,8 @@ public class ChainFacetedDTO {
 
     private String name;
 
+    public ChainFaceted parse(){
+        return new ChainFaceted(null, this.name, this.version, this.description, this.ownershipType);
+    }
+
 }

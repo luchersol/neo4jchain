@@ -12,9 +12,11 @@ import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.util.RelationName.ScopeRelation;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class Scope extends NamedNode {
 
     Priority priority;

@@ -9,9 +9,11 @@ import com.cbd.neo4jchain.sla.Sla;
 import com.cbd.neo4jchain.util.RelationName.CustomerRelation;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class Customer extends AbstractNode {
 
     public Customer(Long id) {

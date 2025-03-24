@@ -23,14 +23,14 @@ public class ChainFacetedService {
         return this.chainFacetedRepository.findById(id).orElseThrow();
     }
 
-    public ChainFaceted createChainFaceted(ChainFaceted chainFaceted) {
-        return this.chainFacetedRepository.save(chainFaceted);
+    public ChainFaceted createChainFaceted(ChainFacetedDTO chainFaceted) {
+        return this.chainFacetedRepository.save(chainFaceted.parse());
     }
 
-    public ChainFaceted updateChainFaceted(Long chainFacetedId, ChainFaceted chainFaceted) {
+    public ChainFaceted updateChainFaceted(Long chainFacetedId, ChainFacetedDTO chainFaceted) {
         ChainFaceted chainFacetedToUpdate = getChainFacetedById(chainFacetedId);
         BeanUtils.copyProperties(chainFaceted, chainFacetedToUpdate, "id");
-        return this.chainFacetedRepository.save(chainFaceted);
+        return this.chainFacetedRepository.save(chainFacetedToUpdate);
     }
 
     public void deleteChainFaceted(Long chainFacetedId) {

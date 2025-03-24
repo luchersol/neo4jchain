@@ -10,8 +10,10 @@ import com.cbd.neo4jchain.scope.Scope;
 import com.cbd.neo4jchain.util.RelationName.SlaRelation;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 @Node
 public class Sla extends NamedNode {
 

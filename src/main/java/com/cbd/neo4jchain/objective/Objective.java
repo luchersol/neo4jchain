@@ -7,9 +7,11 @@ import com.cbd.neo4jchain.enums.UnitTime;
 import com.cbd.neo4jchain.model.AbstractNode;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class Objective extends AbstractNode {
 
     Metric metric;

@@ -6,9 +6,11 @@ import com.cbd.neo4jchain.chain.Chain;
 import com.cbd.neo4jchain.enums.OwnershipType;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class ChainFaceted extends Chain {
 
     public ChainFaceted(Long id, String name, String version, String description, OwnershipType ownershipType) {

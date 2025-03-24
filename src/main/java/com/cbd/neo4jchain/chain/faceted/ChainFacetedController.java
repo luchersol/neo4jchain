@@ -42,7 +42,7 @@ public class ChainFacetedController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createChainFaceted(@RequestBody @Valid ChainFaceted chainFaceted) {
+    public ResponseEntity<?> createChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(this.chainFacetedService.createChainFaceted(chainFaceted));
@@ -52,7 +52,7 @@ public class ChainFacetedController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateChainFaceted(@RequestBody @Valid ChainFaceted chainFaceted, @PathVariable Long id) {
+    public ResponseEntity<?> updateChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted, @PathVariable Long id) {
         try {
             this.chainFacetedService.updateChainFaceted(id, chainFaceted);
             return ResponseEntity.noContent().build();

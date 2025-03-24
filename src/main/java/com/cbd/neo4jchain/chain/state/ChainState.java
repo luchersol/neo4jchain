@@ -12,9 +12,11 @@ import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.util.RelationName.ChainStateRelation;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class ChainState extends Chain {
 
     public ChainState(Long id, String name, String version, String description, OwnershipType ownershipType) {

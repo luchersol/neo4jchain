@@ -11,9 +11,11 @@ import com.cbd.neo4jchain.team.Team;
 import com.cbd.neo4jchain.util.RelationName.IssueRelation;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Node
 @Getter
+@Setter
 public class Issue extends AbstractNode {
 
     private String title;
