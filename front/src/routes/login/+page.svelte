@@ -1,5 +1,6 @@
 <script>
     import { BackendAPI } from "../../stores/stores"
+    import Title from "../../components/title.svelte"
     let username = "";
     let password = "";
 
@@ -20,9 +21,9 @@
     }
 </script>
 
+<Title subtitle={"Log in"}></Title>
 <div class="login-container">
     <div class="login-box">
-        <h2>Login</h2>
         <input type="text" bind:value={username} placeholder="Username" />
         <input type="password" bind:value={password} placeholder="Password" />
         <button on:click={login}>Login</button>
@@ -32,12 +33,11 @@
 
 <style>
     .login-container {
+        margin-top: "1px";
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 100vh;
-        background-color: #f4f4f4;
     }
 
     .login-box {
