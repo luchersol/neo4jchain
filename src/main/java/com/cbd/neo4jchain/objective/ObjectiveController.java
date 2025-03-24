@@ -42,7 +42,7 @@ public class ObjectiveController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createObjective(@RequestBody @Valid Objective objective) {
+    public ResponseEntity<?> createObjective(@RequestBody @Valid ObjectiveDTO objective) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.objectiveService.createObjective(objective));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class ObjectiveController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateObjective(@RequestBody @Valid Objective objective, @PathVariable Long id) {
+    public ResponseEntity<?> updateObjective(@RequestBody @Valid ObjectiveDTO objective, @PathVariable Long id) {
         try {
             this.objectiveService.updateObjective(id, objective);
             return ResponseEntity.noContent().build();

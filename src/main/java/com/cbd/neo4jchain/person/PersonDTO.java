@@ -30,4 +30,8 @@ public class PersonDTO {
 
     private List<Long> roles;
 
+    public Person parse(){
+        return new Person(null, username, lastName, firstName, email, phone, password);
+    }
+
 }

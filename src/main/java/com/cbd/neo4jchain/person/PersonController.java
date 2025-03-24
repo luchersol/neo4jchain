@@ -42,7 +42,7 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createPerson(@RequestBody @Valid Person person) {
+    public ResponseEntity<?> createPerson(@RequestBody @Valid PersonDTO person) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.createPerson(person));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePerson(@RequestBody @Valid Person person, @PathVariable Long id) {
+    public ResponseEntity<?> updatePerson(@RequestBody @Valid PersonDTO person, @PathVariable Long id) {
         try {
             this.personService.updatePerson(id, person);
             return ResponseEntity.noContent().build();

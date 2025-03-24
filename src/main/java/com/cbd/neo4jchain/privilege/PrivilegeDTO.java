@@ -9,4 +9,8 @@ public class PrivilegeDTO {
 
     String name;
 
+    public Privilege parse(){
+        return new Privilege(null, name);
+    }
+
 }

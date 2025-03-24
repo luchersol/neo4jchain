@@ -24,14 +24,14 @@ public class PrivilegeService {
         return this.privilegeRepository.findAll();
     }
 
-    public Privilege createPrivilege(Privilege privilege) {
-        return this.privilegeRepository.save(privilege);
+    public Privilege createPrivilege(PrivilegeDTO privilege) {
+        return this.privilegeRepository.save(privilege.parse());
     }
 
-    public Privilege updatePrivilege(Long privilegeId, Privilege privilege) {
+    public Privilege updatePrivilege(Long privilegeId, PrivilegeDTO privilege) {
         Privilege privilegeToUpdate = getPrivilegeById(privilegeId);
-        BeanUtils.copyProperties(privilege, privilegeToUpdate, "id");
-        return this.privilegeRepository.save(privilege);
+        BeanUtils.copyProperties(privilege.parse(), privilegeToUpdate, "id");
+        return this.privilegeRepository.save(privilegeToUpdate);
     }
 
     public void deletePrivilege(Long privilegeId) {

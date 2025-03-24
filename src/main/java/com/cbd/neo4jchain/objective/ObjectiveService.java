@@ -24,14 +24,14 @@ public class ObjectiveService {
         return this.objectiveRepository.findById(id).orElseThrow();
     }
 
-    public Objective createObjective(Objective objective) {
-        return this.objectiveRepository.save(objective);
+    public Objective createObjective(ObjectiveDTO objective) {
+        return this.objectiveRepository.save(objective.parse());
     }
 
-    public Objective updateObjective(Long objectiveId, Objective objective) {
+    public Objective updateObjective(Long objectiveId, ObjectiveDTO objective) {
         Objective objectiveToUpdate = getObjectiveById(objectiveId);
-        BeanUtils.copyProperties(objective, objectiveToUpdate, "id");
-        return this.objectiveRepository.save(objective);
+        BeanUtils.copyProperties(objective.parse(), objectiveToUpdate, "id");
+        return this.objectiveRepository.save(objectiveToUpdate);
     }
 
     public void deleteObjective(Long objectiveId) {

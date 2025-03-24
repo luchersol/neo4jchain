@@ -21,4 +21,8 @@ public class OrganizationDTO {
 
     private Long chain;
 
+    public Organization parse(){
+        return new Organization(null, name, code);
+    }
+
 }

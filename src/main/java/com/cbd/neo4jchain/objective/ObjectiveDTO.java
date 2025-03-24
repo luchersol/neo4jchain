@@ -12,4 +12,8 @@ public class ObjectiveDTO {
     Double value;
     UnitTime unit;
 
+    public Objective parse(){
+        return new Objective(null, metric, value, unit);
+    }
+
 }

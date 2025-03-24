@@ -42,7 +42,7 @@ public class OrganizationController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createOrganization(@RequestBody @Valid Organization organization) {
+    public ResponseEntity<?> createOrganization(@RequestBody @Valid OrganizationDTO organization) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(this.organizationService.createOrganization(organization));
@@ -52,7 +52,7 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateOrganization(@RequestBody @Valid Organization organization, @PathVariable Long id) {
+    public ResponseEntity<?> updateOrganization(@RequestBody @Valid OrganizationDTO organization, @PathVariable Long id) {
         try {
             this.organizationService.updateOrganization(id, organization);
             return ResponseEntity.noContent().build();

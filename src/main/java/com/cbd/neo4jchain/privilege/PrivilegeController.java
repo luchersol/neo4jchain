@@ -42,7 +42,7 @@ public class PrivilegeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createPrivilege(@RequestBody @Valid Privilege privilege) {
+    public ResponseEntity<?> createPrivilege(@RequestBody @Valid PrivilegeDTO privilege) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.privilegeService.createPrivilege(privilege));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class PrivilegeController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updatePrivilege(@RequestBody @Valid Privilege privilege, @PathVariable Long id) {
+    public ResponseEntity<?> updatePrivilege(@RequestBody @Valid PrivilegeDTO privilege, @PathVariable Long id) {
         try {
             this.privilegeService.updatePrivilege(id, privilege);
             return ResponseEntity.noContent().build();
