@@ -8,16 +8,20 @@ import org.springframework.stereotype.Service;
 import com.cbd.neo4jchain.exception.NotFoundResource;
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.person.PersonRepository;
+import com.cbd.neo4jchain.role.Role;
+import com.cbd.neo4jchain.role.RoleRepository;
 
 @Service
 public class TeamService {
 
     private final TeamRepository teamRepository;
     private final PersonRepository userRepository;
+    RoleRepository roleRepository;
 
-    public TeamService(TeamRepository teamRepository, PersonRepository userRepository) {
+    public TeamService(TeamRepository teamRepository, PersonRepository userRepository, RoleRepository roleRepository) {
         this.teamRepository = teamRepository;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public Team getTeamById(Long id) {
@@ -29,8 +33,13 @@ public class TeamService {
         return teams;
     }
 
-    public Team createTeam(Team team) {
-        return teamRepository.save(team);
+    public Team createTeam(TeamDTO team) {
+        Team newTeam = team.parse();
+        List<Person> memberList = userRepository.findAllById(team.getMembers());
+        List<Role> roles = roleRepository.findAllById(team.getRoles());
+        newTeam.setMembers(memberList);
+        newTeam.setRoles(roles);
+        return teamRepository.save(newTeam);
     }
 
     public Team addUserToTeam(Long teamId, Long userId) {
@@ -43,10 +52,15 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team updateTeam(Long teamId, Team team) {
+    public Team updateTeam(Long teamId, TeamDTO teamDTO) {
         Team teamToUpdate = getTeamById(teamId);
+        Team team = teamDTO.parse();
+        List<Person> memberList = userRepository.findAllById(teamDTO.getMembers());
+        List<Role> roles = roleRepository.findAllById(teamDTO.getRoles());
+        team.setMembers(memberList);
+        team.setRoles(roles);
         BeanUtils.copyProperties(team, teamToUpdate, "id");
-        return this.teamRepository.save(team);
+        return this.teamRepository.save(teamToUpdate);
     }
 
     public void deleteTeam(Long teamId) {

@@ -10,7 +10,6 @@ import com.cbd.neo4jchain.organization.Organization;
 import com.cbd.neo4jchain.organization.OrganizationRepository;
 import com.cbd.neo4jchain.sla.Sla;
 import com.cbd.neo4jchain.sla.SlaRepository;
-import com.cbd.neo4jchain.status.StatusRepository;
 
 @Service
 public class CustomerService {

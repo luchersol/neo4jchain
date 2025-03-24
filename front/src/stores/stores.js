@@ -42,7 +42,8 @@ export const entityDict = {
 		status: 'Status',
 		assignedTeam: 'Team',
 		assignedPerson: 'Person',
-		owner: 'Person'
+		owner: 'Person',
+		requestType: 'RequestType'
 	},
 	Objective: {
 		id: 'Long',

@@ -17,4 +17,8 @@ public class TeamDTO {
 
     private List<Long> roles;
 
+    public Team parse(){
+        return new Team(null, name, specialization);
+    }
+
 }

@@ -42,7 +42,7 @@ public class StatusController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createStatus(@RequestBody @Valid Status status) {
+    public ResponseEntity<?> createStatus(@RequestBody @Valid StatusDTO status) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.statusService.createStatus(status));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class StatusController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateStatus(@RequestBody @Valid Status status, @PathVariable Long id) {
+    public ResponseEntity<?> updateStatus(@RequestBody @Valid StatusDTO status, @PathVariable Long id) {
         try {
             this.statusService.updateStatus(id, status);
             return ResponseEntity.noContent().build();

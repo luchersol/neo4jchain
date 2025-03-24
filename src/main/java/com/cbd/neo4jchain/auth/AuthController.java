@@ -47,7 +47,7 @@ public class AuthController {
         person.setLastName(registerRequest.getLastName());
         person.setPassword(registerRequest.getPassword());
         person.setPhone(registerRequest.getPhone());
-        personService.createPerson(person);
+        personService.createUser(person);
         return ResponseEntity.ok(person);
     }
 }

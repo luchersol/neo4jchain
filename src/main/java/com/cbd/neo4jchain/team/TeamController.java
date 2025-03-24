@@ -42,7 +42,7 @@ public class TeamController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createTeam(@RequestBody @Valid Team team) {
+    public ResponseEntity<?> createTeam(@RequestBody @Valid TeamDTO team) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.teamService.createTeam(team));
         } catch (Exception e) {
@@ -61,7 +61,7 @@ public class TeamController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateTeam(@RequestBody @Valid Team team, @PathVariable Long id) {
+    public ResponseEntity<?> updateTeam(@RequestBody @Valid TeamDTO team, @PathVariable Long id) {
         try {
             this.teamService.updateTeam(id, team);
             return ResponseEntity.noContent().build();

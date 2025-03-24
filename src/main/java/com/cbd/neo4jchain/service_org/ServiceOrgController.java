@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -43,7 +42,7 @@ public class ServiceOrgController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createServiceOrg(@RequestBody @Valid ServiceOrg serviceOrg) {
+    public ResponseEntity<?> createServiceOrg(@RequestBody @Valid ServiceOrgDTO serviceOrg) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.serviceOrgService.createServiceOrg(serviceOrg));
         } catch (Exception e) {
@@ -52,7 +51,7 @@ public class ServiceOrgController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateServiceOrg(@RequestBody @Valid ServiceOrg serviceOrg, @PathVariable Long id) {
+    public ResponseEntity<?> updateServiceOrg(@RequestBody @Valid ServiceOrgDTO serviceOrg, @PathVariable Long id) {
         try {
             this.serviceOrgService.updateServiceOrg(id, serviceOrg);
             return ResponseEntity.noContent().build();

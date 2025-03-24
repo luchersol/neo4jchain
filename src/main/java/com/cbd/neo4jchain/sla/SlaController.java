@@ -42,7 +42,7 @@ public class SlaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createSla(@RequestBody @Valid Sla sla) {
+    public ResponseEntity<?> createSla(@RequestBody @Valid SlaDTO sla) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.slaService.createSla(sla));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class SlaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSla(@RequestBody @Valid Sla sla, @PathVariable Long id) {
+    public ResponseEntity<?> updateSla(@RequestBody @Valid SlaDTO sla, @PathVariable Long id) {
         try {
             this.slaService.updateSla(id, sla);
             return ResponseEntity.noContent().build();

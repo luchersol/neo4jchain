@@ -11,4 +11,8 @@ public class SlaDTO {
 
     List<Long> guarantees;
 
+    public Sla parse(){
+        return new Sla(null, name);
+    }
+
 }

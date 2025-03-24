@@ -24,14 +24,20 @@ public class StatusService {
         return this.statusRepository.findAll();
     }
 
-    public Status createStatus(Status status) {
-        return this.statusRepository.save(status);
+    public Status createStatus(StatusDTO status) {
+        Status newStatus = status.parse();
+        List<Status> statuses =statusRepository.findAllById(status.getPossibleNextStatuses());
+        newStatus.setPossibleNextStatuses(statuses);
+        return this.statusRepository.save(newStatus);
     }
 
-    public Status updateStatus(Long statusId, Status status) {
+    public Status updateStatus(Long statusId, StatusDTO statusDTO) {
         Status statusToUpdate = getStatusById(statusId);
+        Status status = statusDTO.parse();
+        List<Status> statuses =statusRepository.findAllById(statusDTO.getPossibleNextStatuses());
+        status.setPossibleNextStatuses(statuses);
         BeanUtils.copyProperties(status, statusToUpdate, "id");
-        return this.statusRepository.save(status);
+        return this.statusRepository.save(statusToUpdate);
     }
 
     public void deleteStatus(Long statusId) {

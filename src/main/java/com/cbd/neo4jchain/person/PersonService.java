@@ -45,6 +45,10 @@ public class PersonService {
         return this.personRepository.save(newPerson);
     }
 
+    public Person createUser(Person person){
+        return this.personRepository.save(person);
+    }
+
     public Person updatePerson(Long personId, PersonDTO personDTO) {
         Person personToUpdate = getPersonById(personId);
         Person person = personDTO.parse();

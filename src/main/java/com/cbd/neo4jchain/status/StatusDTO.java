@@ -13,4 +13,8 @@ public class StatusDTO {
 
     List<Long> possibleNextStatuses;
 
+    public Status parse(){
+        return new Status(null, name);
+    }
+
 }

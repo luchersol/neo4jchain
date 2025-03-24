@@ -21,4 +21,8 @@ public class ServiceOrgDTO {
 
     private List<Long> customers;
 
+    public ServiceOrg parse(){
+        return new ServiceOrg(null, name, description);
+    }
+
 }
