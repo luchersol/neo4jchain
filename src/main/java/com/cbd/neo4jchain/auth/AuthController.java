@@ -2,18 +2,18 @@ package com.cbd.neo4jchain.auth;
 
 import java.util.Objects;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.person.PersonService;
 
 import jakarta.validation.Valid;
 
+@RestController
 @RequestMapping("/auth")
 public class AuthController {
 
@@ -26,14 +26,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Person person = personService.getPersonByName(loginRequest.getName());
-        if (loginRequest.getPassword() == null || Objects.equals(loginRequest.getPassword(), person.getPassword())) {
+        if (!Objects.equals(loginRequest.getPassword(), person.getPassword())) {
             return ResponseEntity.badRequest().body("Credenciales incorrectos");
         }
         return ResponseEntity.ok(person);
     }
 
     @PostMapping("/signup")
-    @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<?> registerCustomer(@Valid @RequestBody RegisterRequest registerRequest) {
         String name = registerRequest.getName();
         if (personService.existsPersonByName(name)) {
