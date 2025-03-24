@@ -17,7 +17,8 @@ public class RelationName {
                 STATUS = "STATUS",
                 TEAM = "ASIGNED_TO",
                 ASSIGNED_PERSON = "ASSIGNED_TO",
-                OWNER_PERSON = "CREATED_BY";
+                OWNER_PERSON = "CREATED_BY",
+                REQUEST_TYPE = "REQUEST_TYPE";
     }
 
     public static class OrganizationRelation {

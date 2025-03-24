@@ -42,7 +42,7 @@ public class IssueController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createIssue(@RequestBody @Valid Issue issue) {
+    public ResponseEntity<?> createIssue(@RequestBody @Valid IssueDTO issue) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(this.issueService.createIssue(issue));
         } catch (Exception e) {
@@ -51,7 +51,7 @@ public class IssueController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateIssue(@RequestBody @Valid Issue issue, @PathVariable Long id) {
+    public ResponseEntity<?> updateIssue(@RequestBody @Valid IssueDTO issue, @PathVariable Long id) {
         try {
             this.issueService.updateIssue(id, issue);
             return ResponseEntity.noContent().build();

@@ -5,6 +5,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.model.AbstractNode;
 import com.cbd.neo4jchain.person.Person;
+import com.cbd.neo4jchain.request_type.RequestType;
 import com.cbd.neo4jchain.service_org.ServiceOrg;
 import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
@@ -41,4 +42,7 @@ public class Issue extends AbstractNode {
 
     @Relationship(type = IssueRelation.OWNER_PERSON)
     private Person owner;
+
+    @Relationship(type = IssueRelation.REQUEST_TYPE )
+    private RequestType requestType;
 }

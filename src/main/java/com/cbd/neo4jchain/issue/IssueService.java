@@ -6,14 +6,40 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.cbd.neo4jchain.exception.NotFoundResource;
+import com.cbd.neo4jchain.person.Person;
+import com.cbd.neo4jchain.person.PersonRepository;
+import com.cbd.neo4jchain.request_type.RequestType;
+import com.cbd.neo4jchain.request_type.RequestTypeRepository;
+import com.cbd.neo4jchain.service_org.ServiceOrg;
+import com.cbd.neo4jchain.service_org.ServiceOrgRepository;
+import com.cbd.neo4jchain.status.Status;
+import com.cbd.neo4jchain.status.StatusRepository;
+import com.cbd.neo4jchain.team.Team;
+import com.cbd.neo4jchain.team.TeamRepository;
 
 @Service
 public class IssueService {
 
     IssueRepository issueRepository;
 
-    public IssueService(IssueRepository issueRepository) {
+    PersonRepository personRepository;
+
+    TeamRepository teamRepository;
+
+    ServiceOrgRepository serviceOrgRepository;
+
+    StatusRepository statusRepository;
+
+    RequestTypeRepository requestTypeRepository;
+
+
+    public IssueService(IssueRepository issueRepository, PersonRepository personRepository, TeamRepository teamRepository, ServiceOrgRepository serviceOrgRepository, StatusRepository statusRepository, RequestTypeRepository requestTypeRepository) {
         this.issueRepository = issueRepository;
+        this.personRepository = personRepository;
+        this.teamRepository = teamRepository;
+        this.serviceOrgRepository = serviceOrgRepository;
+        this.statusRepository = statusRepository;
+        this.requestTypeRepository = requestTypeRepository;
     }
 
     public List<Issue> getAllIssue() {
@@ -24,14 +50,43 @@ public class IssueService {
         return this.issueRepository.findById(id).orElseThrow();
     }
 
-    public Issue createIssue(Issue issue) {
-        return this.issueRepository.save(issue);
+    public Issue createIssue(IssueDTO issue) {
+        Issue newIssue = issue.parse();
+        Person assignedPerson = personRepository.findById(issue.getAssignedPerson()).orElse(null);
+        Person owner = personRepository.findById(issue.getOwner()).orElseThrow();
+        Team team = teamRepository.findById(issue.getAssignedTeam()).orElse(null);
+        ServiceOrg serviceOrg = serviceOrgRepository.findById(issue.getServiceOrg()).orElse(null);
+        Status status = statusRepository.findById(issue.getStatus()).orElse(null);
+        RequestType requestType = requestTypeRepository.findById(issue.getRequestType()).orElseThrow();
+
+        newIssue.setAssignedPerson(assignedPerson);
+        newIssue.setAssignedTeam(team);
+        newIssue.setServiceOrg(serviceOrg);
+        newIssue.setOwner(owner);
+        newIssue.setStatus(status);
+        newIssue.setRequestType(requestType);
+
+        return this.issueRepository.save(newIssue);
     }
 
-    public Issue updateIssue(Long issueId, Issue issue) {
+    public Issue updateIssue(Long issueId, IssueDTO issueDTO) {
         Issue issueToUpdate = getIssueById(issueId);
-        BeanUtils.copyProperties(issue, issueToUpdate, "id");
-        return this.issueRepository.save(issue);
+
+        Issue issue = issueDTO.parse();
+        Person assignedPerson = personRepository.findById(issueDTO.getAssignedPerson()).orElse(null);
+        Person owner = personRepository.findById(issueDTO.getOwner()).orElseThrow();
+        Team team = teamRepository.findById(issueDTO.getAssignedTeam()).orElse(null);
+        ServiceOrg serviceOrg = serviceOrgRepository.findById(issueDTO.getServiceOrg()).orElse(null);
+        Status status = statusRepository.findById(issueDTO.getStatus()).orElse(null);
+
+        issue.setAssignedPerson(assignedPerson);
+        issue.setAssignedTeam(team);
+        issue.setServiceOrg(serviceOrg);
+        issue.setOwner(owner);
+        issue.setStatus(status);
+
+        BeanUtils.copyProperties(issue, issueToUpdate, "id", "requestType");
+        return this.issueRepository.save(issueToUpdate);
     }
 
     public void deleteIssue(Long issueId) {

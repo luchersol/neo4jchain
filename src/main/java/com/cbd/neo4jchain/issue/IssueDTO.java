@@ -17,4 +17,10 @@ public class IssueDTO {
     private Long assignedPerson;
 
     private Long owner;
+
+    private Long requestType;
+
+    public Issue parse(){
+        return new Issue(null, title, description);
+    }
 }
