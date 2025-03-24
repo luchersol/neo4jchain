@@ -25,8 +25,8 @@ export const entityDict = {
 		version: 'String',
 		description: 'String',
 		ownershipType: 'OwnershipType',
-		initial: 'Status',
-		terminal: 'Status',
+		initial: 'List<Status>',
+		terminal: 'List<Status>',
 		initialSla: 'Sla'
 	},
 	Customer: {

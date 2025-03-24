@@ -1,5 +1,7 @@
 package com.cbd.neo4jchain.chain.state;
 
+import java.util.List;
+
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
 
@@ -20,10 +22,10 @@ public class ChainState extends Chain {
     }
 
     @Relationship(type = ChainStateRelation.INITIAL_STATUS)
-    private Status initial;
+    private List<Status> initial;
 
     @Relationship(type = ChainStateRelation.TERMINAL_STATUS)
-    private Status terminal;
+    private List<Status> terminal;
 
     @Relationship(type = ChainStateRelation.SLA)
     private Sla initialSla;
