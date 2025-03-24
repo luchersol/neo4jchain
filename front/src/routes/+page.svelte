@@ -26,10 +26,6 @@
   
     <div class="button-group">
         <button on:click={() => navigateTo("login")} class="main-button">Log in</button>
-        
-        <button class="create-button" on:click={() => navigateTo("new")}>
-            Create a new chain
-        </button>
 
         <div class="dropdown">
             <button class="dropdown-button" on:click={() => dropdownOpen = !dropdownOpen}>
