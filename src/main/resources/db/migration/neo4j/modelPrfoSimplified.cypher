@@ -47,7 +47,7 @@ CREATE (alumnos)-[:SERVICE]->(servicioAlumnos)
 
 // Crear SLA y Scope
 CREATE (slaAlumnos:Sla { name: "ServicioAlumnosSla" })
-CREATE (scope:Sla { name: "Alcance General" })
+CREATE (scope:Scope { name: "Alcance General" })
 CREATE (slaAlumnos)-[:GUARANTEE]->(scope)
 
 // Crear Objetivos dentro del Scope
