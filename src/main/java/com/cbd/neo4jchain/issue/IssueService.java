@@ -1,5 +1,6 @@
 package com.cbd.neo4jchain.issue;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
@@ -52,6 +53,9 @@ public class IssueService {
 
     public Issue createIssue(IssueDTO issue) {
         Issue newIssue = issue.parse();
+        newIssue.setCreatedAt(LocalDate.now());
+        newIssue.setUpdatedAt(LocalDate.now());
+        newIssue.setClosedAt(null);
         Person assignedPerson = personRepository.findById(issue.getAssignedPerson()).orElse(null);
         Person owner = personRepository.findById(issue.getOwner()).orElseThrow();
         Team team = teamRepository.findById(issue.getAssignedTeam()).orElse(null);
@@ -84,7 +88,10 @@ public class IssueService {
         issue.setServiceOrg(serviceOrg);
         issue.setOwner(owner);
         issue.setStatus(status);
-
+        issue.setUpdatedAt(LocalDate.now());
+        if(status.getPossibleNextStatuses().size() == 0){
+            issue.setClosedAt(LocalDate.now());
+        }
         BeanUtils.copyProperties(issue, issueToUpdate, "id", "requestType");
         return this.issueRepository.save(issueToUpdate);
     }
