@@ -1,6 +1,6 @@
 package com.cbd.neo4jchain.issue;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Relationship;
@@ -48,10 +48,16 @@ public class Issue extends NamedNode {
     @Relationship(type = IssueRelation.REQUEST_TYPE)
     private RequestType requestType;
 
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     
-    private LocalDate updatedAt;
+    private LocalDateTime lastAssignedAt;
+
+    private LocalDateTime lastStateChangedAt;
     
-    private LocalDate closedAt;
+    private LocalDateTime closedAt;
+
+    private Double TTO;
+
+    private Double TTR;
 
 }

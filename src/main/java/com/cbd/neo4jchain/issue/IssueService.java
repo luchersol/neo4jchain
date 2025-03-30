@@ -1,11 +1,14 @@
 package com.cbd.neo4jchain.issue;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import com.cbd.neo4jchain.exception.NoUpdateAllowed;
 import com.cbd.neo4jchain.exception.NotFoundResource;
 import com.cbd.neo4jchain.person.Person;
 import com.cbd.neo4jchain.person.PersonRepository;
@@ -53,8 +56,9 @@ public class IssueService {
 
     public Issue createIssue(IssueDTO issue) {
         Issue newIssue = issue.parse();
-        newIssue.setCreatedAt(LocalDate.now());
-        newIssue.setUpdatedAt(LocalDate.now());
+        newIssue.setCreatedAt(LocalDateTime.now());
+        newIssue.setLastAssignedAt(null);
+        newIssue.setLastStateChangedAt(null);
         newIssue.setClosedAt(null);
         Person assignedPerson = personRepository.findById(issue.getAssignedPerson()).orElse(null);
         Person owner = personRepository.findById(issue.getOwner()).orElseThrow();
@@ -75,7 +79,12 @@ public class IssueService {
 
     public Issue updateIssue(Long issueId, IssueDTO issueDTO) {
         Issue issueToUpdate = getIssueById(issueId);
-
+        if(issueToUpdate.getClosedAt() != null){
+            throw new NoUpdateAllowed(Issue.class, "ID", issueId);
+        }
+        Double issueTTO = issueToUpdate.getTTO();
+        Double issueTTR = issueToUpdate.getTTR();
+        
         Issue issue = issueDTO.parse();
         Person assignedPerson = personRepository.findById(issueDTO.getAssignedPerson()).orElse(null);
         Person owner = personRepository.findById(issueDTO.getOwner()).orElseThrow();
@@ -83,15 +92,30 @@ public class IssueService {
         ServiceOrg serviceOrg = serviceOrgRepository.findById(issueDTO.getServiceOrg()).orElse(null);
         Status status = statusRepository.findById(issueDTO.getStatus()).orElse(null);
 
+        Boolean hasChangedState = issueToUpdate.getStatus().getId() != status.getId();
+        Boolean hasChangedAssgined = issueToUpdate.getAssignedPerson().getId() != status.getId();
+
+        if(hasChangedState){
+            issueTTR += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastStateChangedAt());
+            issue.setLastStateChangedAt(LocalDateTime.now());
+        }
+
+        if(hasChangedAssgined){
+            issueTTO += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastAssignedAt());
+            issue.setLastAssignedAt(LocalDateTime.now());
+        }
+
         issue.setAssignedPerson(assignedPerson);
         issue.setAssignedTeam(team);
         issue.setServiceOrg(serviceOrg);
         issue.setOwner(owner);
         issue.setStatus(status);
-        issue.setUpdatedAt(LocalDate.now());
-        if(status.getPossibleNextStatuses().size() == 0){
-            issue.setClosedAt(LocalDate.now());
+
+        if(status.getPossibleNextStatuses().isEmpty()){
+            issue.setClosedAt(LocalDateTime.now());
         }
+        issue.setTTO(issueTTO);
+        issue.setTTR(issueTTR);
         BeanUtils.copyProperties(issue, issueToUpdate, "id", "requestType");
         return this.issueRepository.save(issueToUpdate);
     }
