@@ -3,7 +3,12 @@
 	import { onMount } from 'svelte';
 	import Throbber from '../../../../components/throbber.svelte';
 	import Title from '../../../../components/title.svelte';
-	import { BackendAPI, entityDict, transformObject } from '../../../../stores/stores';
+	import {
+		BackendAPI,
+		entityDict,
+		isEntityOrArray,
+		transformObject
+	} from '../../../../stores/stores';
 
 	let entity = $page.params.entity;
 	let id = $page.params.id;
@@ -59,16 +64,7 @@
 				});
 
 			Object.entries(fields).forEach(([key, type]) => {
-				if (
-					type.startsWith('List<') ||
-					type === 'Status' ||
-					type === 'Sla' ||
-					type === 'Organization' ||
-					type === 'Team' ||
-					type === 'Person' ||
-					type === 'Role' ||
-					type === 'RequestType'
-				) {
+				if (isEntityOrArray(type)) {
 					fetchItemsForSelect(type).then((items) => {
 						existingItems[type] = items;
 					});

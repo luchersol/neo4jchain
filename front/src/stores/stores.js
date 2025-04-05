@@ -11,6 +11,10 @@ export const transformObject = (obj) => {
 	return transformed;
 };
 
+export const isEntityOrArray = (str = '') => {
+	return str.startsWith('List<') || Object.keys(entityDict).includes(str);
+};
+
 export const entityDict = {
 	ChainFaceted: {
 		id: 'Long',
