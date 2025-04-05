@@ -176,7 +176,7 @@
 		padding: 8px;
 		border: 1px solid #ddd;
 		border-radius: 4px;
-		background-color: #f9f9f9;
+		background-color: #dddddd6a;
 	}
 
 	.field ul {
