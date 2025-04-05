@@ -84,6 +84,10 @@
 			console.error('Error deleting entity:', error);
 		}
 	}
+
+	$: {
+		console.log(entityToEdit);
+	}
 </script>
 
 <div class="container">
@@ -102,13 +106,15 @@
 					{:else if type === 'Priority' || type === 'OwnershipType' || type === 'Metric' || type === 'UnitTime'}
 						<p>{entityToEdit[key]}</p>
 					{:else if type.match(regexList)}
-						<p>
-							{#each existingItems[type] as item}
-								{#if item.id === entityToEdit[key]}
-									{item.name}
-								{/if}
-							{/each}
-						</p>
+						{#if entityToEdit[key].length > 0}
+							<ul>
+								{#each entityToEdit[key] as item}
+									<li>{item.name}</li>
+								{/each}
+							</ul>
+						{:else}
+							<p>No data available</p>
+						{/if}
 					{:else}
 						<p>{entityToEdit[key]?.name}</p>
 					{/if}
@@ -166,11 +172,25 @@
 	}
 
 	.field p {
+		min-height: 40px;
 		padding: 8px;
 		border: 1px solid #ddd;
 		border-radius: 4px;
 		background-color: #f9f9f9;
 	}
+
+	.field ul {
+		min-height: 40px;
+		padding: 8px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		background-color: #f9f9f9;
+	}
+
+	.field li {
+		margin-left: 20px;
+	}
+
 	.modal-content {
 		background: white;
 		padding: 2rem;

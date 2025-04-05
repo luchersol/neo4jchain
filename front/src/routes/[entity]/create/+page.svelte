@@ -5,10 +5,6 @@
 	import Title from '../../../components/title.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
 
-	$: {
-		console.log(formData);
-	}
-
 	let entity = $page.params.entity;
 	let fields = {};
 	let formData = {};
@@ -43,7 +39,6 @@
 				.forEach((key) => {
 					formData[key] = '';
 				});
-			console.log(fields);
 
 			Object.entries(fields).forEach(([key, type]) => {
 				if (
@@ -129,11 +124,12 @@
 							<option value="HOURS">Hours</option>
 						</select>
 					{:else if type.match(regexList)}
-						<select id={key} bind:value={formData[key]} required multiple>
-							{#each existingItems[type] as item}
-								<option value={item.id}>{item.name}</option>
-							{/each}
-						</select>
+						{#each existingItems[type] as item}
+							<div class="checkbox-container">
+								<input type="checkbox" value={item.id} bind:group={formData[key]} />
+								<span>{item.name}</span>
+							</div>
+						{/each}
 					{:else if !type.match(regexList)}
 						<select id={key} bind:value={formData[key]} required>
 							{#each existingItems[type] as item}
@@ -184,5 +180,21 @@
 
 	button:hover {
 		background-color: #45a049;
+	}
+
+	.checkbox-container {
+		margin-block: 10px;
+		display: flex;
+		flex-direction: row; /* Esto asegura que los elementos estén uno al lado del otro */
+		align-items: center;
+	}
+
+	.checkbox-container input {
+		width: 20px;
+		margin-right: 10px; /* Espacio entre el checkbox y el texto */
+	}
+
+	.checkbox-container span {
+		flex: 1; /* Esto hace que el texto ocupe el espacio restante */
 	}
 </style>
