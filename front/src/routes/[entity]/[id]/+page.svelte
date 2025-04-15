@@ -146,13 +146,26 @@
 	<div class="modal">
 		<div class="modal-content">
 			<p>Are you sure that you want to delete this entity?</p>
-			<button on:click={() => deleteEntity()} class="button delete-button">Delete Forever</button>
-			<button on:click={() => showModal.set(false)} class="button cancel-button">Cancel</button>
+			<div style="display: flex; justify-content: center;">
+				<div class="buttons-cancel">
+					<button on:click={() => deleteEntity()} class="button delete-button">
+						Delete Forever
+					</button>
+					<button on:click={() => showModal.set(false)} class="button cancel-button">Cancel</button>
+				</div>
+			</div>
 		</div>
 	</div>
 {/if}
 
 <style>
+	.buttons-cancel {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 20%;
+	}
+
 	.container {
 		padding: 20px;
 		font-family: Arial, sans-serif;
