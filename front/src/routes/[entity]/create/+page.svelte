@@ -37,7 +37,7 @@
 			Object.keys(fields)
 				.filter(([key, _]) => key !== 'id')
 				.forEach((key) => {
-					formData[key] = '';
+					formData[key] = regexList.test(fields[key]) ? [] : '';
 				});
 
 			Object.entries(fields).forEach(([key, type]) => {
@@ -54,6 +54,7 @@
 
 	async function handleSubmit() {
 		try {
+			console.log(formData);
 			const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}`, {
 				method: 'POST',
 				headers: {
