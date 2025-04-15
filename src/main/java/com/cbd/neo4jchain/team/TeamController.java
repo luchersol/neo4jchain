@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/team")
+@RequestMapping("/api/team")
 public class TeamController {
 
     private final TeamService teamService;

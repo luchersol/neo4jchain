@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/sla")
+@RequestMapping("/api/sla")
 public class SlaController {
 
     SlaService slaService;

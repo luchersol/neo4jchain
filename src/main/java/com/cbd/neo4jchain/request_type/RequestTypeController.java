@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/requesttype")
+@RequestMapping("/api/requesttype")
 public class RequestTypeController {
 
     RequestTypeService requestTypeService;

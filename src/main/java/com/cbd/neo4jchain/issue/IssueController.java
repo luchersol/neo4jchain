@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/issue")
+@RequestMapping("/api/issue")
 public class IssueController {
 
     IssueService issueService;

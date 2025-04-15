@@ -12,7 +12,7 @@ lastName: String
 firstName: String 
 function: String 
 email: String 
-phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>370</y><w>150</w><h>60</h></coordinates><panel_attributes>ServiceOrg
+phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>490</x><y>360</y><w>150</w><h>70</h></coordinates><panel_attributes>ServiceOrg
 -
 type: String
 contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>550</x><y>590</y><w>60</w><h>150</h></coordinates><panel_attributes>lt=-&gt;
@@ -27,7 +27,7 @@ m2=*
 MEMBER</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>620</x><y>540</y><w>150</w><h>70</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=0..1
-PARENT v</panel_attributes><additional_attributes>10;10;70;10;70;40;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>890</x><y>680</y><w>170</w><h>80</h></coordinates><panel_attributes>Objetive
+PARENT v</panel_attributes><additional_attributes>10;10;70;10;70;40;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>870</x><y>680</y><w>190</w><h>80</h></coordinates><panel_attributes>Objetive
 -
 metric: Metric
 value: Double
@@ -109,7 +109,7 @@ m2=0..1
 IS_PROVIDER_OF</panel_attributes><additional_attributes>140;20;30;20;30;80</additional_attributes></element><element><id>Relation</id><coordinates><x>100</x><y>310</y><w>470</w><h>290</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
-CUSTOMER</panel_attributes><additional_attributes>40;260;10;260;10;20;430;20;430;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>930</y><w>150</w><h>60</h></coordinates><panel_attributes>Issue
+CUSTOMER</panel_attributes><additional_attributes>40;260;10;260;10;20;430;20;430;50</additional_attributes></element><element><id>UMLClass</id><coordinates><x>750</x><y>930</y><w>150</w><h>60</h></coordinates><panel_attributes>Issue
 -
 title: String
 description: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>610</x><y>930</y><w>160</w><h>50</h></coordinates><panel_attributes>lt=-&gt;
@@ -121,10 +121,10 @@ m2=1
 ASIGNED_TO</panel_attributes><additional_attributes>140;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>770</y><w>200</w><h>180</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-ASIGNED_TO</panel_attributes><additional_attributes>170;160;170;40;10;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>370</y><w>270</w><h>580</h></coordinates><panel_attributes>lt=-&gt;
+ASIGNED_TO</panel_attributes><additional_attributes>170;160;170;40;10;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>580</x><y>310</y><w>320</w><h>640</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
-SERVICE</panel_attributes><additional_attributes>210;560;210;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>410</y><w>160</w><h>540</h></coordinates><panel_attributes>lt=-&gt;
+SERVICE</panel_attributes><additional_attributes>260;620;260;10;10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>720</x><y>410</y><w>160</w><h>540</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
 STATUS</panel_attributes><additional_attributes>100;520;100;10;10;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>930</x><y>0</y><w>210</w><h>80</h></coordinates><panel_attributes>Chain
@@ -149,4 +149,7 @@ m1=1
 m2=1
 INITIAL_SLA</panel_attributes><additional_attributes>10;170;10;50;880;50;880;10</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>40</y><w>760</w><h>620</h></coordinates><panel_attributes>lt=-&gt;
 m1=0..n
-m2=1</panel_attributes><additional_attributes>10;560;10;600;740;600;740;10;550;10</additional_attributes></element></diagram>
+m2=1</panel_attributes><additional_attributes>10;560;10;600;740;600;740;10;550;10</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>360</y><w>290</w><h>590</h></coordinates><panel_attributes>lt=-&gt;
+m1=*
+m2=1
+SERVICE</panel_attributes><additional_attributes>230;570;230;10;10;10</additional_attributes></element></diagram>

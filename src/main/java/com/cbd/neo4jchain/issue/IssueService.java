@@ -1,6 +1,5 @@
 package com.cbd.neo4jchain.issue;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -24,20 +23,16 @@ import com.cbd.neo4jchain.team.TeamRepository;
 @Service
 public class IssueService {
 
-    IssueRepository issueRepository;
+    private final IssueRepository issueRepository;
+    private final PersonRepository personRepository;
+    private final TeamRepository teamRepository;
+    private final ServiceOrgRepository serviceOrgRepository;
+    private final StatusRepository statusRepository;
+    private final RequestTypeRepository requestTypeRepository;
 
-    PersonRepository personRepository;
-
-    TeamRepository teamRepository;
-
-    ServiceOrgRepository serviceOrgRepository;
-
-    StatusRepository statusRepository;
-
-    RequestTypeRepository requestTypeRepository;
-
-
-    public IssueService(IssueRepository issueRepository, PersonRepository personRepository, TeamRepository teamRepository, ServiceOrgRepository serviceOrgRepository, StatusRepository statusRepository, RequestTypeRepository requestTypeRepository) {
+    public IssueService(IssueRepository issueRepository, PersonRepository personRepository,
+            TeamRepository teamRepository, ServiceOrgRepository serviceOrgRepository,
+            StatusRepository statusRepository, RequestTypeRepository requestTypeRepository) {
         this.issueRepository = issueRepository;
         this.personRepository = personRepository;
         this.teamRepository = teamRepository;
@@ -79,12 +74,12 @@ public class IssueService {
 
     public Issue updateIssue(Long issueId, IssueDTO issueDTO) {
         Issue issueToUpdate = getIssueById(issueId);
-        if(issueToUpdate.getClosedAt() != null){
+        if (issueToUpdate.getClosedAt() != null)
             throw new NoUpdateAllowed(Issue.class, "ID", issueId);
-        }
+
         Double issueTTO = issueToUpdate.getTTO();
         Double issueTTR = issueToUpdate.getTTR();
-        
+
         Issue issue = issueDTO.parse();
         Person assignedPerson = personRepository.findById(issueDTO.getAssignedPerson()).orElse(null);
         Person owner = personRepository.findById(issueDTO.getOwner()).orElseThrow();
@@ -95,12 +90,12 @@ public class IssueService {
         Boolean hasChangedState = issueToUpdate.getStatus().getId() != status.getId();
         Boolean hasChangedAssgined = issueToUpdate.getAssignedPerson().getId() != status.getId();
 
-        if(hasChangedState){
+        if (hasChangedState) {
             issueTTR += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastStateChangedAt());
             issue.setLastStateChangedAt(LocalDateTime.now());
         }
 
-        if(hasChangedAssgined){
+        if (hasChangedAssgined) {
             issueTTO += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastAssignedAt());
             issue.setLastAssignedAt(LocalDateTime.now());
         }
@@ -111,7 +106,7 @@ public class IssueService {
         issue.setOwner(owner);
         issue.setStatus(status);
 
-        if(status.getPossibleNextStatuses().isEmpty()){
+        if (status.getPossibleNextStatuses().isEmpty()) {
             issue.setClosedAt(LocalDateTime.now());
         }
         issue.setTTO(issueTTO);

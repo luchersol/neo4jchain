@@ -49,15 +49,11 @@ public class Issue extends NamedNode {
     private RequestType requestType;
 
     private LocalDateTime createdAt;
-    
     private LocalDateTime lastAssignedAt;
-
     private LocalDateTime lastStateChangedAt;
-    
     private LocalDateTime closedAt;
 
     private Double TTO;
-
     private Double TTR;
 
 }

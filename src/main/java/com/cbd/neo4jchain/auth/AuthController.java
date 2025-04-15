@@ -14,7 +14,7 @@ import com.cbd.neo4jchain.person.PersonService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/api/auth")
 public class AuthController {
 
     PersonService personService;

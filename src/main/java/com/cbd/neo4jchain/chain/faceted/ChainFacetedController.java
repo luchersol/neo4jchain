@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/chainfaceted")
+@RequestMapping("/api/chainfaceted")
 public class ChainFacetedController {
 
     ChainFacetedService chainFacetedService;
@@ -52,7 +52,8 @@ public class ChainFacetedController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted, @PathVariable Long id) {
+    public ResponseEntity<?> updateChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted,
+            @PathVariable Long id) {
         try {
             this.chainFacetedService.updateChainFaceted(id, chainFaceted);
             return ResponseEntity.noContent().build();

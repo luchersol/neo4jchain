@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/scope")
+@RequestMapping("/api/scope")
 public class ScopeController {
 
     ScopeService scopeService;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/organization")
+@RequestMapping("/api/organization")
 public class OrganizationController {
 
     private final OrganizationService organizationService;
@@ -52,7 +52,8 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateOrganization(@RequestBody @Valid OrganizationDTO organization, @PathVariable Long id) {
+    public ResponseEntity<?> updateOrganization(@RequestBody @Valid OrganizationDTO organization,
+            @PathVariable Long id) {
         try {
             this.organizationService.updateOrganization(id, organization);
             return ResponseEntity.noContent().build();

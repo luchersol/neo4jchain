@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/privilege")
+@RequestMapping("/api/privilege")
 public class PrivilegeController {
 
     PrivilegeService privilegeService;

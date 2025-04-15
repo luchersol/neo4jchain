@@ -60,7 +60,6 @@ public class OrganizationService {
 
         Organization organization = organizationDTO.parse();
 
-        Organization parent = organizationRepository.findById(organizationDTO.getParent()).orElse(null);
         List<ServiceOrg> services = serviceOrgRepository.findAllById(organizationDTO.getServices());
         List<Team> teams = teamRepository.findAllById(organizationDTO.getTeams());
 

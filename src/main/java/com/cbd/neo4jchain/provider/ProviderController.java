@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/provider")
+@RequestMapping("/api/provider")
 public class ProviderController {
 
     ProviderService providerService;
