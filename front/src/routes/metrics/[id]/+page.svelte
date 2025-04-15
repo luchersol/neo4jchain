@@ -1,23 +1,17 @@
 <script>
+    import Title from '../../../components/title.svelte';
+    import { BackendAPI } from '../../../stores/stores';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import Throbber from '../../components/throbber.svelte';
-	import Title from '../../components/title.svelte';
-	import { BackendAPI } from '../../stores/stores';
-
+	import Throbber from '../../../components/throbber.svelte';
+    
 	let entity = $page.params.entity;
 	let data = [];
 	let isLoading = true;
 
 	async function fetchInfo() {
 		try {
-			const chainfacetedResponse = await fetch(`${BackendAPI}/api/chainfaceted`);
-			const chainstateResponse = await fetch(`${BackendAPI}/api/chainstate`);
-			const chainfacetedList = await chainfacetedResponse.json();
-			const chainstateList = await chainstateResponse.json();
-			data.push(...chainfacetedList);
-			data.push(...chainstateList);
-			isLoading = false;
+            
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
@@ -26,9 +20,10 @@
 	onMount(async () => {
 		await fetchInfo();
 	});
+
 </script>
 
-<Title subtitle={'Select a service chain to view its metrics'}></Title>
+<Title subtitle={'Metrics'}></Title>
 
 {#if isLoading}
 	<Throbber message={'Loading...'} />
@@ -38,17 +33,7 @@
 	</div>
 {:else}
 	<div class="container">
-		{#each data as element}
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div
-				class="card"
-				on:click={() => (window.location.href = `/metrics/${entity}/${element.id}`)}
-				style="cursor: pointer;"
-			>
-				<h3>{element.name}</h3>
-			</div>
-		{/each}
+            METRICS
 	</div>
 {/if}
 

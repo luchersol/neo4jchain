@@ -11,7 +11,14 @@
 
 	async function fetchInfo() {
 		try {
-            
+			const chainfacetedResponse = await fetch(`${BackendAPI}/api/chainfaceted`);
+			const chainstateResponse = await fetch(`${BackendAPI}/api/chainstate`);
+			const chainfacetedList = await chainfacetedResponse.json();
+            const chainstateList = await chainstateResponse.json()
+            data.push(...chainfacetedList)
+            data.push(...chainstateList)
+            console.log(JSON.stringify(data))
+			isLoading = false;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
@@ -23,7 +30,7 @@
 
 </script>
 
-<Title subtitle={'Metrics'}></Title>
+<Title subtitle={'Select a service chain to view its metrics'}></Title>
 
 {#if isLoading}
 	<Throbber message={'Loading...'} />
@@ -33,7 +40,18 @@
 	</div>
 {:else}
 	<div class="container">
-            METRICS
+		{#each data as element}
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<!-- svelte-ignore a11y-no-static-element-interactions -->
+			<div
+				class="card"
+				on:click={() => (window.location.href = `/metrics/${element.id}`)}
+				style="cursor: pointer;"
+			>
+				<h3>{element.name}</h3>
+
+			</div>
+		{/each}
 	</div>
 {/if}
 
@@ -70,4 +88,5 @@
 		font-size: 1rem;
 		margin: 0.25rem 0;
 	}
+
 </style>
