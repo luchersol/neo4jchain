@@ -39,7 +39,7 @@
 
 	{#if name !== null}
 		<div class="button-container mt-4">
-			{#each Object.keys(entityDict) as key}
+			{#each Object.keys(entityDict).filter((i) => i !== 'Chain') as key}
 				<button class="btn-square" on:click={() => navigateTo(key)}>
 					{key}
 				</button>

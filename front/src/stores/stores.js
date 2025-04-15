@@ -16,6 +16,13 @@ export const isEntityOrArray = (str = '') => {
 };
 
 export const entityDict = {
+	Chain: {
+		id: 'Long',
+		name: 'String',
+		version: 'String',
+		description: 'String',
+		ownershipType: 'OwnershipType'
+	},
 	ChainFaceted: {
 		id: 'Long',
 		name: 'String',

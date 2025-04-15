@@ -54,7 +54,6 @@
 
 	async function handleSubmit() {
 		try {
-			console.log(formData);
 			const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}`, {
 				method: 'POST',
 				headers: {
