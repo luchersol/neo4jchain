@@ -1,9 +1,9 @@
 <script>
-    import Title from '../../components/title.svelte'
-    import { BackendAPI } from '../../stores/stores';
-    import { page } from '$app/stores';
+	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../components/throbber.svelte';
+	import Title from '../../components/title.svelte';
+	import { BackendAPI } from '../../stores/stores';
 
 	let entity = $page.params.entity;
 	let data = [];
@@ -14,10 +14,9 @@
 			const chainfacetedResponse = await fetch(`${BackendAPI}/api/chainfaceted`);
 			const chainstateResponse = await fetch(`${BackendAPI}/api/chainstate`);
 			const chainfacetedList = await chainfacetedResponse.json();
-            const chainstateList = await chainstateResponse.json()
-            data.push(...chainfacetedList)
-            data.push(...chainstateList)
-            console.log(JSON.stringify(data))
+			const chainstateList = await chainstateResponse.json();
+			data.push(...chainfacetedList);
+			data.push(...chainstateList);
 			isLoading = false;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
@@ -27,7 +26,6 @@
 	onMount(async () => {
 		await fetchInfo();
 	});
-
 </script>
 
 <Title subtitle={'Select a service chain to view its metrics'}></Title>
@@ -49,7 +47,6 @@
 				style="cursor: pointer;"
 			>
 				<h3>{element.name}</h3>
-
 			</div>
 		{/each}
 	</div>
@@ -88,5 +85,4 @@
 		font-size: 1rem;
 		margin: 0.25rem 0;
 	}
-
 </style>

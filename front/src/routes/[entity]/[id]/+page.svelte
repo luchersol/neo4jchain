@@ -13,7 +13,7 @@
 	let entityToEdit = {};
 	let showModal = writable(false);
 	let selectedEntity = writable(null);
-	let existingItems = transformObject(entityDict);
+	let existingItems = transformObject();
 
 	async function fetchInfo() {
 		try {
@@ -52,11 +52,10 @@
 			Object.keys(fields).forEach((key) => {
 				entityToEdit[key] = entityToEdit[key]; // Keeping data in entityToEdit
 			});
-
-			Object.entries(fields).forEach(([key, type]) => {
-				if (Object.keys(existingItems).includes(type)) {
-					fetchItemsForSelect(type).then((items) => {
-						existingItems[type] = items;
+			Object.entries(fields).forEach(([_, value]) => {
+				if (Object.keys(existingItems).includes(value['type'])) {
+					fetchItemsForSelect(value['type']).then((items) => {
+						existingItems[value['type']] = items;
 					});
 				}
 			});
@@ -84,10 +83,6 @@
 			console.error('Error deleting entity:', error);
 		}
 	}
-
-	$: {
-		console.log(entityToEdit);
-	}
 </script>
 
 <div class="container">
@@ -95,17 +90,17 @@
 
 	{#if Object.keys(fields).length > 0}
 		<div class="details">
-			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, type]}
+			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, value]}
 				<div class="field">
 					<label for={key}>{key}</label>
 
-					{#if type === 'String'}
+					{#if value['type'] === 'String'}
 						<p>{entityToEdit[key]}</p>
-					{:else if type === 'Long' || type === 'Double'}
+					{:else if value['type'] === 'Long' || value['type'] === 'Double'}
 						<p>{entityToEdit[key]}</p>
-					{:else if type === 'Priority' || type === 'OwnershipType' || type === 'Metric' || type === 'UnitTime'}
+					{:else if value['type'] === 'Priority' || value['type'] === 'OwnershipType' || value['type'] === 'Metric' || value['type'] === 'UnitTime'}
 						<p>{entityToEdit[key]}</p>
-					{:else if type.match(regexList)}
+					{:else if value['type'].match(regexList)}
 						{#if entityToEdit[key].length > 0}
 							<ul>
 								{#each entityToEdit[key] as item}

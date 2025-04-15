@@ -1,9 +1,9 @@
 export const BackendAPI = import.meta.env.VITE_BACKEND_API ?? '';
 
-export const transformObject = (obj) => {
+export const transformObject = () => {
 	const transformed = {};
 
-	for (const key in obj) {
+	for (const key in entityDict) {
 		transformed[key] = [];
 		transformed[`List<${key}>`] = [];
 	}
@@ -17,123 +17,123 @@ export const isEntityOrArray = (str = '') => {
 
 export const entityDict = {
 	Chain: {
-		id: 'Long',
-		name: 'String',
-		version: 'String',
-		description: 'String',
-		ownershipType: 'OwnershipType'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		version: { type: 'String', required: true },
+		description: { type: 'String', required: true },
+		ownershipType: { type: 'OwnershipType', required: true }
 	},
 	ChainFaceted: {
-		id: 'Long',
-		name: 'String',
-		version: 'String',
-		description: 'String',
-		ownershipType: 'OwnershipType'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		version: { type: 'String', required: true },
+		description: { type: 'String', required: true },
+		ownershipType: { type: 'OwnershipType', required: true }
 	},
 	ChainState: {
-		id: 'Long',
-		name: 'String',
-		version: 'String',
-		description: 'String',
-		ownershipType: 'OwnershipType',
-		initial: 'List<Status>',
-		terminal: 'List<Status>',
-		initialSla: 'Sla'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		version: { type: 'String', required: true },
+		description: { type: 'String', required: true },
+		ownershipType: { type: 'OwnershipType', required: true },
+		initial: { type: 'List<Status>', required: true },
+		terminal: { type: 'List<Status>', required: true },
+		initialSla: { type: 'Sla', required: true }
 	},
 	Customer: {
-		id: 'Long',
-		name: 'String',
-		organization: 'Organization',
-		sla: 'Sla'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		organization: { type: 'Organization', required: true },
+		sla: { type: 'Sla', required: true }
 	},
 	Issue: {
-		id: 'Long',
-		name: 'String',
-		title: 'String',
-		description: 'String',
-		serviceOrg: 'ServiceOrg',
-		status: 'Status',
-		assignedTeam: 'Team',
-		assignedPerson: 'Person',
-		owner: 'Person',
-		requestType: 'RequestType'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		title: { type: 'String', required: true },
+		description: { type: 'String', required: true },
+		serviceOrg: { type: 'ServiceOrg', required: true },
+		status: { type: 'Status', required: true },
+		assignedTeam: { type: 'Team', required: true },
+		assignedPerson: { type: 'Person', required: true },
+		owner: { type: 'Person', required: true },
+		requestType: { type: 'RequestType', required: true }
 	},
 	Objective: {
-		id: 'Long',
-		name: 'String',
-		metric: 'Metric',
-		value: 'Double',
-		unit: 'UnitTime'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		metric: { type: 'Metric', required: true },
+		value: { type: 'Double', required: true },
+		unit: { type: 'UnitTime', required: true }
 	},
 	Organization: {
-		id: 'Long',
-		name: 'String',
-		code: 'String',
-		teams: 'List<Team>',
-		services: 'List<ServiceOrg>',
-		chain: 'Chain'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		code: { type: 'String', required: true },
+		teams: { type: 'List<Team>', required: true },
+		services: { type: 'List<ServiceOrg>', required: true },
+		chain: { type: 'Chain', required: true }
 	},
 	Person: {
-		id: 'Long',
-		name: 'String',
-		lastName: 'String',
-		firstName: 'String',
-		email: 'String',
-		phone: 'String',
-		roles: 'List<Role>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		lastName: { type: 'String', required: true },
+		firstName: { type: 'String', required: true },
+		email: { type: 'String', required: true },
+		phone: { type: 'String', required: true },
+		roles: { type: 'List<Role>', required: true }
 	},
 	Privilege: {
-		id: 'Long',
-		name: 'String'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true }
 	},
 	Provider: {
-		id: 'Long',
-		name: 'String',
-		organization: 'Organization',
-		serviceOrg: 'ServiceOrg',
-		servicesProviders: 'List<ServiceOrg>',
-		sla: 'Sla'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		organization: { type: 'Organization', required: true },
+		serviceOrg: { type: 'ServiceOrg', required: true },
+		servicesProviders: { type: 'List<ServiceOrg>', required: true },
+		sla: { type: 'Sla', required: true }
 	},
 	RequestType: {
-		id: 'Long',
-		name: 'String'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true }
 	},
 	Role: {
-		id: 'Long',
-		name: 'String',
-		privileges: 'List<Privilege>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		privileges: { type: 'List<Privilege>', required: true }
 	},
 	Scope: {
-		id: 'Long',
-		name: 'String',
-		priority: 'Priority',
-		requestType: 'RequestType',
-		objectives: 'List<Objective>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		priority: { type: 'Priority', required: true },
+		requestType: { type: 'RequestType', required: true },
+		objectives: { type: 'List<Objective>', required: true }
 	},
 	ServiceOrg: {
-		id: 'Long',
-		name: 'String',
-		description: 'String',
-		status: 'Status',
-		requestTypes: 'List<RequestType>',
-		teams: 'List<Team>',
-		customers: 'List<Customer>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		description: { type: 'String', required: true },
+		status: { type: 'Status', required: true },
+		requestTypes: { type: 'List<RequestType>', required: true },
+		teams: { type: 'List<Team>', required: true },
+		customers: { type: 'List<Customer>', required: true }
 	},
 	Sla: {
-		id: 'Long',
-		name: 'String',
-		guarantees: 'List<Scope>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		guarantees: { type: 'List<Scope>', required: true }
 	},
 	Status: {
-		id: 'Long',
-		name: 'String',
-		possibleNextStatuses: 'List<Status>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		possibleNextStatuses: { type: 'List<Status>', required: true }
 	},
 	Team: {
-		id: 'Long',
-		name: 'String',
-		specialization: 'String',
-		members: 'List<Person>',
-		roles: 'List<Role>'
+		id: { type: 'Long', required: false },
+		name: { type: 'String', required: true },
+		specialization: { type: 'String', required: true },
+		members: { type: 'List<Person>', required: true },
+		roles: { type: 'List<Role>', required: true }
 	}
 };

@@ -16,7 +16,7 @@
 	let data = {};
 	let formData = {};
 	let entityToEdit = {};
-	let existingItems = transformObject(entityDict);
+	let existingItems = transformObject();
 
 	async function fetchInfo() {
 		try {
@@ -56,17 +56,23 @@
 			Object.keys(fields)
 				.filter(([key, _]) => key !== 'id')
 				.forEach((key) => {
-					console.log(typeof entityToEdit[key]);
-
-					formData[key] = Array.isArray(entityToEdit[key])
-						? entityToEdit[key].map((field) => field.id)
-						: entityToEdit[key];
+					const fieldType = fields[key]['type'];
+					if (isEntityOrArray(fieldType)) {
+						if (fieldType.startsWith('List<')) {
+							console.log(entityToEdit[key]);
+							formData[key] = entityToEdit[key].map((field) => field.id);
+						} else {
+							formData[key] = entityToEdit[key].id;
+						}
+					} else {
+						formData[key] = entityToEdit[key];
+					}
 				});
 
-			Object.entries(fields).forEach(([key, type]) => {
-				if (isEntityOrArray(type)) {
-					fetchItemsForSelect(type).then((items) => {
-						existingItems[type] = items;
+			Object.entries(fields).forEach(([_, value]) => {
+				if (isEntityOrArray(value['type'])) {
+					fetchItemsForSelect(value['type']).then((items) => {
+						existingItems[value['type']] = items;
 					});
 				}
 			});
@@ -96,10 +102,6 @@
 			alert('Error submitting the form');
 		}
 	}
-
-	$: {
-		console.log(formData);
-	}
 </script>
 
 <div class="container">
@@ -107,18 +109,24 @@
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>
-			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, type]}
+			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, value]}
 				<div class="field">
 					<label for={key}>{key}</label>
 
-					{#if type === 'String'}
-						<input type="text" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Long'}
-						<input type="number" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Double'}
-						<input type="number" step="any" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Priority'}
-						<select id={key} bind:value={formData[key]} required>
+					{#if value['type'] === 'String'}
+						<input type="text" id={key} bind:value={formData[key]} required={value['required']} />
+					{:else if value['type'] === 'Long'}
+						<input type="number" id={key} bind:value={formData[key]} required={value['required']} />
+					{:else if value['type'] === 'Double'}
+						<input
+							type="number"
+							step="any"
+							id={key}
+							bind:value={formData[key]}
+							required={value['required']}
+						/>
+					{:else if value['type'] === 'Priority'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="LOW">Low</option>
 							<option value="MEDIUM">Medium</option>
 							<option value="HARD">Hard</option>
@@ -126,32 +134,32 @@
 							<option value="CRITICAL">Critial</option>
 							<option value="ALL">All</option>
 						</select>
-					{:else if type === 'OwnershipType'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'OwnershipType'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="STATE">State</option>
 							<option value="STATE_TEAM">State+team</option>
 						</select>
-					{:else if type === 'Metric'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'Metric'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="TTO">TTO</option>
 							<option value="TTR">TTR</option>
 						</select>
-					{:else if type === 'UnitTime'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'UnitTime'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="MINUTES">Minutes</option>
 							<option value="HOURS">Hours</option>
 						</select>
-					{:else if type.match(regexList)}
-						{#each existingItems[type] as item}
+					{:else if value['type'].match(regexList)}
+						{#each existingItems[value['type']] as item}
 							<div class="checkbox-container">
 								<input type="checkbox" value={item.id} bind:group={formData[key]} />
 								<span>{item.name}</span>
 							</div>
 						{/each}
-					{:else if !type.match(regexList)}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if !value['type'].match(regexList)}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="">Select an existing {key}</option>
-							{#each existingItems[type] as item}
+							{#each existingItems[value['type']] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>

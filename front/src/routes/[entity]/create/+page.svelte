@@ -9,7 +9,7 @@
 	let fields = {};
 	let formData = {};
 
-	let existingItems = transformObject(entityDict);
+	let existingItems = transformObject();
 
 	const regexList = /List<([A-Za-z]+)>/;
 
@@ -37,16 +37,18 @@
 			Object.keys(fields)
 				.filter(([key, _]) => key !== 'id')
 				.forEach((key) => {
-					formData[key] = regexList.test(fields[key]) ? [] : '';
+					formData[key] = regexList.test(fields[key]['type']) ? [] : '';
 				});
 
-			Object.entries(fields).forEach(([key, type]) => {
-				if (isEntityOrArray(type)) {
-					fetchItemsForSelect(type).then((items) => {
-						existingItems[type] = items;
-					});
-				}
-			});
+			Object.entries(fields)
+				.filter((i) => i.type)
+				.forEach((type) => {
+					if (isEntityOrArray(type)) {
+						fetchItemsForSelect(type).then((items) => {
+							existingItems[type] = items;
+						});
+					}
+				});
 		} else {
 			console.error('Unknown entity type');
 		}
@@ -80,18 +82,24 @@
 
 	{#if Object.keys(fields).length > 0}
 		<form on:submit|preventDefault={handleSubmit}>
-			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, type]}
+			{#each Object.entries(fields).filter(([key, _]) => key !== 'id') as [key, value]}
 				<div class="field">
 					<label for={key}>{key}</label>
 
-					{#if type === 'String'}
-						<input type="text" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Long'}
-						<input type="number" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Double'}
-						<input type="number" step="any" id={key} bind:value={formData[key]} required />
-					{:else if type === 'Priority'}
-						<select id={key} bind:value={formData[key]} required>
+					{#if value['type'] === 'String'}
+						<input type="text" id={key} bind:value={formData[key]} required={value['required']} />
+					{:else if value['type'] === 'Long'}
+						<input type="number" id={key} bind:value={formData[key]} required={value['required']} />
+					{:else if value['type'] === 'Double'}
+						<input
+							type="number"
+							step="any"
+							id={key}
+							bind:value={formData[key]}
+							required={value['required']}
+						/>
+					{:else if value['type'] === 'Priority'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="LOW">Low</option>
 							<option value="MEDIUM">Medium</option>
 							<option value="HARD">Hard</option>
@@ -99,31 +107,31 @@
 							<option value="CRITICAL">Critial</option>
 							<option value="ALL">All</option>
 						</select>
-					{:else if type === 'OwnershipType'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'OwnershipType'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="STATE">State</option>
 							<option value="STATE_TEAM">State+team</option>
 						</select>
-					{:else if type === 'Metric'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'Metric'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="TTO">TTO</option>
 							<option value="TTR">TTR</option>
 						</select>
-					{:else if type === 'UnitTime'}
-						<select id={key} bind:value={formData[key]} required>
+					{:else if value['type'] === 'UnitTime'}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="MINUTES">Minutes</option>
 							<option value="HOURS">Hours</option>
 						</select>
-					{:else if type.match(regexList)}
-						{#each existingItems[type] as item}
+					{:else if value['type'].match(regexList)}
+						{#each existingItems[value['type']] as item}
 							<div class="checkbox-container">
 								<input type="checkbox" value={item.id} bind:group={formData[key]} />
 								<span>{item.name}</span>
 							</div>
 						{/each}
-					{:else if !type.match(regexList)}
-						<select id={key} bind:value={formData[key]} required>
-							{#each existingItems[type] as item}
+					{:else if !value['type'].match(regexList)}
+						<select id={key} bind:value={formData[key]} required={value['required']}>
+							{#each existingItems[value['type']] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
 						</select>
