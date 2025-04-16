@@ -1,19 +1,31 @@
 package com.cbd.neo4jchain.metrics;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cbd.neo4jchain.chain.state.ChainState;
+import com.cbd.neo4jchain.chain.state.ChainStateService;
+import com.cbd.neo4jchain.enums.OwnershipType;
+import com.cbd.neo4jchain.status.Status;
+
 @RestController
 @RequestMapping("/api/metrics")
 public class MetricController {
 
     private final MetricService metricService;
+    private final ChainStateService chainStateService;
+    private final GraphBuilderService graphBuilderService;
 
-    public MetricController(MetricService metricService) {
+    public MetricController(MetricService metricService, ChainStateService chainStateService,
+            GraphBuilderService graphBuilderService) {
         this.metricService = metricService;
+        this.chainStateService = chainStateService;
+        this.graphBuilderService = graphBuilderService;
     }
 
     // globalPassedSLA: Porcentaje de issues cerradas que cumplen con el TTO y el
@@ -61,4 +73,33 @@ public class MetricController {
     public ResponseEntity<?> getServicePassedTTR() {
         return null;
     }
+
+    @GetMapping("/graph_status/chainstate/{id}")
+    public GraphResponse getGraphStatus(@PathVariable Long id) {
+        // ChainState chainState = this.chainStateService.getChainStateById(id);
+        // Crear estados
+        Status statusA = new Status(1L, "Status A");
+        Status statusB = new Status(2L, "Status B");
+        Status statusC = new Status(3L, "Status C");
+        Status statusD = new Status(4L, "Status D");
+
+        // Relación de Status -> posibles siguientes estados
+        statusA.setPossibleNextStatuses(List.of(statusB, statusD));
+        statusB.setPossibleNextStatuses(List.of(statusC));
+        statusC.setPossibleNextStatuses(List.of(statusD));
+        statusD.setPossibleNextStatuses(List.of());
+
+        // Crear ChainState con relaciones
+        ChainState chainState = new ChainState(
+                null,
+                "ChainState Ejemplo",
+                "v1.0",
+                "Cadena de estados de prueba",
+                OwnershipType.STATE);
+        chainState.setInitial(List.of(statusA));
+        chainState.setTerminal(List.of(statusD));
+
+        return graphBuilderService.buildStatusGraph(chainState);
+    }
+
 }
