@@ -1,5 +1,6 @@
-MATCH(n) DETACH DELETE n
+MATCH(n) DETACH DELETE n;
 
+DROP CONSTRAINT UNIQUE_IMPORT_NAME IF EXISTS;
 CREATE CONSTRAINT UNIQUE_IMPORT_NAME FOR (node:`UNIQUE IMPORT LABEL`) REQUIRE (node.`UNIQUE IMPORT ID`) IS UNIQUE;
 UNWIND [{_id:127, properties:{ownershipType:"STATE", name:"Revisión de piezas de aviones", description:"Cadena de tipo state para revisión de piezas de aviones", version:"1"}}] AS row
 CREATE (n:`UNIQUE IMPORT LABEL`{`UNIQUE IMPORT ID`: row._id}) SET n += row.properties SET n:Chain:ChainState;
