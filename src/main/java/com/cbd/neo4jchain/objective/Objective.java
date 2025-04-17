@@ -25,4 +25,11 @@ public class Objective extends NamedNode {
         this.unit = unit;
     }
 
+    public Double toSecond() {
+        return switch (this.unit) {
+            case HOUR -> this.value * 3600;
+            case MINUTES -> this.value * 60;
+        };
+    }
+
 }
