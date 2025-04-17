@@ -1,115 +1,115 @@
-<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>438</x><y>66</y><w>60</w><h>30</h></coordinates><panel_attributes>AbstractNode
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>324</x><y>54</y><w>60</w><h>30</h></coordinates><panel_attributes>AbstractNode
 -
-id: Long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>438</x><y>132</y><w>60</w><h>30</h></coordinates><panel_attributes>NamedNode
+id: Long</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>324</x><y>120</y><w>60</w><h>30</h></coordinates><panel_attributes>NamedNode
 -
-name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>462</x><y>90</y><w>18</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>372</y><w>78</w><h>36</h></coordinates><panel_attributes>Organization
+name: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>348</x><y>78</y><w>18</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>360</y><w>78</w><h>36</h></coordinates><panel_attributes>Organization
 -
-code: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>480</y><w>90</w><h>36</h></coordinates><panel_attributes>Team
+code: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>294</x><y>468</y><w>90</w><h>36</h></coordinates><panel_attributes>Team
 -
-specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>576</y><w>72</w><h>78</h></coordinates><panel_attributes>Person
+specialization: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>564</y><w>72</w><h>78</h></coordinates><panel_attributes>Person
 -
 lastName: String 
 firstName: String 
 function: String 
 email: String 
-phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>414</x><y>270</y><w>90</w><h>42</h></coordinates><panel_attributes>ServiceOrg
+phone: String </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>300</x><y>258</y><w>90</w><h>42</h></coordinates><panel_attributes>ServiceOrg
 -
 type: String
-contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>402</y><w>36</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
+contactInfo: String</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>390</y><w>36</w><h>90</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=*
-TEAM</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>456</x><y>306</y><w>42</w><h>78</h></coordinates><panel_attributes>lt=&lt;-
+TEAM</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>294</y><w>42</w><h>78</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
-SERVICE</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>510</y><w>48</w><h>78</h></coordinates><panel_attributes>lt=-&gt;
+SERVICE</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>336</x><y>498</y><w>48</w><h>78</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=*
-MEMBER</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>492</x><y>372</y><w>90</w><h>42</h></coordinates><panel_attributes>lt=-&gt;
+MEMBER</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>378</x><y>360</y><w>90</w><h>42</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=0..1
-PARENT v</panel_attributes><additional_attributes>10;10;70;10;70;40;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>720</x><y>486</y><w>114</w><h>48</h></coordinates><panel_attributes>Objetive
+PARENT v</panel_attributes><additional_attributes>10;10;70;10;70;40;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>606</x><y>474</y><w>114</w><h>48</h></coordinates><panel_attributes>Objetive
 -
 metric: Metric
 value: Double
-unit: UnitTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>210</x><y>270</y><w>78</w><h>42</h></coordinates><panel_attributes>SLA
+unit: UnitTime</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>96</x><y>258</y><w>78</w><h>42</h></coordinates><panel_attributes>SLA
 -
-description</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>408</y><w>78</w><h>54</h></coordinates><panel_attributes>Priority
+description</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>6</x><y>396</y><w>78</w><h>54</h></coordinates><panel_attributes>Priority
 -
 CRITICAL
 HARD
 MEDIUM
-LOW</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>516</y><w>78</w><h>42</h></coordinates><panel_attributes>UnitTime
+LOW</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>6</x><y>504</y><w>78</w><h>42</h></coordinates><panel_attributes>UnitTime
 -
 HOUR
-MINUTES</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>468</y><w>42</w><h>42</h></coordinates><panel_attributes>Metric
+MINUTES</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>6</x><y>456</y><w>42</w><h>42</h></coordinates><panel_attributes>Metric
 -
 TTR
-TTO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>204</x><y>378</y><w>78</w><h>24</h></coordinates><panel_attributes>Customer
+TTO</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>90</x><y>366</y><w>78</w><h>24</h></coordinates><panel_attributes>Customer
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>306</y><w>30</w><h>84</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>96</x><y>294</y><w>30</w><h>84</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-SLA</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>276</x><y>384</y><w>156</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+SLA</panel_attributes><additional_attributes>10;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>162</x><y>372</y><w>156</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-ORGANIZATION</panel_attributes><additional_attributes>240;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>318</x><y>546</y><w>60</w><h>18</h></coordinates><panel_attributes>Role 
+ORGANIZATION</panel_attributes><additional_attributes>240;20;10;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>204</x><y>534</y><w>60</w><h>18</h></coordinates><panel_attributes>Role 
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>558</y><w>90</w><h>72</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>546</y><w>90</w><h>72</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=*
-ROLE</panel_attributes><additional_attributes>130;90;10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>294</x><y>330</y><w>78</w><h>24</h></coordinates><panel_attributes>Provider
+ROLE</panel_attributes><additional_attributes>130;90;10;90;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>180</x><y>318</y><w>78</w><h>24</h></coordinates><panel_attributes>Provider
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>234</x><y>306</y><w>72</w><h>54</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>120</x><y>294</y><w>72</w><h>54</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-SLA</panel_attributes><additional_attributes>10;10;10;60;100;60</additional_attributes></element><element><id>Relation</id><coordinates><x>318</x><y>348</y><w>114</w><h>48</h></coordinates><panel_attributes>lt=&lt;-
+SLA</panel_attributes><additional_attributes>10;10;10;60;100;60</additional_attributes></element><element><id>Relation</id><coordinates><x>204</x><y>336</y><w>114</w><h>48</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-ORGANIZATION</panel_attributes><additional_attributes>170;50;10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>306</x><y>276</y><w>120</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
+ORGANIZATION</panel_attributes><additional_attributes>170;50;10;50;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>192</x><y>264</y><w>120</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
 m1=0..1
 m2=*
-SERVICE</panel_attributes><additional_attributes>180;20;10;20;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>732</x><y>300</y><w>72</w><h>18</h></coordinates><panel_attributes>RequestType 
+SERVICE</panel_attributes><additional_attributes>180;20;10;20;10;90</additional_attributes></element><element><id>UMLClass</id><coordinates><x>618</x><y>288</y><w>72</w><h>18</h></coordinates><panel_attributes>RequestType 
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>228</x><y>600</y><w>66</w><h>18</h></coordinates><panel_attributes>Privilege
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>114</x><y>588</y><w>66</w><h>18</h></coordinates><panel_attributes>Privilege
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>246</x><y>540</y><w>84</w><h>72</h></coordinates><panel_attributes>lt=-&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>132</x><y>528</y><w>84</w><h>72</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=*
-PRIVILEGE</panel_attributes><additional_attributes>120;20;30;20;30;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>726</x><y>366</y><w>102</w><h>30</h></coordinates><panel_attributes>Scope
+PRIVILEGE</panel_attributes><additional_attributes>120;20;30;20;30;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>612</x><y>354</y><w>102</w><h>30</h></coordinates><panel_attributes>Scope
 -
-priority: Priority</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>768</x><y>312</y><w>66</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
+priority: Priority</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>654</x><y>300</y><w>66</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-REQUEST_TYPE</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>768</x><y>390</y><w>54</w><h>108</h></coordinates><panel_attributes>lt=&lt;-
+REQUEST_TYPE</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>654</x><y>378</y><w>54</w><h>108</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=*
-OBJECTIVE</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>510</x><y>210</y><w>60</w><h>24</h></coordinates><panel_attributes>Status
+OBJECTIVE</panel_attributes><additional_attributes>10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>396</x><y>198</y><w>60</w><h>24</h></coordinates><panel_attributes>Status
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>180</y><w>72</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>396</x><y>168</y><w>72</w><h>42</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=*
-NEXT_STATUS</panel_attributes><additional_attributes>90;50;90;20;10;20;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>492</y><w>78</w><h>66</h></coordinates><panel_attributes>lt=-&gt;
+NEXT_STATUS</panel_attributes><additional_attributes>90;50;90;20;10;20;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>228</x><y>480</y><w>78</w><h>66</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=*
-ROLE</panel_attributes><additional_attributes>110;20;10;20;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>222</x><y>12</y><w>744</w><h>390</h></coordinates><panel_attributes>lt=&lt;-
+ROLE</panel_attributes><additional_attributes>110;20;10;20;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>108</x><y>0</y><w>744</w><h>390</h></coordinates><panel_attributes>lt=&lt;-
+m1=*
+m2=*
+GUARANTEE</panel_attributes><additional_attributes>1010;620;1220;620;1220;20;10;20;10;430</additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>204</y><w>78</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=*
-GUARANTEE</panel_attributes><additional_attributes>1010;620;1220;620;1220;20;10;20;10;430</additional_attributes></element><element><id>Relation</id><coordinates><x>444</x><y>216</y><w>78</w><h>66</h></coordinates><panel_attributes>lt=&lt;-
-m1=1
-m2=*
-STATUS</panel_attributes><additional_attributes>110;20;20;20;20;90</additional_attributes></element><element><id>Relation</id><coordinates><x>498</x><y>294</y><w>246</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
+STATUS</panel_attributes><additional_attributes>110;20;20;20;20;90</additional_attributes></element><element><id>Relation</id><coordinates><x>384</x><y>282</y><w>246</w><h>30</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=*
-REQUEST_TYPE</panel_attributes><additional_attributes>390;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>486</x><y>306</y><w>120</w><h>204</h></coordinates><panel_attributes>lt=&lt;-
+REQUEST_TYPE</panel_attributes><additional_attributes>390;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>372</x><y>294</y><w>120</w><h>204</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=*
-TEAM</panel_attributes><additional_attributes>20;310;150;310;150;100;10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>324</x><y>294</y><w>102</w><h>48</h></coordinates><panel_attributes>lt=&lt;-
+TEAM</panel_attributes><additional_attributes>20;310;150;310;150;100;10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>282</y><w>102</w><h>48</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
-IS_PROVIDER_OF</panel_attributes><additional_attributes>150;20;10;20;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>114</x><y>234</y><w>348</w><h>174</h></coordinates><panel_attributes>lt=&lt;-
+IS_PROVIDER_OF</panel_attributes><additional_attributes>150;20;10;20;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>0</x><y>222</y><w>348</w><h>174</h></coordinates><panel_attributes>lt=&lt;-
 m1=*
 m2=0..1
-CUSTOMER</panel_attributes><additional_attributes>150;260;10;260;10;20;540;20;540;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>582</x><y>606</y><w>132</w><h>90</h></coordinates><panel_attributes>Issue
+CUSTOMER</panel_attributes><additional_attributes>150;260;10;260;10;20;540;20;540;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>468</x><y>594</y><w>132</w><h>90</h></coordinates><panel_attributes>Issue
 -
 title: String
 description: String
@@ -118,44 +118,47 @@ lastAssignedAt: LocalDateTime
 lastStateChangedAt: LocalDateTime 
 closedAt: LocalDateTime 
 TTO: Double
-TTR: Double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>486</x><y>606</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=-&gt;
+TTR: Double</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>372</x><y>594</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-CREATED_BY</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>486</x><y>624</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=-&gt;
+CREATED_BY</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>372</x><y>612</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-ASIGNED_TO</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>474</x><y>510</y><w>132</w><h>108</h></coordinates><panel_attributes>lt=-&gt;
+ASIGNED_TO</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>498</y><w>132</w><h>108</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-ASIGNED_TO</panel_attributes><additional_attributes>190;160;190;40;10;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>468</x><y>240</y><w>210</w><h>378</h></coordinates><panel_attributes>lt=-&gt;
+ASIGNED_TO</panel_attributes><additional_attributes>190;160;190;40;10;40;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>354</x><y>228</y><w>210</w><h>378</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
-SERVICE</panel_attributes><additional_attributes>290;610;290;10;10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>228</y><w>114</w><h>390</h></coordinates><panel_attributes>lt=-&gt;
+SERVICE</panel_attributes><additional_attributes>290;610;290;10;10;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>216</y><w>114</w><h>390</h></coordinates><panel_attributes>lt=-&gt;
 m1=1
 m2=1
-STATUS</panel_attributes><additional_attributes>130;630;130;160;10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>678</x><y>48</y><w>126</w><h>48</h></coordinates><panel_attributes>Chain
+STATUS</panel_attributes><additional_attributes>130;630;130;160;10;160;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>564</x><y>36</y><w>126</w><h>48</h></coordinates><panel_attributes>Chain
 -
 version: Double
 description: String
-ownershipType: OwnershipType</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>576</x><y>126</y><w>126</w><h>18</h></coordinates><panel_attributes>ChainFaceted
+ownershipType: OwnershipType</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>462</x><y>114</y><w>126</w><h>18</h></coordinates><panel_attributes>ChainFaceted
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>768</x><y>126</y><w>126</w><h>18</h></coordinates><panel_attributes>ChainState
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>654</x><y>114</y><w>126</w><h>18</h></coordinates><panel_attributes>ChainState
 -
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>120</x><y>564</y><w>78</w><h>42</h></coordinates><panel_attributes>OwnershipType
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>6</x><y>552</y><w>78</w><h>42</h></coordinates><panel_attributes>OwnershipType
 -
 STATE
-STATE_TEAM</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>90</y><w>120</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>180;10;180;40;10;40;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>732</x><y>90</y><w>114</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40;170;40;170;60</additional_attributes></element><element><id>Relation</id><coordinates><x>564</x><y>138</y><w>336</w><h>108</h></coordinates><panel_attributes>lt=&lt;-
+STATE_TEAM</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>516</x><y>78</y><w>120</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>180;10;180;40;10;40;10;60</additional_attributes></element><element><id>Relation</id><coordinates><x>618</x><y>78</y><w>114</w><h>48</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;40;170;40;170;60</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>126</y><w>336</w><h>108</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=1
-INITIAL</panel_attributes><additional_attributes>10;150;530;150;530;10</additional_attributes></element><element><id>Relation</id><coordinates><x>564</x><y>138</y><w>288</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
+INITIAL</panel_attributes><additional_attributes>10;150;530;150;530;10</additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>126</y><w>288</w><h>96</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=1
-TERMINAL</panel_attributes><additional_attributes>10;130;450;130;450;10</additional_attributes></element><element><id>Relation</id><coordinates><x>252</x><y>138</y><w>546</w><h>144</h></coordinates><panel_attributes>lt=&lt;-
+TERMINAL</panel_attributes><additional_attributes>10;130;450;130;450;10</additional_attributes></element><element><id>Relation</id><coordinates><x>138</x><y>126</y><w>546</w><h>144</h></coordinates><panel_attributes>lt=&lt;-
 m1=1
 m2=1
-INITIAL_SLA</panel_attributes><additional_attributes>10;220;10;70;880;70;880;10</additional_attributes></element><element><id>Relation</id><coordinates><x>474</x><y>72</y><w>456</w><h>372</h></coordinates><panel_attributes>lt=-&gt;
+INITIAL_SLA</panel_attributes><additional_attributes>10;220;10;70;880;70;880;10</additional_attributes></element><element><id>Relation</id><coordinates><x>360</x><y>60</y><w>456</w><h>372</h></coordinates><panel_attributes>lt=-&gt;
 m1=0..n
-m2=1</panel_attributes><additional_attributes>10;560;10;600;740;600;740;10;550;10</additional_attributes></element><element><id>Relation</id><coordinates><x>498</x><y>276</y><w>204</w><h>342</h></coordinates><panel_attributes>lt=-&gt;
+m2=1</panel_attributes><additional_attributes>10;560;10;600;740;600;740;10;550;10</additional_attributes></element><element><id>Relation</id><coordinates><x>384</x><y>264</y><w>204</w><h>342</h></coordinates><panel_attributes>lt=-&gt;
 m1=*
 m2=1
-SERVICE</panel_attributes><additional_attributes>280;550;280;10;10;10</additional_attributes></element></diagram>
+SERVICE</panel_attributes><additional_attributes>280;550;280;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>576</x><y>300</y><w>66</w><h>306</h></coordinates><panel_attributes>lt=&lt;-
+m1=1
+m2=*
+REQUEST_TYPE</panel_attributes><additional_attributes>70;10;10;10;10;490</additional_attributes></element></diagram>

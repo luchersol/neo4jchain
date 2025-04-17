@@ -30,10 +30,10 @@ CREATE
 (paula:Person { id: 4, name: "paula", firstName: "Paula", lastName: "", email: "paula@alum.us.es", phone: "", password: "1234" }),
 
 // Personas ↔ equipos
-(julio)-[:MEMBER]->(grupoProfesores),
-(pedro)-[:MEMBER]->(grupo1),
-(juan)-[:MEMBER]->(grupo1),
-(paula)-[:MEMBER]->(grupo1),
+(grupoProfesores)-[:MEMBER]->(julio),
+(grupo1)-[:MEMBER]->(pedro),
+(grupo1)-[:MEMBER]->(juan),
+(grupo1)-[:MEMBER]->(paula),
 
 // Roles
 (profesor:Role { id: 1, name: "Profesor" }),

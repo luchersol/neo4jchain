@@ -57,6 +57,8 @@ public class Issue extends NamedNode {
     private Double TTO;
     private Double TTR;
 
+    // --------------------------------------------------------------------
+
     @JsonIgnore
     public Long getStatusId() {
         Status status = getStatus();
