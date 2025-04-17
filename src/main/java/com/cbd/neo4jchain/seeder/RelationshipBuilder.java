@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputFilter.Status;
 import java.lang.Thread.State;
+import java.util.Objects;
 import java.util.Random;
 
 import com.cbd.neo4jchain.chain.faceted.ChainFaceted;
@@ -296,7 +297,7 @@ public class RelationshipBuilder {
             Integer targetId = null;
             do {
                 targetId = random.nextInt(0, limitId.intValue());
-            } while (targetId == sourcerId);
+            } while (Objects.equals(targetId, sourcerId));
             edge(sourcerId, targetId);
         }
         return this;
@@ -314,7 +315,7 @@ public class RelationshipBuilder {
                 Integer targetId = null;
                 do {
                     targetId = random.nextInt(0, limitId.intValue());
-                } while (targetId == sourcerId);
+                } while (Objects.equals(targetId, sourcerId));
                 edge(sourcerId, targetId);
             }
         }
