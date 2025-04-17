@@ -25,49 +25,29 @@ public class ChainStateController {
 
     @GetMapping
     public ResponseEntity<?> getAllChainStates() {
-        try {
-            return ResponseEntity.ok(chainStateService.getAllChainState());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(chainStateService.getAllChainState());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getChainStateById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.chainStateService.getChainStateById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.chainStateService.getChainStateById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createChainState(@RequestBody @Valid ChainStateDTO chainState) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.chainStateService.createChainState(chainState));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.chainStateService.createChainState(chainState));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateChainState(@RequestBody @Valid ChainStateDTO chainState, @PathVariable Long id) {
-        try {
-            this.chainStateService.updateChainState(id, chainState);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.chainStateService.updateChainState(id, chainState);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChainState(@PathVariable Long id) {
-        try {
-            this.chainStateService.deleteChainState(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.chainStateService.deleteChainState(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

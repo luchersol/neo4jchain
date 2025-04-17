@@ -25,50 +25,30 @@ public class RequestTypeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getRequestTypeById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.requestTypeService.getRequestTypeById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.requestTypeService.getRequestTypeById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllRequestTypes() {
-        try {
-            return ResponseEntity.ok(this.requestTypeService.getAllRequestType());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.requestTypeService.getAllRequestType());
     }
 
     @PostMapping
     public ResponseEntity<?> createRequestType(@RequestBody @Valid RequestTypeDTO requestType) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(this.requestTypeService.createRequestType(requestType));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.requestTypeService.createRequestType(requestType));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRequestType(@RequestBody @Valid RequestTypeDTO requestType, @PathVariable Long id) {
-        try {
-            this.requestTypeService.updateRequestType(id, requestType);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.requestTypeService.updateRequestType(id, requestType);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRequestType(@PathVariable Long id) {
-        try {
-            this.requestTypeService.deleteRequestType(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.requestTypeService.deleteRequestType(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -25,49 +25,29 @@ public class PrivilegeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPrivilegeById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.privilegeService.getPrivilegeById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.privilegeService.getPrivilegeById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllPrivileges() {
-        try {
-            return ResponseEntity.ok(this.privilegeService.getAllPrivilege());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.privilegeService.getAllPrivilege());
     }
 
     @PostMapping
     public ResponseEntity<?> createPrivilege(@RequestBody @Valid PrivilegeDTO privilege) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.privilegeService.createPrivilege(privilege));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.privilegeService.createPrivilege(privilege));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePrivilege(@RequestBody @Valid PrivilegeDTO privilege, @PathVariable Long id) {
-        try {
-            this.privilegeService.updatePrivilege(id, privilege);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.privilegeService.updatePrivilege(id, privilege);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePrivilege(@PathVariable Long id) {
-        try {
-            this.privilegeService.deletePrivilege(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.privilegeService.deletePrivilege(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

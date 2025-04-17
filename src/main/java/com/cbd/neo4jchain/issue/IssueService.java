@@ -3,6 +3,7 @@ package com.cbd.neo4jchain.issue;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -89,8 +90,8 @@ public class IssueService {
         ServiceOrg serviceOrg = serviceOrgRepository.findById(issueDTO.getServiceOrg()).orElse(null);
         Status status = statusRepository.findById(issueDTO.getStatus()).orElse(null);
 
-        Boolean hasChangedState = issueToUpdate.getStatus().getId() != status.getId();
-        Boolean hasChangedAssgined = issueToUpdate.getAssignedPerson().getId() != status.getId();
+        Boolean hasChangedState = !Objects.equals(issueToUpdate.getStatus().getId(), status.getId());
+        Boolean hasChangedAssgined = !Objects.equals(issueToUpdate.getAssignedPerson().getId(), status.getId());
 
         if (hasChangedState) {
             issueTTR += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastStateChangedAt());

@@ -25,59 +25,35 @@ public class TeamController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getTeamById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.teamService.getTeamById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.teamService.getTeamById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllTeam() {
-        try {
-            return ResponseEntity.ok(this.teamService.getAllTeam());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.teamService.getAllTeam());
     }
 
     @PostMapping
     public ResponseEntity<?> createTeam(@RequestBody @Valid TeamDTO team) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.teamService.createTeam(team));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.teamService.createTeam(team));
     }
 
     @PostMapping("/{teamId}/{userId}")
     public ResponseEntity<?> addUserToTeam(@PathVariable Long teamId, @PathVariable Long userId) {
-        try {
-            Team team = teamService.addUserToTeam(teamId, userId);
-            return ResponseEntity.ok(team);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        Team team = teamService.addUserToTeam(teamId, userId);
+        return ResponseEntity.ok(team);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateTeam(@RequestBody @Valid TeamDTO team, @PathVariable Long id) {
-        try {
-            this.teamService.updateTeam(id, team);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.teamService.updateTeam(id, team);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteTeam(@PathVariable Long id) {
-        try {
-            this.teamService.deleteTeam(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.teamService.deleteTeam(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

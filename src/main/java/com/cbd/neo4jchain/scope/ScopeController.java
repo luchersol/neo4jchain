@@ -25,49 +25,29 @@ public class ScopeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getScopeById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.scopeService.getScopeById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.scopeService.getScopeById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllScopes() {
-        try {
-            return ResponseEntity.ok(this.scopeService.getAllScope());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.scopeService.getAllScope());
     }
 
     @PostMapping
     public ResponseEntity<?> createScope(@RequestBody @Valid ScopeDTO scope) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.scopeService.createScope(scope));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.scopeService.createScope(scope));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateScope(@RequestBody @Valid ScopeDTO scope, @PathVariable Long id) {
-        try {
-            this.scopeService.updateScope(id, scope);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.scopeService.updateScope(id, scope);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteScope(@PathVariable Long id) {
-        try {
-            this.scopeService.deleteScope(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.scopeService.deleteScope(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

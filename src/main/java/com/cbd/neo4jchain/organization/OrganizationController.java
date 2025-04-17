@@ -25,51 +25,31 @@ public class OrganizationController {
 
     @GetMapping
     public ResponseEntity<?> getAllOrganizations() {
-        try {
-            return ResponseEntity.ok(organizationService.getAllOrganization());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(organizationService.getAllOrganization());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrganizationById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.organizationService.getOrganizationById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.organizationService.getOrganizationById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createOrganization(@RequestBody @Valid OrganizationDTO organization) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(this.organizationService.createOrganization(organization));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.organizationService.createOrganization(organization));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateOrganization(@RequestBody @Valid OrganizationDTO organization,
             @PathVariable Long id) {
-        try {
-            this.organizationService.updateOrganization(id, organization);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.organizationService.updateOrganization(id, organization);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteOrganization(@PathVariable Long id) {
-        try {
-            this.organizationService.deleteOrganization(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.organizationService.deleteOrganization(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

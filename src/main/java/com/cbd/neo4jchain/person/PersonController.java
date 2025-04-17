@@ -25,49 +25,29 @@ public class PersonController {
 
     @GetMapping
     public ResponseEntity<?> getAllPerson() {
-        try {
-            return ResponseEntity.ok(personService.getAllPerson());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(personService.getAllPerson());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getPersonById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.personService.getPersonById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.personService.getPersonById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createPerson(@RequestBody @Valid PersonDTO person) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.createPerson(person));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.personService.createPerson(person));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updatePerson(@RequestBody @Valid PersonDTO person, @PathVariable Long id) {
-        try {
-            this.personService.updatePerson(id, person);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.personService.updatePerson(id, person);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePerson(@PathVariable Long id) {
-        try {
-            this.personService.deletePerson(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.personService.deletePerson(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

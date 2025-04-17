@@ -25,49 +25,29 @@ public class ObjectiveController {
 
     @GetMapping
     public ResponseEntity<?> getAllObjectives() {
-        try {
-            return ResponseEntity.ok(objectiveService.getAllObjective());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(objectiveService.getAllObjective());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getObjectiveById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.objectiveService.getObjectiveById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.objectiveService.getObjectiveById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createObjective(@RequestBody @Valid ObjectiveDTO objective) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.objectiveService.createObjective(objective));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.objectiveService.createObjective(objective));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateObjective(@RequestBody @Valid ObjectiveDTO objective, @PathVariable Long id) {
-        try {
-            this.objectiveService.updateObjective(id, objective);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.objectiveService.updateObjective(id, objective);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteObjective(@PathVariable Long id) {
-        try {
-            this.objectiveService.deleteObjective(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.objectiveService.deleteObjective(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

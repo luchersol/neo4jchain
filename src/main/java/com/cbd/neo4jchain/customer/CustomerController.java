@@ -25,49 +25,29 @@ public class CustomerController {
 
     @GetMapping
     public ResponseEntity<?> getAllCustomers() {
-        try {
-            return ResponseEntity.ok(customerService.getAllCustomer());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(customerService.getAllCustomer());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.customerService.getCustomerById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.customerService.getCustomerById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createCustomer(@RequestBody @Valid CustomerDTO customer) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.customerService.createCustomer(customer));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.customerService.createCustomer(customer));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCustomer(@RequestBody @Valid CustomerDTO customer, @PathVariable Long id) {
-        try {
-            this.customerService.updateCustomer(id, customer);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.customerService.updateCustomer(id, customer);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
-        try {
-            this.customerService.deleteCustomer(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.customerService.deleteCustomer(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
