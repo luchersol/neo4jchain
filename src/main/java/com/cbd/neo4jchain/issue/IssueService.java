@@ -52,6 +52,8 @@ public class IssueService {
     public Issue createIssue(IssueDTO issue) {
         Issue newIssue = issue.parse();
         newIssue.setCreatedAt(LocalDateTime.now());
+        newIssue.setTTO(0.);
+        newIssue.setTTR(0.);
         newIssue.setLastAssignedAt(null);
         newIssue.setLastStateChangedAt(null);
         newIssue.setClosedAt(null);
