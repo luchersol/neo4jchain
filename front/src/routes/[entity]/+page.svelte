@@ -84,11 +84,11 @@
 				{/if}
 				{#if entity === 'Issue'}
 					<p><strong>Status:</strong> {element.status.name}</p>
-					<p><strong>Owner:</strong> {element.owner.firstName} {element.owner.lastName}</p>
+					<p><strong>Owner:</strong> {element.owner?.firstName} {element.owner?.lastName? element.owner?.lastName : '' }</p>
 					<p>
 						<strong>Assigned to:</strong>
-						{element.assignedPerson ? element.assignedPerson.firstName : 'No person assigned'}
-						{element.assignedPerson.lastName ?? ''}
+						{element.assignedPerson ? element.assignedPerson?.firstName : 'No person assigned'}
+						{element.assignedPerson?.lastName ?? ''}
 					</p>
 					<p>
 						<strong>Assigned team:</strong>
