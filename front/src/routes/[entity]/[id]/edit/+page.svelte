@@ -134,7 +134,6 @@
 							<option value="HARD">Hard</option>
 							<option value="HIGH">High</option>
 							<option value="CRITICAL">Critial</option>
-							<option value="ALL">All</option>
 						</select>
 					{:else if value['type'] === 'OwnershipType'}
 						<select id={key} bind:value={formData[key]} required={value['required']}>
@@ -149,7 +148,7 @@
 					{:else if value['type'] === 'UnitTime'}
 						<select id={key} bind:value={formData[key]} required={value['required']}>
 							<option value="MINUTES">Minutes</option>
-							<option value="HOURS">Hours</option>
+							<option value="HOUR">Hours</option>
 						</select>
 					{:else if value['type'].match(regexList)}
 						{#each existingItems[value['type']] as item}
