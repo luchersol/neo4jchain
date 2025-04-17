@@ -25,49 +25,29 @@ public class StatusController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getStatusById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.statusService.getStatusById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.statusService.getStatusById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllStatuss() {
-        try {
-            return ResponseEntity.ok(this.statusService.getAllStatus());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.statusService.getAllStatus());
     }
 
     @PostMapping
     public ResponseEntity<?> createStatus(@RequestBody @Valid StatusDTO status) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.statusService.createStatus(status));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.statusService.createStatus(status));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateStatus(@RequestBody @Valid StatusDTO status, @PathVariable Long id) {
-        try {
-            this.statusService.updateStatus(id, status);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.statusService.updateStatus(id, status);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteStatus(@PathVariable Long id) {
-        try {
-            this.statusService.deleteStatus(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.statusService.deleteStatus(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

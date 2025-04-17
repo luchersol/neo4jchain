@@ -25,49 +25,29 @@ public class ProviderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProviderById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.providerService.getProviderById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.providerService.getProviderById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllProviders() {
-        try {
-            return ResponseEntity.ok(this.providerService.getAllProvider());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.providerService.getAllProvider());
     }
 
     @PostMapping
     public ResponseEntity<?> createProvider(@RequestBody @Valid ProviderDTO provider) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.providerService.createProvider(provider));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.providerService.createProvider(provider));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProvider(@RequestBody @Valid ProviderDTO provider, @PathVariable Long id) {
-        try {
-            this.providerService.updateProvider(id, provider);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.providerService.updateProvider(id, provider);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProvider(@PathVariable Long id) {
-        try {
-            this.providerService.deleteProvider(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.providerService.deleteProvider(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

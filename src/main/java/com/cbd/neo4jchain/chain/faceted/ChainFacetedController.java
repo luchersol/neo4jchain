@@ -25,51 +25,31 @@ public class ChainFacetedController {
 
     @GetMapping
     public ResponseEntity<?> getAllChainFaceteds() {
-        try {
-            return ResponseEntity.ok(chainFacetedService.getAllChainFaceted());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(chainFacetedService.getAllChainFaceted());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getChainFacetedById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.chainFacetedService.getChainFacetedById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.chainFacetedService.getChainFacetedById(id));
     }
 
     @PostMapping
     public ResponseEntity<?> createChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(this.chainFacetedService.createChainFaceted(chainFaceted));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(this.chainFacetedService.createChainFaceted(chainFaceted));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateChainFaceted(@RequestBody @Valid ChainFacetedDTO chainFaceted,
             @PathVariable Long id) {
-        try {
-            this.chainFacetedService.updateChainFaceted(id, chainFaceted);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.chainFacetedService.updateChainFaceted(id, chainFaceted);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChainFaceted(@PathVariable Long id) {
-        try {
-            this.chainFacetedService.deleteChainFaceted(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.chainFacetedService.deleteChainFaceted(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

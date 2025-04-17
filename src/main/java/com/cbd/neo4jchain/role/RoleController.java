@@ -25,49 +25,29 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getRoleById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.roleService.getRoleById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.roleService.getRoleById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllRoles() {
-        try {
-            return ResponseEntity.ok(this.roleService.getAllRole());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.roleService.getAllRole());
     }
 
     @PostMapping
     public ResponseEntity<?> createRole(@RequestBody @Valid RoleDTO role) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.createRole(role));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.createRole(role));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateRole(@RequestBody @Valid RoleDTO role, @PathVariable Long id) {
-        try {
-            this.roleService.updateRole(id, role);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.roleService.updateRole(id, role);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteRole(@PathVariable Long id) {
-        try {
-            this.roleService.deleteRole(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.roleService.deleteRole(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

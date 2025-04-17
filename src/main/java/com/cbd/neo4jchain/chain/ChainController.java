@@ -19,30 +19,18 @@ public class ChainController {
 
     @GetMapping
     public ResponseEntity<?> getAllChain() {
-        try {
-            return ResponseEntity.ok(chainService.getAllChain());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
+        return ResponseEntity.ok(chainService.getAllChain());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getChainById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.chainService.getChainById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.chainService.getChainById(id));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteChain(@PathVariable Long id) {
-        try {
-            this.chainService.deleteChain(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.chainService.deleteChain(id);
+        return ResponseEntity.noContent().build();
     }
 
 }

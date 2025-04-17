@@ -25,49 +25,29 @@ public class SlaController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getSlaById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(this.slaService.getSlaById(id));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.slaService.getSlaById(id));
     }
 
     @GetMapping
     public ResponseEntity<?> getAllSlas() {
-        try {
-            return ResponseEntity.ok(this.slaService.getAllSla());
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(this.slaService.getAllSla());
     }
 
     @PostMapping
     public ResponseEntity<?> createSla(@RequestBody @Valid SlaDTO sla) {
-        try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(this.slaService.createSla(sla));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(this.slaService.createSla(sla));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateSla(@RequestBody @Valid SlaDTO sla, @PathVariable Long id) {
-        try {
-            this.slaService.updateSla(id, sla);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.slaService.updateSla(id, sla);
+        return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteSla(@PathVariable Long id) {
-        try {
-            this.slaService.deleteSla(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        this.slaService.deleteSla(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
