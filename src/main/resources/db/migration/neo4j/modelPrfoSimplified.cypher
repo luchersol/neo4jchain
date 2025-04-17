@@ -62,6 +62,8 @@ CREATE (customerProfesores)-[:ORGANIZATION]->(profesores)
 CREATE (customerProfesores)-[:SLA]->(slaAlumnos)
 CREATE (servicioAlumnos)-[:CUSTOMER]->(customerProfesores)
 
+CREATE (s:Status { name: "New" });
+
 CREATE (incident:RequestType { name: "Incident" }),
 (userRequest:RequestType { name: "User Request" });
 
@@ -96,7 +98,7 @@ CREATE
 MATCH (i:Issue), (p:Person { name: "julio" })
 MERGE (i)-[:CREATED_BY]->(p);
 
-MATCH (i:Issue), (s:Status { name: "New" })
+MATCH (i:Issue)
 MERGE (i)-[:STATUS]->(s);
 
 MATCH (i:Issue), (so:ServiceOrg { name: "Servicio de Alumnos" })
