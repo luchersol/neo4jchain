@@ -59,16 +59,16 @@
 					const fieldType = fields[key]['type'];
 					if (isEntityOrArray(fieldType)) {
 						if (fieldType.startsWith('List<')) {
-							console.log(entityToEdit[key]);
-							formData[key] = entityToEdit[key].map((field) => field.id);
+							formData[key] = entityToEdit[key]?.map((field) => field.id);
 						} else {
-							formData[key] = entityToEdit[key].id;
+							formData[key] = entityToEdit[key]?.id;
 						}
 					} else {
 						formData[key] = entityToEdit[key];
 					}
 				});
 
+			console.log(fields);
 			Object.entries(fields)
 				.map(([_, value]) => value['type'])
 				.forEach((type) => {
