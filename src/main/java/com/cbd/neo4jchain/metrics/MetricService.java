@@ -17,7 +17,7 @@ public class MetricService {
     }
 
     public Double getGlobalPassedSLA(Long chainId) {
-        List<Issue> issues = issueRepository.getIssuesByOrganizationId(chainId);
+        List<Issue> issues = issueRepository.getIssuesByChainId(chainId);
         return null;
     }
 
