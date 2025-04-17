@@ -31,47 +31,53 @@ public class MetricController {
     // globalPassedSLA: Porcentaje de issues cerradas que cumplen con el TTO y el
     // TTR a la vez
     @GetMapping("/global_passed_sla/{chainId}")
-    public ResponseEntity<?> getGlobalPassedSLA(@PathVariable Long chainId) {
-        Double res = this.metricService.getGlobalPassedSLA(chainId);
-        return null;
+    public ResponseEntity<Double> getGlobalPassedSLA(@PathVariable Long chainId) {
+        Double res = 100 * this.metricService.getGlobalPassedSLA(chainId);
+        return ResponseEntity.ok(res);
     }
 
     // problematicOpenIssues: issues que están abiertas y que incumplen el TTO, el
     // TTR o ambos
-    @GetMapping("/problematic_open_issues")
-    public ResponseEntity<?> getProblematicOpenIssues() {
-        return null;
+    @GetMapping("/problematic_open_issues/{chainId}")
+    public ResponseEntity<?> getProblematicOpenIssues(@PathVariable Long chainId) {
+        Double res = 100 * this.metricService.getProblematicOpenIssues(chainId);
+        return ResponseEntity.ok(res);
     }
 
     // passedTTO: porcentaje de issues abiertas y cerradas que cumplen con el TTO
-    @GetMapping("/passed_tto")
-    public ResponseEntity<?> getPassedTTO() {
-        return null;
+    @GetMapping("/passed_tto/{chainId}")
+    public ResponseEntity<?> getPassedTTO(@PathVariable Long chainId) {
+        Double res = 100 * this.metricService.getPassedTTO(chainId);
+        return ResponseEntity.ok(res);
     }
 
     // passedTTR: porcentaje de issues abiertas y cerradas que cumplen con el TTR
-    @GetMapping("/passed_ttr")
-    public ResponseEntity<?> getPassedTTR() {
-        return null;
+    @GetMapping("/passed_ttr/{chainId}")
+    public ResponseEntity<?> getPassedTTR(@PathVariable Long chainId) {
+        Double res = 100 * this.metricService.getPassedTTR(chainId);
+        return ResponseEntity.ok(res);
     }
 
     // monthlyPassedSLA: porcentaje de issues cerradas este mes que cumplen con el
     // TTO y el TTR
-    @GetMapping("/monthly_passed_sla")
-    public ResponseEntity<?> getMonthlyPassedSLA() {
-        return null;
+    @GetMapping("/monthly_passed_sla/{chainId}")
+    public ResponseEntity<?> getMonthlyPassedSLA(@PathVariable Long chainId) {
+        Double res = 100 * this.metricService.getMonthlyPassedSLA(chainId);
+        return ResponseEntity.ok(res);
     }
 
     // servicePassedTTO: el passedTTO pero de las issues de un servicio
-    @GetMapping("/service_passed_tto")
-    public ResponseEntity<?> getServicePassedTTO() {
-        return null;
+    @GetMapping("/service_passed_tto/{serviceId}")
+    public ResponseEntity<?> getServicePassedTTO(@PathVariable Long serviceId) {
+        Double res = 100 * this.metricService.getServicePassedTTO(serviceId);
+        return ResponseEntity.ok(res);
     }
 
     // sercivePassedTTR: el passedTTR pero de las issues de un servicio
-    @GetMapping("/service_passed_ttr")
-    public ResponseEntity<?> getServicePassedTTR() {
-        return null;
+    @GetMapping("/service_passed_ttr/{serviceId}")
+    public ResponseEntity<?> getServicePassedTTR(@PathVariable Long serviceId) {
+        Double res = 100 * this.metricService.getServicePassedTTR(serviceId);
+        return ResponseEntity.ok(res);
     }
 
     @GetMapping("/graph_status/chainstate/{id}")

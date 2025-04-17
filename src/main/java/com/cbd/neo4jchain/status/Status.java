@@ -7,6 +7,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 
 import com.cbd.neo4jchain.model.NamedNode;
 import com.cbd.neo4jchain.util.RelationName.StatusRelation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +23,10 @@ public class Status extends NamedNode {
 
     @Relationship(type = StatusRelation.STATUSES)
     List<Status> possibleNextStatuses;
+
+    @JsonIgnore
+    public boolean isTerminal() {
+        return this.possibleNextStatuses.isEmpty();
+    }
 
 }

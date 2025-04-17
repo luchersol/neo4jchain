@@ -1,7 +1,7 @@
 package com.cbd.neo4jchain.model;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.neo4j.core.schema.GeneratedValue;
+import org.springframework.data.neo4j.core.schema.Id;
 
 import com.cbd.neo4jchain.util.Depth2Serializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -25,4 +25,22 @@ public abstract class AbstractNode {
     public AbstractNode(Long id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        AbstractNode other = (AbstractNode) obj;
+        if (id == null) {
+            if (other.id != null)
+                return false;
+        } else if (!id.equals(other.id))
+            return false;
+        return true;
+    }
+
 }
