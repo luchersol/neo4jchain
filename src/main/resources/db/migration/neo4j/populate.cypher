@@ -125,34 +125,3 @@ MERGE (status9:Status { id: "9", name: "Status name 9" })
 MERGE (team0:Team { id: "0", name: "Brown-Beatty", specialization: "UX/UI Designer" })
 MERGE (team1:Team { id: "1", name: "Fritsch, Bartell and Miller", specialization: "Desarrollador Backend" })
 MERGE (team2:Team { id: "2", name: "Dietrich LLC", specialization: "Analista de Datos" })
-
-CREATE (incident:RequestType {name: "Incident"}),
-       (userRequest:RequestType {name: "User Request"});
-
-CREATE
-  (:Issue {createdAt: "2025-04-16T10:20:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Error de plataforma", description: "No se puede acceder a la plataforma educativa", title: "Plataforma caída", TTO: 90094.0}),
-  (:Issue {createdAt: "2025-04-15T15:45:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Problema con calificaciones", description: "Las calificaciones no se muestran correctamente", title: "Error en notas", TTO: 145034.0}),
-  (:Issue {createdAt: "2025-04-10T08:00:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Imposible subir tarea", description: "No se pueden subir archivos a la tarea final", title: "Error subida tarea", TTO: 620534.0}),
-  (:Issue {createdAt: "2025-04-01T12:30:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Cuenta bloqueada", description: "Un alumno no puede acceder a su cuenta", title: "Acceso bloqueado", TTO: 1376334.0}),
-  (:Issue {createdAt: "2025-03-20T09:00:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Problema de matrícula", description: "Error al actualizar datos de matrícula", title: "Fallo matrícula", TTO: 2407134.0}),
-  (:Issue {createdAt: "2025-04-12T14:10:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Problema de acceso al aula virtual", description: "Algunos usuarios no pueden entrar al aula virtual", title: "Acceso aula virtual", TTO: 415734.0}),
-  (:Issue {createdAt: "2025-04-08T19:30:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Caída del sistema de correos", description: "El servicio de correo institucional está fuera de línea", title: "Correo caído", TTO: 710034.0}),
-  (:Issue {createdAt: "2025-04-05T08:50:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Error en notificaciones", description: "Las notificaciones no están llegando a los alumnos", title: "Fallo en notificaciones", TTO: 1009734.0}),
-  (:Issue {createdAt: "2025-03-29T17:25:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Problemas en videollamadas", description: "Se interrumpen las videollamadas en la plataforma", title: "Fallos en videollamadas", TTO: 1570134.0}),
-  (:Issue {createdAt: "2025-03-15T10:00:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Error de sincronización", description: "Problemas sincronizando datos entre aplicaciones", title: "Sincronización fallida", TTO: 2594334.0}),
-  (:Issue {createdAt: "2025-03-05T09:40:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Problema de autenticación", description: "Usuarios no pueden autenticarse con su contraseña", title: "Error de login", TTO: 3455934.0}),
-  (:Issue {createdAt: "2025-02-25T11:15:00", lastAssignedAt: "2025-04-17T00:00:00", TTR: 0.0, name: "Fallo en carga de documentos", description: "Los documentos no se cargan correctamente en la plataforma", title: "Error documentos", TTO: 4311534.0});
-
-MATCH (i:Issue)
-WITH i, CASE WHEN rand() < 0.5 THEN "Incident" ELSE "User Request" END AS requestTypeName
-MATCH (r:RequestType {name: requestTypeName})
-MERGE (i)-[:REQUEST_TYPE]->(r);
-
-MATCH (i:Issue), (p:Person {name: "julio"})
-MERGE (i)-[:CREATED_BY]->(p);
-
-MATCH (i:Issue), (s:Status {name: "New"})
-MERGE (i)-[:STATUS]->(s);
-
-MATCH (i:Issue), (so:ServiceOrg {name: "Servicio de Alumnos"})
-MERGE (i)-[:SERVICE]->(so);
