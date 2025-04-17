@@ -27,14 +27,14 @@ export const entityDict = {
 		id: { type: 'Long', required: false },
 		name: { type: 'String', required: true },
 		version: { type: 'String', required: true },
-		description: { type: 'String', required: true },
+		description: { type: 'String', required: false },
 		ownershipType: { type: 'OwnershipType', required: true }
 	},
 	ChainState: {
 		id: { type: 'Long', required: false },
 		name: { type: 'String', required: true },
 		version: { type: 'String', required: true },
-		description: { type: 'String', required: true },
+		description: { type: 'String', required: false },
 		ownershipType: { type: 'OwnershipType', required: true },
 		initial: { type: 'List<Status>', required: true },
 		terminal: { type: 'List<Status>', required: true },
@@ -53,8 +53,8 @@ export const entityDict = {
 		description: { type: 'String', required: true },
 		serviceOrg: { type: 'ServiceOrg', required: true },
 		status: { type: 'Status', required: true },
-		assignedTeam: { type: 'Team', required: true },
-		assignedPerson: { type: 'Person', required: true },
+		assignedTeam: { type: 'Team', required: false },
+		assignedPerson: { type: 'Person', required: false },
 		owner: { type: 'Person', required: true },
 		requestType: { type: 'RequestType', required: true }
 	},
