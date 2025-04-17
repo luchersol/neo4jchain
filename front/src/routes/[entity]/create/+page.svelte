@@ -41,7 +41,7 @@
 				});
 
 			Object.entries(fields)
-				.filter((i) => i.type)
+				.map(([_, value]) => value['type'])
 				.forEach((type) => {
 					if (isEntityOrArray(type)) {
 						fetchItemsForSelect(type).then((items) => {
@@ -131,6 +131,7 @@
 						{/each}
 					{:else if !value['type'].match(regexList)}
 						<select id={key} bind:value={formData[key]} required={value['required']}>
+							<option value="">Select an existing {key}</option>
 							{#each existingItems[value['type']] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}

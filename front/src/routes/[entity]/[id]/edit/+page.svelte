@@ -69,13 +69,15 @@
 					}
 				});
 
-			Object.entries(fields).forEach(([_, value]) => {
-				if (isEntityOrArray(value['type'])) {
-					fetchItemsForSelect(value['type']).then((items) => {
-						existingItems[value['type']] = items;
-					});
-				}
-			});
+			Object.entries(fields)
+				.map(([_, value]) => value['type'])
+				.forEach((type) => {
+					if (isEntityOrArray(type)) {
+						fetchItemsForSelect(type).then((items) => {
+							existingItems[type] = items;
+						});
+					}
+				});
 		} else {
 			console.error('Unknown entity type');
 		}
