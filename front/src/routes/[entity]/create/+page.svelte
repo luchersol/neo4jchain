@@ -37,7 +37,7 @@
 			Object.keys(fields)
 				.filter(([key, _]) => key !== 'id')
 				.forEach((key) => {
-					formData[key] = regexList.test(fields[key]['type']) ? [] : '';
+					formData[key] = regexList.test(fields[key]['type']) ? [] : null;
 				});
 
 			Object.entries(fields)

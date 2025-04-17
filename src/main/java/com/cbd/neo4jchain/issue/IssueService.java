@@ -90,8 +90,8 @@ public class IssueService {
         ServiceOrg serviceOrg = serviceOrgRepository.findById(issueDTO.getServiceOrg()).orElse(null);
         Status status = statusRepository.findById(issueDTO.getStatus()).orElse(null);
 
-        Boolean hasChangedState = !Objects.equals(issueToUpdate.getStatus().getId(), status.getId());
-        Boolean hasChangedAssgined = !Objects.equals(issueToUpdate.getAssignedPerson().getId(), status.getId());
+        Boolean hasChangedState = !Objects.equals(issueToUpdate.getStatusId(), status.getId());
+        Boolean hasChangedAssgined = !Objects.equals(issueToUpdate.getAssignedPersonId(), status.getId());
 
         if (hasChangedState) {
             issueTTR += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastStateChangedAt());

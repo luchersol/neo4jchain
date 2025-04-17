@@ -104,14 +104,14 @@
 						{#if entityToEdit[key].length > 0}
 							<ul>
 								{#each entityToEdit[key] as item}
-									<li>{item.name}</li>
+									<li>{item.name ?? '---'}</li>
 								{/each}
 							</ul>
 						{:else}
 							<p>No data available</p>
 						{/if}
 					{:else}
-						<p>{entityToEdit[key]?.name}</p>
+						<p>{entityToEdit[key]?.name ?? '---'}</p>
 					{/if}
 				</div>
 			{/each}

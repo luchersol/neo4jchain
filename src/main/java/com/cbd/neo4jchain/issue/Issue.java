@@ -12,6 +12,7 @@ import com.cbd.neo4jchain.service_org.ServiceOrg;
 import com.cbd.neo4jchain.status.Status;
 import com.cbd.neo4jchain.team.Team;
 import com.cbd.neo4jchain.util.RelationName.IssueRelation;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -55,5 +56,17 @@ public class Issue extends NamedNode {
 
     private Double TTO;
     private Double TTR;
+
+    @JsonIgnore
+    public Long getStatusId() {
+        Status status = getStatus();
+        return status == null ? null : status.getId();
+    }
+
+    @JsonIgnore
+    public Long getAssignedPersonId() {
+        Person person = getAssignedPerson();
+        return person == null ? null : person.getId();
+    }
 
 }

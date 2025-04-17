@@ -59,12 +59,12 @@
 					const fieldType = fields[key]['type'];
 					if (isEntityOrArray(fieldType)) {
 						if (fieldType.startsWith('List<')) {
-							formData[key] = entityToEdit[key]?.map((field) => field.id);
+							formData[key] = entityToEdit[key]?.map((field) => field.id) ?? null;
 						} else {
-							formData[key] = entityToEdit[key]?.id;
+							formData[key] = entityToEdit[key]?.id ?? null;
 						}
 					} else {
-						formData[key] = entityToEdit[key];
+						formData[key] = entityToEdit[key] ?? null;
 					}
 				});
 
@@ -160,7 +160,7 @@
 						{/each}
 					{:else if !value['type'].match(regexList)}
 						<select id={key} bind:value={formData[key]} required={value['required']}>
-							<option value="">Select an existing {key}</option>
+							<option value={null}>Select an existing {key}</option>
 							{#each existingItems[value['type']] as item}
 								<option value={item.id}>{item.name}</option>
 							{/each}
