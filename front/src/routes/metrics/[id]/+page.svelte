@@ -18,13 +18,17 @@
 			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`)
 			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`)
 
-			console.log(await globalPassedSLA.json())
 			data.globalPassedSLA = await globalPassedSLA.json()
 			data.problematicOpenIssuesnNumber = await problematicOpenIssuesnNumber.json()
 			data.passedTTO = await passedTTO.json()
 			data.passedTTR = await passedTTR.json()
 			data.monthlyPassedSLA = await monthlyPassedSLA.json()
 			console.log(data.globalPassedSLA)
+			console.log(data.problematicOpenIssuesnNumber)
+			console.log(data.passedTTO)
+			console.log(data.passedTTR)
+			console.log(data.monthlyPassedSLA)
+
 			isLoading = false;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
