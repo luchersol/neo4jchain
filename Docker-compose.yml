@@ -2,9 +2,11 @@ version: "3.8"
 
 services:
   frontend:
+    environment:
+      NODE_ENV: production
     build: ./front
     ports:
-      - "3000:80"
+      - "3000:3000"
     depends_on:
       - backend
 
