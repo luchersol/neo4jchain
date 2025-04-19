@@ -1,8 +1,8 @@
 package com.cbd.neo4jchain.seeder;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.neo4j.core.Neo4jClient;
@@ -13,7 +13,7 @@ import jakarta.annotation.PostConstruct;
 @Component
 public class DataSeeder {
 
-    Neo4jClient neo4jClient;
+    private final Neo4jClient neo4jClient;
 
     @Value("${neo4jchain.populate-database:false}")
     private boolean populateDatabase;
@@ -28,7 +28,7 @@ public class DataSeeder {
     private String cypherPath;
 
     @Value("${neo4jchain.relation-path:#{null}}")
-    private String realtionPath;
+    private String relationPath;
 
     public DataSeeder(Neo4jClient neo4jClient) {
         this.neo4jClient = neo4jClient;
@@ -36,21 +36,49 @@ public class DataSeeder {
 
     @PostConstruct
     public void generateData() throws Exception {
-        if (generateCypher) {
-            NodeSeeder nodeSeeder = new NodeSeeder(this.deleteData, this.cypherPath, this.realtionPath);
-            nodeSeeder.loadTestData();
-            nodeSeeder.generateCypher();
-        }
-
         if (populateDatabase) {
-            try {
-                List<String> cypherFile = Files.readAllLines(Path.of(this.cypherPath));
-                cypherFile.stream()
-                        .filter(line -> !line.isBlank() && !line.startsWith("//"))
-                        .forEach(line -> neo4jClient.query(line).run());
-
-            } catch (Exception e) {
-                throw new IllegalAccessError(e.getMessage());
+            int maxRetries = 10;
+            int retryDelayMs = 3000;
+            int attempt = 0;
+            
+            while (attempt < maxRetries) {
+                try {
+                    attempt++;
+    
+                    System.out.println("Trying to populate database (attempt " + attempt + ")...");
+    
+                    var inputStream = getClass().getClassLoader().getResourceAsStream(this.cypherPath);
+                    if (inputStream == null) {
+                        throw new IllegalArgumentException("File not found: " + this.cypherPath);
+                    }
+    
+                    String cypherFileContent = new BufferedReader(new InputStreamReader(inputStream))
+                            .lines()
+                            .filter(line -> !line.isBlank() && !line.startsWith("//"))
+                            .collect(Collectors.joining("\n"));
+    
+                    String[] queries = cypherFileContent.split(";");
+    
+                    for (String query : queries) {
+                        String trimmedQuery = query.trim();
+                        if (!trimmedQuery.isEmpty()) {
+                            neo4jClient.query(trimmedQuery).run();
+                        }
+                    }
+    
+                    System.out.println("Database populated successfully");
+                    break;
+    
+                } catch (Exception e) {
+                    System.out.println("Error while populating database: " + e.getMessage());
+    
+                    if (attempt >= maxRetries) {
+                        throw new RuntimeException("Max attempts exceeded:", e);
+                    }
+    
+                    System.out.println("Waiting " + retryDelayMs + "ms before another try...");
+                    Thread.sleep(retryDelayMs);
+                }
             }
         }
     }
