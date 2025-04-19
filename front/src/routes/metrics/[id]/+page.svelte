@@ -4,14 +4,28 @@
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../components/throbber.svelte';
+	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte'
     
-	let entity = $page.params.entity;
-	let data = [];
+	let id = $page.params.id;
+	let data = {};
 	let isLoading = true;
 
 	async function fetchInfo() {
 		try {
-            
+            let globalPassedSLA = await fetch(`${BackendAPI}/api/metrics/global_passed_sla/${id}`)
+			let problematicOpenIssuesnNumber = await fetch(`${BackendAPI}/api/metrics/problematic_open_issues/${id}`)
+			let passedTTO = await fetch(`${BackendAPI}/api/metrics/passed_tto/${id}`)
+			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`)
+			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`)
+
+			console.log(await globalPassedSLA.json())
+			data.globalPassedSLA = await globalPassedSLA.json()
+			data.problematicOpenIssuesnNumber = await problematicOpenIssuesnNumber.json()
+			data.passedTTO = await passedTTO.json()
+			data.passedTTR = await passedTTR.json()
+			data.monthlyPassedSLA = await monthlyPassedSLA.json()
+			console.log(data.globalPassedSLA)
+			isLoading = false;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
@@ -27,13 +41,14 @@
 
 {#if isLoading}
 	<Throbber message={'Loading...'} />
-{:else if data.length === 0}
+{:else if data == {}}
 	<div class="container">
 		<p>No data retrieved</p>
 	</div>
 {:else}
 	<div class="container">
             METRICS
+			<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA}></GlobalPassedSLAPieChart>
 	</div>
 {/if}
 

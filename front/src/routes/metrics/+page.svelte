@@ -15,7 +15,9 @@
 			const chainstateResponse = await fetch(`${BackendAPI}/api/chainstate`);
 			const chainfacetedList = await chainfacetedResponse.json();
             const chainstateList = await chainstateResponse.json()
-            data.push(...chainfacetedList)
+            // chainfacetedList = await chainfacetedList.map((element)=> { element.type = 'chainfaceted'; return element})
+            // chainstateList = await chainstateList.map((element)=> { element.type = 'chainstate'; return element})
+			data.push(...chainfacetedList)
             data.push(...chainstateList)
             console.log(JSON.stringify(data))
 			isLoading = false;
