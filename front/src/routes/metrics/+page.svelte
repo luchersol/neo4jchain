@@ -53,13 +53,11 @@
 				style="cursor: pointer;"
 			>
 				<h3>{element.name}</h3>
-				<p>
-					<strong>TYPE: </strong><span
-						class="type-badge"
-						class:type-stated={element.initialSla}
-						class:type-faceted={!element.initialSla}>{getTypeChain(element)}</span
-					>
-				</p>
+				<span
+					class="type-badge"
+					class:type-stated={element.initialSla}
+					class:type-faceted={!element.initialSla}>{getTypeChain(element)}</span
+				>
 			</div>
 		{/each}
 	</div>
