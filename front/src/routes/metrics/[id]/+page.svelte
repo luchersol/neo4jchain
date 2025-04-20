@@ -27,10 +27,10 @@
 			data.passedTTO = await passedTTO.json();
 			data.passedTTR = await passedTTR.json();
 			data.monthlyPassedSLA = await monthlyPassedSLA.json();
-
-			isLoading = false;
 		} catch (error) {
-			data = 'There was an error retrieving the info: ' + error;
+			alert('There was an error retrieving the info: ' + error);
+		} finally {
+			isLoading = false;
 		}
 	}
 
