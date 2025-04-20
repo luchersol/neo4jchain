@@ -14,12 +14,16 @@ import com.cbd.neo4jchain.team.Team;
 import com.cbd.neo4jchain.util.RelationName.IssueRelation;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Node
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Issue extends NamedNode {
 
     private String title;
@@ -31,10 +35,28 @@ public class Issue extends NamedNode {
         this.description = description;
     }
 
+    public Issue(Issue issue, Status status) {
+        super(issue.getId(), issue.getName());
+        this.title = issue.getTitle();
+        this.description = issue.getDescription();
+        this.serviceOrg = issue.getServiceOrg();
+        this.assignedTeam = issue.getAssignedTeam();
+        this.assignedPerson = issue.getAssignedPerson();
+        this.owner = issue.getOwner();
+        this.requestType = issue.getRequestType();
+        this.createdAt = issue.getCreatedAt();
+        this.lastAssignedAt = issue.getLastAssignedAt();
+        this.lastStateChangedAt = issue.getLastStateChangedAt();
+        this.closedAt = issue.getClosedAt();
+        this.TTO = issue.getTTO();
+        this.TTR = issue.getTTR();
+        this.status = status; // Asigna el nuevo Status
+    }
+
     @Relationship(type = IssueRelation.SERVICE_ORG)
     private ServiceOrg serviceOrg;
 
-    @Relationship(type = IssueRelation.STATUS)
+    @Relationship(type = "STATUS", direction = Relationship.Direction.OUTGOING)
     private Status status;
 
     @Relationship(type = IssueRelation.TEAM)
