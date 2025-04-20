@@ -1,33 +1,35 @@
 <script>
-    import Title from '../../../components/title.svelte';
-    import { BackendAPI } from '../../../stores/stores';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
+	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte';
 	import Throbber from '../../../components/throbber.svelte';
-	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte'
-    
+	import Title from '../../../components/title.svelte';
+	import { BackendAPI } from '../../../stores/stores';
+
 	let id = $page.params.id;
 	let data = {};
 	let isLoading = true;
 
 	async function fetchInfo() {
 		try {
-            let globalPassedSLA = await fetch(`${BackendAPI}/api/metrics/global_passed_sla/${id}`)
-			let problematicOpenIssuesnNumber = await fetch(`${BackendAPI}/api/metrics/problematic_open_issues/${id}`)
-			let passedTTO = await fetch(`${BackendAPI}/api/metrics/passed_tto/${id}`)
-			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`)
-			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`)
+			let globalPassedSLA = await fetch(`${BackendAPI}/api/metrics/global_passed_sla/${id}`);
+			let problematicOpenIssuesnNumber = await fetch(
+				`${BackendAPI}/api/metrics/problematic_open_issues/${id}`
+			);
+			let passedTTO = await fetch(`${BackendAPI}/api/metrics/passed_tto/${id}`);
+			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`);
+			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`);
 
-			data.globalPassedSLA = await globalPassedSLA.json()
-			data.problematicOpenIssuesnNumber = await problematicOpenIssuesnNumber.json()
-			data.passedTTO = await passedTTO.json()
-			data.passedTTR = await passedTTR.json()
-			data.monthlyPassedSLA = await monthlyPassedSLA.json()
-			console.log(data.globalPassedSLA)
-			console.log(data.problematicOpenIssuesnNumber)
-			console.log(data.passedTTO)
-			console.log(data.passedTTR)
-			console.log(data.monthlyPassedSLA)
+			data.globalPassedSLA = await globalPassedSLA.json();
+			data.problematicOpenIssuesnNumber = await problematicOpenIssuesnNumber.json();
+			data.passedTTO = await passedTTO.json();
+			data.passedTTR = await passedTTR.json();
+			data.monthlyPassedSLA = await monthlyPassedSLA.json();
+			console.log(data.globalPassedSLA);
+			console.log(data.problematicOpenIssuesnNumber);
+			console.log(data.passedTTO);
+			console.log(data.passedTTR);
+			console.log(data.monthlyPassedSLA);
 
 			isLoading = false;
 		} catch (error) {
@@ -38,7 +40,6 @@
 	onMount(async () => {
 		await fetchInfo();
 	});
-
 </script>
 
 <Title subtitle={'Metrics'}></Title>
@@ -51,8 +52,8 @@
 	</div>
 {:else}
 	<div class="container">
-            METRICS
-			<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA}></GlobalPassedSLAPieChart>
+		METRICS
+		<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA}></GlobalPassedSLAPieChart>
 	</div>
 {/if}
 
