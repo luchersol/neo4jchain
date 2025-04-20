@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte';
@@ -7,6 +8,7 @@
 	import { BackendAPI } from '../../../stores/stores';
 
 	let id = $page.params.id;
+	let type = $page.url.searchParams.get('type'); // <--- Obtener query param
 	let data = {};
 	let isLoading = true;
 
@@ -25,11 +27,6 @@
 			data.passedTTO = await passedTTO.json();
 			data.passedTTR = await passedTTR.json();
 			data.monthlyPassedSLA = await monthlyPassedSLA.json();
-			console.log(data.globalPassedSLA);
-			console.log(data.problematicOpenIssuesnNumber);
-			console.log(data.passedTTO);
-			console.log(data.passedTTR);
-			console.log(data.monthlyPassedSLA);
 
 			isLoading = false;
 		} catch (error) {
@@ -42,52 +39,45 @@
 	});
 </script>
 
-<Title subtitle={'Metrics'}></Title>
+<Title subtitle={'Metrics'} />
 
 {#if isLoading}
 	<Throbber message={'Loading...'} />
-{:else if data == {}}
+{:else if Object.keys(data).length === 0}
 	<div class="container">
 		<p>No data retrieved</p>
 	</div>
 {:else}
 	<div class="container">
 		METRICS
-		<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA}></GlobalPassedSLAPieChart>
+		<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA} />
+
+		{#if type === 'STATE'}
+			<button class="state-button" on:click={() => goto(`/metrics/${id}/graph`)}> Graph </button>
+		{/if}
 	</div>
 {/if}
 
 <style>
 	.container {
 		display: flex;
-		flex-wrap: wrap;
+		flex-direction: column;
+		align-items: center;
 		gap: 1rem;
-		justify-content: center;
-	}
-	.card {
-		background: #ffffff;
-		border-radius: 10px;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-		padding: 1.5rem;
-		width: 300px;
-		text-align: center;
-		transition: transform 0.3s ease-in-out;
 	}
 
-	.card:hover {
-		transform: scale(1.05);
-	}
-
-	h3 {
-		color: #333;
-		font-size: 1.2rem;
-		margin-bottom: 0.5rem;
-	}
-
-	p {
-		min-height: 40px;
-		color: #555;
+	.state-button {
+		padding: 0.75rem 1.5rem;
+		background-color: #007bff;
+		color: white;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
 		font-size: 1rem;
-		margin: 0.25rem 0;
+		transition: background-color 0.3s;
+	}
+
+	.state-button:hover {
+		background-color: #0056b3;
 	}
 </style>

@@ -53,7 +53,7 @@
 <style>
 	.graph-container {
 		width: 100%;
-		height: 60%;
+		height: 70vh;
 		border: 1px solid grey;
 	}
 </style>
