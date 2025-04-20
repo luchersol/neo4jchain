@@ -1,11 +1,11 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
 	import { BackendAPI, entityDict, transformObject } from '../../../stores/stores';
-
 	let entity = $page.params.entity;
 	let id = $page.params.id;
 	let fields = {};
@@ -75,7 +75,7 @@
 			});
 			if (response.ok) {
 				showModal.set(false);
-				window.location.href = `/${entity}`;
+				goto(`/${entity}`);
 			} else {
 				console.error('Failed to delete entity');
 			}
@@ -116,12 +116,7 @@
 				</div>
 			{/each}
 		</div>
-		<button
-			on:click={() => {
-				window.location.href = `/${entity}/${entityToEdit.id}/edit`;
-			}}
-			class="button edit-button"
-		>
+		<button on:click={() => goto(`/${entity}/${entityToEdit.id}/edit`)} class="button edit-button">
 			Edit
 		</button>
 		<button

@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../../components/throbber.svelte';
@@ -95,7 +96,7 @@
 
 			if (response.ok) {
 				alert(`${entity} edited successfully!`);
-				window.location.href = `/${entity}`;
+				goto(`/${entity}`);
 			} else {
 				alert('There was an error editing the entity.');
 			}

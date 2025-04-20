@@ -1,10 +1,10 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
 	import { BackendAPI, entityDict, isEntityOrArray, transformObject } from '../../../stores/stores';
-
 	let entity = $page.params.entity;
 	let fields = {};
 	let formData = {};
@@ -66,7 +66,7 @@
 
 			if (response.ok) {
 				alert(`${entity} created successfully!`);
-				window.location.href = `/${entity}`;
+				goto(`/${entity}`);
 			} else {
 				alert('There was an error creating the entity.');
 			}
