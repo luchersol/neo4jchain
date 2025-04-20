@@ -1,11 +1,11 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import { writable } from 'svelte/store';
 	import Throbber from '../../components/throbber.svelte';
 	import Title from '../../components/title.svelte';
 	import { BackendAPI } from '../../stores/stores';
-
 	let entity = $page.params.entity;
 	let data = [];
 	let showModal = writable(false);
@@ -50,7 +50,7 @@
 
 <Title subtitle={`${entity} list`}></Title>
 
-<button on:click={() => (window.location.href = `/${entity}/create`)} class="button create-button">
+<button on:click={() => goto(`/${entity}/create`)} class="button create-button">
 	Create {entity}
 </button>
 
@@ -65,11 +65,7 @@
 		{#each data as element}
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<div
-				class="card"
-				on:click={() => (window.location.href = `/${entity}/${element.id}`)}
-				style="cursor: pointer;"
-			>
+			<div class="card" on:click={() => goto(`/${entity}/${element.id}`)} style="cursor: pointer;">
 				<h3>{element.name || element.firstName || element.title || element.metric || ''}</h3>
 				<p><strong>ID:</strong> {element.id}</p>
 				{#if element.lastName}
@@ -84,7 +80,11 @@
 				{/if}
 				{#if entity === 'Issue'}
 					<p><strong>Status:</strong> {element.status.name}</p>
-					<p><strong>Owner:</strong> {element.owner?.firstName} {element.owner?.lastName? element.owner?.lastName : '' }</p>
+					<p>
+						<strong>Owner:</strong>
+						{element.owner?.firstName}
+						{element.owner?.lastName ? element.owner?.lastName : ''}
+					</p>
 					<p>
 						<strong>Assigned to:</strong>
 						{element.assignedPerson ? element.assignedPerson?.firstName : 'No person assigned'}
@@ -107,7 +107,7 @@
 					<button
 						on:click={(event) => {
 							event.stopPropagation();
-							window.location.href = `/${entity}/${element.id}/edit`;
+							goto(`/${entity}/${element.id}/edit`);
 						}}
 						class="button edit-button"
 					>
