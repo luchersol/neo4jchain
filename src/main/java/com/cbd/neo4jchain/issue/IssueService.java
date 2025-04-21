@@ -94,12 +94,12 @@ public class IssueService {
         Boolean hasChangedAssgined = !Objects.equals(issueToUpdate.getAssignedPersonId(), status.getId());
 
         if (hasChangedState) {
-            issueTTR += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastStateChangedAt());
+            issueTTR += ChronoUnit.SECONDS.between(issueToUpdate.getLastStateChangedAt(), LocalDateTime.now());
             issue.setLastStateChangedAt(LocalDateTime.now());
         }
 
         if (hasChangedAssgined) {
-            issueTTO += ChronoUnit.SECONDS.between(LocalDateTime.now(), issueToUpdate.getLastAssignedAt());
+            issueTTO += ChronoUnit.SECONDS.between(issueToUpdate.getLastAssignedAt(), LocalDateTime.now());
             issue.setLastAssignedAt(LocalDateTime.now());
         }
 
