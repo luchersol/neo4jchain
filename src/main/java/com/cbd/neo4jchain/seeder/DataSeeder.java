@@ -48,48 +48,48 @@ public class DataSeeder {
             int maxRetries = 10;
             int retryDelayMs = 3000;
             int attempt = 0;
-            
             while (attempt < maxRetries) {
                 try {
                     attempt++;
-    
+
                     System.out.println("Trying to populate database (attempt " + attempt + ")...");
-    
+
                     var inputStream = getClass().getClassLoader().getResourceAsStream(this.cypherPath);
                     String[] activeProfiles = env.getActiveProfiles();
 
-                    if(Arrays.asList(activeProfiles).contains("local")){
-                      inputStream = new FileInputStream("src/main/resources/" + this.cypherPath);
+                    if (Arrays.asList(activeProfiles).contains("local")) {
+                        inputStream = new FileInputStream("src/main/resources/" + this.cypherPath);
                     }
-                    
+
                     if (inputStream == null) {
                         throw new IllegalArgumentException("File not found: " + this.cypherPath);
                     }
-    
-                    String cypherFileContent = new BufferedReader(new InputStreamReader(inputStream))
-                            .lines()
-                            .filter(line -> !line.isBlank() && !line.startsWith("//"))
-                            .collect(Collectors.joining("\n"));
-    
-                    String[] queries = cypherFileContent.split(";");
-    
-                    for (String query : queries) {
-                        String trimmedQuery = query.trim();
-                        if (!trimmedQuery.isEmpty()) {
-                            neo4jClient.query(trimmedQuery).run();
+
+                    try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+                        String cypherFileContent = reader
+                                .lines()
+                                .filter(line -> !line.isBlank() && !line.startsWith("//"))
+                                .collect(Collectors.joining("\n"));
+                        String[] queries = cypherFileContent.split(";");
+
+                        for (String query : queries) {
+                            String trimmedQuery = query.trim();
+                            if (!trimmedQuery.isEmpty()) {
+                                neo4jClient.query(trimmedQuery).run();
+                            }
                         }
+
+                        System.out.println("Database populated successfully");
+                        break;
                     }
-    
-                    System.out.println("Database populated successfully");
-                    break;
-    
+
                 } catch (Exception e) {
                     System.out.println("Error while populating database: " + e.getMessage());
-    
+
                     if (attempt >= maxRetries) {
                         throw new RuntimeException("Max attempts exceeded:", e);
                     }
-    
+
                     System.out.println("Waiting " + retryDelayMs + "ms before another try...");
                     Thread.sleep(retryDelayMs);
                 }

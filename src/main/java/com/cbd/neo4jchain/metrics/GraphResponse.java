@@ -1,7 +1,6 @@
 package com.cbd.neo4jchain.metrics;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import lombok.AllArgsConstructor;

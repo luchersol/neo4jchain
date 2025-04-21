@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.stereotype.Repository;
 
+import com.cbd.neo4jchain.metrics.MetricResponse;
 import com.cbd.neo4jchain.model.AbstractRepository;
 
 @Repository
@@ -20,11 +21,14 @@ public interface IssueRepository extends AbstractRepository<Issue> {
 
     @Query("""
                 MATCH (issue:Issue)-[:SERVICE]->(serviceOrg:ServiceOrg)-[:CUSTOMER]->(customer:Customer)
+                MATCH (issue)-[:CREATED_BY]->(owner:Person)
+                MATCH (issue)-[:REQUEST_TYPE]->(issueRequestType:RequestType)
                 MATCH (customer)-[:ORGANIZATION]->(organization:Organization)-[:TEAM]->(team:Team)-[:MEMBER]->(person:Person)
                 MATCH (customer)-[:SLA]->(sla:Sla)-[:GUARANTEE]->(scope:Scope)-[:OBJECTIVE]->(objective:Objective)
+                MATCH (scope)-[:REQUEST_TYPE]->(scopeRequestType:RequestType)
                 WHERE id(issue) IN $issueIds
-                  AND person = issue.owner
-                  AND scope.requestType = issue.requestType
+                  AND person = owner
+                  AND scopeRequestType = issueRequestType
                 RETURN COUNT(CASE
                     WHEN $checkMetric = 'CHECK_NOT_SLA' AND NOT (objective.metric = 'TTO' AND objective.value * 60 >= issue.TTO AND objective.metric = 'TTR' AND objective.value * 60 >= issue.TTR) THEN issue
                     WHEN $checkMetric = 'CHECK_SLA' AND (objective.metric = 'TTO' AND objective.value * 60 >= issue.TTO AND objective.metric = 'TTR' AND objective.value * 60 >= issue.TTR) THEN issue
@@ -33,7 +37,7 @@ public interface IssueRepository extends AbstractRepository<Issue> {
                     ELSE NULL
                 END) AS count, COUNT(issue) AS total
             """)
-    List<Object[]> processIssues(List<Long> issueIds, String checkMetric);
+    MetricResponse processIssues(List<Long> issueIds, String checkMetric);
 
     List<Issue> findByServiceOrg_Id(Long serviceOrgId);
 
