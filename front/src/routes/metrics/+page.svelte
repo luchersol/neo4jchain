@@ -1,11 +1,10 @@
 <script>
-    import Title from '../../components/title.svelte'
-    import { BackendAPI } from '../../stores/stores';
-    import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Throbber from '../../components/throbber.svelte';
+	import Title from '../../components/title.svelte';
+	import { BackendAPI } from '../../stores/stores';
 
-	let entity = $page.params.entity;
 	let data = [];
 	let isLoading = true;
 
@@ -14,22 +13,25 @@
 			const chainfacetedResponse = await fetch(`${BackendAPI}/api/chainfaceted`);
 			const chainstateResponse = await fetch(`${BackendAPI}/api/chainstate`);
 			const chainfacetedList = await chainfacetedResponse.json();
-            const chainstateList = await chainstateResponse.json()
-            // chainfacetedList = await chainfacetedList.map((element)=> { element.type = 'chainfaceted'; return element})
-            // chainstateList = await chainstateList.map((element)=> { element.type = 'chainstate'; return element})
-			data.push(...chainfacetedList)
-            data.push(...chainstateList)
-            console.log(JSON.stringify(data))
+			const chainstateList = await chainstateResponse.json();
+			// chainfacetedList = await chainfacetedList.map((element)=> { element.type = 'chainfaceted'; return element})
+			// chainstateList = await chainstateList.map((element)=> { element.type = 'chainstate'; return element})
+			data.push(...chainfacetedList);
+			data.push(...chainstateList);
+			console.log(JSON.stringify(data));
 			isLoading = false;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
 		}
 	}
 
+	function getTypeChain(chain) {
+		return 'initialSla' in chain ? 'STATE' : 'FACETED';
+	}
+
 	onMount(async () => {
 		await fetchInfo();
 	});
-
 </script>
 
 <Title subtitle={'Select a service chain to view its metrics'}></Title>
@@ -47,11 +49,15 @@
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			<div
 				class="card"
-				on:click={() => (window.location.href = `/metrics/${element.id}`)}
+				on:click={() => goto(`/metrics/${element.id}?type=${getTypeChain(element)}`)}
 				style="cursor: pointer;"
 			>
 				<h3>{element.name}</h3>
-
+				<span
+					class="type-badge"
+					class:type-stated={element.initialSla}
+					class:type-faceted={!element.initialSla}>{getTypeChain(element)}</span
+				>
 			</div>
 		{/each}
 	</div>
@@ -91,4 +97,23 @@
 		margin: 0.25rem 0;
 	}
 
+	.type-badge {
+		display: inline-block;
+		padding: 0.2rem 0.5rem;
+		border-radius: 5px;
+		font-weight: bold;
+		font-size: 0.9rem;
+	}
+
+	.type-stated {
+		border: 2px solid #007bff;
+		color: #007bff;
+		background-color: #f0f8ff;
+	}
+
+	.type-faceted {
+		border: 2px solid #28a745;
+		color: #28a745;
+		background-color: #e9f7ea;
+	}
 </style>

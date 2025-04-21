@@ -1,12 +1,17 @@
 <script>
+	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
 	import GraphView from '../../../../components/GraphView.svelte';
+	import Throbber from '../../../../components/throbber.svelte';
+	import Title from '../../../../components/title.svelte';
 	import { BackendAPI } from '../../../../stores/stores';
 	let graphData = null;
+	let id = $page.params.id;
+	let enabled_physics = false;
 
 	onMount(async () => {
 		try {
-			const res = await fetch(`${BackendAPI}/api/metrics/graph_status/chainstate/2`);
+			const res = await fetch(`${BackendAPI}/api/metrics/graph_status/chainstate/${id}`);
 			if (!res.ok) {
 				throw new Error('Error al cargar el grafo');
 			}
@@ -18,8 +23,59 @@
 	});
 </script>
 
+<Title subtitle={'State graphs'}></Title>
+
+<div class="legend">
+	<label>
+		<input type="checkbox" bind:checked={enabled_physics} />
+		Enable physics
+	</label>
+	<div><span class="dot green"></span> Initial</div>
+	<div><span class="dot blue"></span> Intermediate</div>
+	<div><span class="dot red"></span> Terminal</div>
+</div>
+
 {#if graphData}
-	<GraphView {graphData} />
+	<div class="container">
+		<GraphView {graphData} {enabled_physics} />
+	</div>
 {:else}
-	<p>Cargando grafo...</p>
+	<Throbber message={'Loading...'} />
 {/if}
+
+<style>
+	.legend {
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		font-size: 14px;
+		color: #333;
+	}
+
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		justify-content: center;
+	}
+
+	.dot {
+		display: inline-block;
+		width: 12px;
+		height: 12px;
+		border-radius: 50%;
+		margin-right: 0.5rem;
+	}
+
+	.red {
+		background-color: red;
+	}
+
+	.green {
+		background-color: green;
+	}
+
+	.blue {
+		background-color: blue;
+	}
+</style>

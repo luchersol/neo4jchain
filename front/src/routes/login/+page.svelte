@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import Title from '../../components/title.svelte';
 	import { BackendAPI } from '../../stores/stores';
 	let name = '';
@@ -14,7 +15,7 @@
 		if (res.ok) {
 			const data = await res.json();
 			localStorage.setItem('name', data.name);
-			window.location.href = '/';
+			goto('/');
 		} else {
 			alert('Invalid credentials');
 		}
