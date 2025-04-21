@@ -1,10 +1,14 @@
 package com.cbd.neo4jchain.seeder;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.data.neo4j.core.Neo4jClient;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +34,12 @@ public class DataSeeder {
     @Value("${neo4jchain.relation-path:#{null}}")
     private String relationPath;
 
-    public DataSeeder(Neo4jClient neo4jClient) {
+    @Autowired
+    private Environment env;
+
+    public DataSeeder(Neo4jClient neo4jClient, Environment env) {
         this.neo4jClient = neo4jClient;
+        this.env = env;
     }
 
     @PostConstruct
@@ -48,6 +56,12 @@ public class DataSeeder {
                     System.out.println("Trying to populate database (attempt " + attempt + ")...");
     
                     var inputStream = getClass().getClassLoader().getResourceAsStream(this.cypherPath);
+                    String[] activeProfiles = env.getActiveProfiles();
+
+                    if(Arrays.asList(activeProfiles).contains("local")){
+                      inputStream = new FileInputStream("src/main/resources/" + this.cypherPath);
+                    }
+                    
                     if (inputStream == null) {
                         throw new IllegalArgumentException("File not found: " + this.cypherPath);
                     }
