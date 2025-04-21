@@ -94,12 +94,20 @@ public class IssueService {
         Boolean hasChangedAssgined = !Objects.equals(issueToUpdate.getAssignedPersonId(), status.getId());
 
         if (hasChangedState) {
-            issueTTR += ChronoUnit.SECONDS.between(issueToUpdate.getLastStateChangedAt(), LocalDateTime.now());
+            Boolean firstStateChange = issueToUpdate.getLastStateChangedAt() == null;
+            if(!firstStateChange){
+                issueTTR += ChronoUnit.SECONDS.between(issueToUpdate.getLastStateChangedAt(), LocalDateTime.now());
+            }
             issue.setLastStateChangedAt(LocalDateTime.now());
         }
 
         if (hasChangedAssgined) {
-            issueTTO += ChronoUnit.SECONDS.between(issueToUpdate.getLastAssignedAt(), LocalDateTime.now());
+            Boolean firstAssignment = issueToUpdate.getLastAssignedAt() == null;
+            if(firstAssignment){
+                issueTTO += ChronoUnit.SECONDS.between(issueToUpdate.getCreatedAt(), LocalDateTime.now());
+            } else {
+                issueTTO += ChronoUnit.SECONDS.between(issueToUpdate.getLastAssignedAt(), LocalDateTime.now());
+            }
             issue.setLastAssignedAt(LocalDateTime.now());
         }
 
