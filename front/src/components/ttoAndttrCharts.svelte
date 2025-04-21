@@ -33,7 +33,7 @@
                 labels: ['Passed', 'Failed'],
                 datasets: [
                     {
-                        data: [passedPercentage, 100 - passedPercentage],
+                        data: [passedPercentage.toFixed(2), 100 - passedPercentage.toFixed(2)],
                         backgroundColor: ['green', 'red']
                     }
                 ]
@@ -106,7 +106,7 @@
                 <canvas
                     id="passed-tto"
                     class="justify-content-center"
-                    data-value={tto_passed_percentage}
+                    data-value={tto_passed_percentage.toFixed(2)}
                 ></canvas>
             </div>
         </div>
@@ -118,7 +118,7 @@
                 <canvas
                     id="passed-ttr"
                     class="justify-content-center"
-                    data-value={ttr_passed_percentage}
+                    data-value={ttr_passed_percentage.toFixed(2)}
                 ></canvas>
             </div>
         </div>

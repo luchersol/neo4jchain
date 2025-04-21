@@ -2,7 +2,9 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte';
+	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte'; // globalPassedSLA
+	import SlaPieCharts from '../../../components/slaPieCharts.svelte'
+	import TTOandTTRCharts from '../../../components/ttoAndttrCharts.svelte' //tto_passed_percentage and ttr_passed_percentage
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
 	import { BackendAPI } from '../../../stores/stores';
@@ -49,8 +51,13 @@
 	</div>
 {:else}
 	<div class="container">
-		METRICS
-		<GlobalPassedSLAPieChart globalPassedSLA={data.globalPassedSLA} />
+
+		<div>
+			<p>Month and Global passed SLA percentages</p>
+			<SlaPieCharts globalPassedSLA={data.globalPassedSLA} monthPassedSLA={data.monthlyPassedSLA}></SlaPieCharts>
+		</div>
+
+		<TTOandTTRCharts tto_passed_percentage={data.passedTTO} ttr_passed_percentage={data.passedTTR}></TTOandTTRCharts>
 
 		{#if type === 'STATE'}
 			<button class="state-button" on:click={() => goto(`/metrics/${id}/graph`)}> Graph </button>
