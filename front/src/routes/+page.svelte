@@ -33,6 +33,7 @@
 			</button>
 		{:else}
 			<button class="btn-login" on:click={() => navigateTo('login')}> Log in </button>
+			<button class="btn-login" on:click={() => navigateTo('register')}> Create an account </button>
 		{/if}
 		<button class="btn-metrics" on:click={() => navigateTo('metrics')}> Metrics </button>
 	</div>
