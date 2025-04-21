@@ -103,26 +103,29 @@
 					<p><strong>Service:</strong> {element.serviceOrg?.name ?? 'No service assigned'}</p>
 					<p><strong>Sla:</strong> {element.sla?.name ?? 'No Sla assigned'}</p>
 				{/if}
-				<div>
-					<button
-						on:click={(event) => {
-							event.stopPropagation();
-							goto(`/${entity}/${element.id}/edit`);
-						}}
-						class="button edit-button"
-					>
-						Edit
-					</button>
-					<button
-						on:click={(event) => {
-							event.stopPropagation();
-							confirmDelete(element);
-						}}
-						class="button delete-button"
-					>
-						Delete
-					</button>
-				</div>
+
+				{#if entity.toLowerCase() !== 'issue' || !element.closedAt}
+					<div>
+						<button
+							on:click={(event) => {
+								event.stopPropagation();
+								goto(`/${entity}/${element.id}/edit`);
+							}}
+							class="button edit-button"
+						>
+							Edit
+						</button>
+						<button
+							on:click={(event) => {
+								event.stopPropagation();
+								confirmDelete(element);
+							}}
+							class="button delete-button"
+						>
+							Delete
+						</button>
+					</div>
+				{/if}
 			</div>
 		{/each}
 	</div>

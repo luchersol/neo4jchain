@@ -14,11 +14,13 @@
 	let showModal = writable(false);
 	let selectedEntity = writable(null);
 	let existingItems = transformObject();
+	let isEditable = true;
 
 	async function fetchInfo() {
 		try {
 			const response = await fetch(`${BackendAPI}/api/${entity.toLocaleLowerCase()}/${id}`);
 			data = await response.json();
+			isEditable = !data.closedAt;
 			entityToEdit = data;
 		} catch (error) {
 			data = 'There was an error retrieving the info: ' + error;
@@ -116,17 +118,22 @@
 				</div>
 			{/each}
 		</div>
-		<button on:click={() => goto(`/${entity}/${entityToEdit.id}/edit`)} class="button edit-button">
-			Edit
-		</button>
-		<button
-			on:click={() => {
-				confirmDelete();
-			}}
-			class="button delete-button"
-		>
-			Delete
-		</button>
+		{#if isEditable}
+			<button
+				on:click={() => goto(`/${entity}/${entityToEdit.id}/edit`)}
+				class="button edit-button"
+			>
+				Edit
+			</button>
+			<button
+				on:click={() => {
+					confirmDelete();
+				}}
+				class="button delete-button"
+			>
+				Delete
+			</button>
+		{/if}
 	{:else}
 		<Throbber message={'Loading...'} />
 	{/if}
