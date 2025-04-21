@@ -64,7 +64,7 @@
 		{#if type === 'STATE'}
 			<div class="button-container">
 				<button class="state-button" on:click={() => goto(`/metrics/${id}/graph`)}>
-					View Graph
+					View State Graph
 				</button>
 			</div>
 		{/if}
