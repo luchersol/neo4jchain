@@ -116,6 +116,7 @@ public class IssueService {
         issue.setServiceOrg(serviceOrg);
         issue.setOwner(owner);
         issue.setStatus(status);
+        issue.setCreatedAt(issueToUpdate.getCreatedAt());
 
         if (status.getPossibleNextStatuses().isEmpty()) {
             issue.setClosedAt(LocalDateTime.now());
