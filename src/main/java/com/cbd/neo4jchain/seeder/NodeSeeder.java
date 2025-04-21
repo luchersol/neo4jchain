@@ -1,21 +1,6 @@
 package com.cbd.neo4jchain.seeder;
 
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_FACETED;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CHAIN_STATE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_CUSTOMER;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_ISSUE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_OBJECTIVE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_ORGANIZATION;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_PERSON;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_PRIVILEGE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_PROVIDER;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_REQUEST_TYPE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_ROLE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_SCOPE;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_SERVICE_ORG;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_SLA;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_STATUS;
-import static com.cbd.neo4jchain.seeder.SeederConfig.NUM_TEAM;
+import static com.cbd.neo4jchain.seeder.SeederConfig.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -92,7 +77,7 @@ public class NodeSeeder {
                 if (this.deleteData)
                         file.write("MATCH (n) DETACH DELETE n; \n\n");
                 createNodes();
-                // TODO: Se produce una excepción en medio de la creación de relaciones
+                // Se produce una excepción en medio de la creación de relaciones
                 // createRelationship(file, this.relationPath);
         }
 
