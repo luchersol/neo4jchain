@@ -30,9 +30,11 @@
 		<input type="checkbox" bind:checked={enabled_physics} />
 		Enable physics
 	</label>
-	<div><span class="dot green"></span> Initial</div>
-	<div><span class="dot blue"></span> Intermediate</div>
-	<div><span class="dot red"></span> Terminal</div>
+	<div class="box">
+		<div><span class="dot green"></span> Initial</div>
+		<div><span class="dot blue"></span> Intermediate</div>
+		<div><span class="dot red"></span> Terminal</div>
+	</div>
 </div>
 
 {#if graphData}
@@ -50,6 +52,16 @@
 		gap: 2rem;
 		font-size: 14px;
 		color: #333;
+	}
+
+	.box {
+		border: 1px solid grey;
+		display: flex;
+		justify-content: center;
+		gap: 2rem;
+		font-size: 14px;
+		color: #333;
+		padding: 3px;
 	}
 
 	.container {
