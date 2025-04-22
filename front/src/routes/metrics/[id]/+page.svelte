@@ -2,11 +2,10 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { onMount } from 'svelte';
-	import GlobalPassedSLAPieChart from '../../../components/globalPassedSLAPieChart.svelte';
 	import SlaPieCharts from '../../../components/slaPieCharts.svelte';
-	import TTOandTTRCharts from '../../../components/ttoAndttrCharts.svelte';
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
+	import TTOandTTRCharts from '../../../components/ttoAndttrCharts.svelte';
 	import { BackendAPI } from '../../../stores/stores';
 
 	let id = $page.params.id;
@@ -17,7 +16,9 @@
 	async function fetchInfo() {
 		try {
 			let globalPassedSLA = await fetch(`${BackendAPI}/api/metrics/global_passed_sla/${id}`);
-			let problematicOpenIssuesnNumber = await fetch(`${BackendAPI}/api/metrics/problematic_open_issues/${id}`);
+			let problematicOpenIssuesnNumber = await fetch(
+				`${BackendAPI}/api/metrics/problematic_open_issues/${id}`
+			);
 			let passedTTO = await fetch(`${BackendAPI}/api/metrics/passed_tto/${id}`);
 			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`);
 			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`);
@@ -49,16 +50,23 @@
 	</div>
 {:else}
 	<div class="container">
-		<p style="align-self: center;"> You have {data.problematicOpenIssuesnNumber} problematic open issues in your chain</p>
+		<strong style="align-self: center;">
+			You have {data.problematicOpenIssuesnNumber} problematic open issues in your chain
+		</strong>
 		<div class="chart-grid">
 			<section class="section">
 				<h2 class="section-title">SLA Performance</h2>
-				<SlaPieCharts 
-					globalPassedSLA={data.globalPassedSLA} 
-					monthPassedSLA={data.monthlyPassedSLA} 
+				<SlaPieCharts
+					globalPassedSLA={data.globalPassedSLA}
+					monthPassedSLA={data.monthlyPassedSLA}
 				/>
 			</section>
-			<TTOandTTRCharts tto_passed_percentage={data.passedTTO} ttr_passed_percentage={data.passedTTR} />
+			<div>
+				<TTOandTTRCharts
+					tto_passed_percentage={data.passedTTO}
+					ttr_passed_percentage={data.passedTTR}
+				/>
+			</div>
 		</div>
 
 		{#if type === 'STATE'}
@@ -83,7 +91,7 @@
 	.chart-grid {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-		gap: 2rem;
+		gap: 1rem;
 		width: 100%;
 		max-width: 1200px;
 	}
@@ -125,7 +133,9 @@
 		font-size: 1rem;
 		font-weight: bold;
 		cursor: pointer;
-		transition: background-color 0.3s, transform 0.2s;
+		transition:
+			background-color 0.3s,
+			transform 0.2s;
 	}
 
 	.state-button:hover {
