@@ -1,5 +1,7 @@
 package com.cbd.neo4jchain.issue;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,4 +20,10 @@ public class IssueWithNumNextStatuses {
         return numberOfNextStatuses == 0;
     }
 
+    public boolean isThisMonth() {
+        LocalDateTime createAt = this.getIssue().getCreatedAt(),
+                now = LocalDateTime.now();
+        return createAt.getMonth() == now.getMonth() &&
+                createAt.getYear() == now.getYear();
+    }
 }

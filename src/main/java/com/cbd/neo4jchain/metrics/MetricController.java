@@ -43,10 +43,10 @@ public class MetricController {
     @GetMapping("/problematic_open_issues/{chainId}")
     public ResponseEntity<?> getProblematicOpenIssues(@PathVariable Long chainId) {
         try {
-            Double res = 100 * this.metricService.getProblematicOpenIssues(chainId);
+            Long res = this.metricService.getProblematicOpenIssues(chainId);
             return ResponseEntity.ok(res);
         } catch (NoIssuesException e) {
-            return ResponseEntity.ok(0.);
+            return ResponseEntity.ok(0L);
         }
     }
 
