@@ -15,14 +15,19 @@ import com.cbd.neo4jchain.issue.IssueRepository;
 import com.cbd.neo4jchain.issue.IssueWithNumNextStatuses;
 import com.cbd.neo4jchain.issue.IssueWithObjectives;
 import com.cbd.neo4jchain.objective.Objective;
+import com.cbd.neo4jchain.service_org.ServiceOrg;
+import com.cbd.neo4jchain.service_org.ServiceOrgRepository;
+import com.cbd.neo4jchain.service_org.ServiceOrgWithTTOAndTTR;
 
 @Service
 public class MetricService {
 
     private final IssueRepository issueRepository;
+    private final ServiceOrgRepository serviceOrgRepository;
 
-    public MetricService(IssueRepository issueRepository) {
+    public MetricService(IssueRepository issueRepository, ServiceOrgRepository serviceOrgRepository) {
         this.issueRepository = issueRepository;
+        this.serviceOrgRepository = serviceOrgRepository;
     }
 
     private static BiPredicate<Objective, Issue> PASS_TTO = (obj, i) -> obj == null || obj.toSecond() >= i.getTTO();
@@ -65,14 +70,16 @@ public class MetricService {
         return processIssues(issues, CheckMetric.CHECK_SLA);
     }
 
-    public Double getServicePassedTTO(Long serviceId) {
-        List<Issue> issues = issueRepository.findByServiceOrg_Id(serviceId);
-        return processIssues(issues, CheckMetric.CHECK_TTO);
+    public List<ServiceOrgWithTTOAndTTR> getServicesPassedTTOAndTTR(Long chainId) {
+        List<ServiceOrg> services = serviceOrgRepository.findAllServiceOrgByChainId(chainId);
+        return services.stream().map(service -> getServicePassedTTOAndTTR(service)).toList();
     }
 
-    public Double getServicePassedTTR(Long serviceId) {
-        List<Issue> issues = issueRepository.findByServiceOrg_Id(serviceId);
-        return processIssues(issues, CheckMetric.CHECK_TTR);
+    private ServiceOrgWithTTOAndTTR getServicePassedTTOAndTTR(ServiceOrg serviceOrg) {
+        List<Issue> issues = issueRepository.findByServiceOrg_Id(serviceOrg.getId());
+        Double serviceTTO = 100 * processIssues(issues, CheckMetric.CHECK_TTO);
+        Double serviceTTR = 100 * processIssues(issues, CheckMetric.CHECK_TTR);
+        return new ServiceOrgWithTTOAndTTR(serviceOrg, serviceTTO, serviceTTR);
     }
 
     private List<Issue> getIssues(Long chainId,
@@ -97,7 +104,7 @@ public class MetricService {
                 .filter(i -> filterObjectives(i, checkMetric))
                 .toList();
         if (result.size() == 0) {
-            throw new NoIssuesException();
+            return 0.;
         }
         return (double) result.size() / result.size();
     }
@@ -112,20 +119,12 @@ public class MetricService {
                 .filter(obj -> obj.getMetric() == Metric.TTR)
                 .findFirst().orElse(null);
 
-        System.out.println("=".repeat(100));
-        System.out.println(objTTO.toSecond());
-        System.out.println(issue.getTTO());
-        System.out.println("*".repeat(100));
-        System.out.println(objTTR.toSecond());
-        System.out.println(issue.getTTR());
-
-        boolean res = switch (checkMetric) {
+        return switch (checkMetric) {
             case CHECK_NOT_SLA -> !(PASS_TTO.test(objTTO, issue) && PASS_TTR.test(objTTR, issue));
             case CHECK_SLA -> PASS_TTO.test(objTTO, issue) && PASS_TTR.test(objTTR, issue);
             case CHECK_TTO -> PASS_TTO.test(objTTO, issue);
             case CHECK_TTR -> PASS_TTR.test(objTTR, issue);
         };
-        return res;
     }
 
 }

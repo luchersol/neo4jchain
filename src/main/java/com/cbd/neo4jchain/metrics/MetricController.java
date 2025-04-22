@@ -1,5 +1,7 @@
 package com.cbd.neo4jchain.metrics;
 
+import java.util.Collections;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,25 +86,15 @@ public class MetricController {
         }
     }
 
-    // servicePassedTTO: el passedTTO pero de las issues de un servicio
-    @GetMapping("/service_passed_tto/{serviceId}")
-    public ResponseEntity<?> getServicePassedTTO(@PathVariable Long serviceId) {
+    // [{servicio1: {...}, tto: 45 ttr: 78}, ...]
+    // servicePassedTTO: el passedTTO y passedTTR pero de las issues de un servicio
+    @GetMapping("/service_passed_tto_and_ttr/{chainId}")
+    public ResponseEntity<?> getServicesPassedTTOAndTTR(@PathVariable Long chainId) {
         try {
-            Double res = 100 * this.metricService.getServicePassedTTO(serviceId);
+            var res = this.metricService.getServicesPassedTTOAndTTR(chainId);
             return ResponseEntity.ok(res);
         } catch (NoIssuesException e) {
-            return ResponseEntity.ok(0.);
-        }
-    }
-
-    // sercivePassedTTR: el passedTTR pero de las issues de un servicio
-    @GetMapping("/service_passed_ttr/{serviceId}")
-    public ResponseEntity<?> getServicePassedTTR(@PathVariable Long serviceId) {
-        try {
-            Double res = 100 * this.metricService.getServicePassedTTR(serviceId);
-            return ResponseEntity.ok(res);
-        } catch (NoIssuesException e) {
-            return ResponseEntity.ok(0.);
+            return ResponseEntity.ok(Collections.emptyList());
         }
     }
 
