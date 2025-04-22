@@ -99,7 +99,7 @@ public class MetricService {
         if (result.size() == 0) {
             throw new NoIssuesException();
         }
-        return (double) result.size() / result.size();
+        return (double) result.size() / issueIds.size();
     }
 
     private boolean filterObjectives(IssueWithObjectives issueObjectivesProjection, CheckMetric checkMetric) {
@@ -112,12 +112,6 @@ public class MetricService {
                 .filter(obj -> obj.getMetric() == Metric.TTR)
                 .findFirst().orElse(null);
 
-        System.out.println("=".repeat(100));
-        System.out.println(objTTO.toSecond());
-        System.out.println(issue.getTTO());
-        System.out.println("*".repeat(100));
-        System.out.println(objTTR.toSecond());
-        System.out.println(issue.getTTR());
 
         boolean res = switch (checkMetric) {
             case CHECK_NOT_SLA -> !(PASS_TTO.test(objTTO, issue) && PASS_TTR.test(objTTR, issue));
