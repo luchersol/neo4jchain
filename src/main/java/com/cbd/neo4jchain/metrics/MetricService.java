@@ -106,7 +106,7 @@ public class MetricService {
         if (result.size() == 0) {
             return 0.;
         }
-        return (double) result.size() / result.size();
+        return (double) result.size() / issueIds.size();
     }
 
     private boolean filterObjectives(IssueWithObjectives issueObjectivesProjection, CheckMetric checkMetric) {
