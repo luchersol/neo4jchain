@@ -1,6 +1,8 @@
 package com.cbd.neo4jchain.metrics;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
@@ -89,13 +91,14 @@ public class MetricService {
 
     private Double processIssues(List<Issue> issues, CheckMetric checkMetric) {
         List<Long> issueIds = issues.stream().map(Issue::getId).toList();
-        var result = issueRepository.processIssues(issueIds);
-        if (result == null) {
-            return 0.0;
-        }
-        result = result.stream()
+        var result = Optional.ofNullable(issueRepository.processIssues(issueIds))
+                .orElse(Collections.emptyList())
+                .stream()
                 .filter(i -> filterObjectives(i, checkMetric))
                 .toList();
+        if (result.size() == 0) {
+            throw new NoIssuesException();
+        }
         return (double) result.size() / result.size();
     }
 
