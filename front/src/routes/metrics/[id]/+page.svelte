@@ -6,6 +6,7 @@
 	import Throbber from '../../../components/throbber.svelte';
 	import Title from '../../../components/title.svelte';
 	import TTOandTTRCharts from '../../../components/ttoAndttrCharts.svelte';
+	import ServiceMetrics from '../../../components/serviceMetrics.svelte';
 	import { BackendAPI } from '../../../stores/stores';
 
 	let id = $page.params.id;
@@ -22,12 +23,14 @@
 			let passedTTO = await fetch(`${BackendAPI}/api/metrics/passed_tto/${id}`);
 			let passedTTR = await fetch(`${BackendAPI}/api/metrics/passed_ttr/${id}`);
 			let monthlyPassedSLA = await fetch(`${BackendAPI}/api/metrics/monthly_passed_sla/${id}`);
+			let serviceListData = await fetch(`${BackendAPI}/api/metrics/service_passed_tto_and_ttr/${id}`);
 
 			data.globalPassedSLA = await globalPassedSLA.json();
 			data.problematicOpenIssuesnNumber = await problematicOpenIssuesnNumber.json();
 			data.passedTTO = await passedTTO.json();
 			data.passedTTR = await passedTTR.json();
 			data.monthlyPassedSLA = await monthlyPassedSLA.json();
+			data.serviceListData = await serviceListData.json();
 		} catch (error) {
 			alert('There was an error retrieving the info: ' + error);
 		} finally {
@@ -68,6 +71,9 @@
 				/>
 			</div>
 		</div>
+		<div>
+		</div>
+		<ServiceMetrics serviceListData={data.serviceListData}></ServiceMetrics>
 
 		{#if type === 'STATE'}
 			<div class="button-container">
