@@ -12,6 +12,7 @@ public interface ServiceOrgRepository extends AbstractRepository<ServiceOrg> {
 
     @Query("""
             MATCH (chain:Chain)<-[:BELONGS_TO]-(org:Organization)-[:SERVICE]->(serviceOrg:ServiceOrg)
+            WHERE id(chain) = $chainId
             RETURN serviceOrg
             """)
     List<ServiceOrg> findAllServiceOrgByChainId(Long chainId);
